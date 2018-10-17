@@ -1,4 +1,4 @@
-package com.controller.test.personnel;
+package com.controller.personnel;
 
 public class testpersonnel {
     public static void main(String[] args) {
