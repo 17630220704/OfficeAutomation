@@ -1,96 +1,98 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-    <title>测试页</title>
-    <script type="text/javascript" src="resources/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="resources/jquery.serialize.js"></script>
-</head>
-<body>
-<p class="shujv"></p>
-<form class="save">
-    <input type="text" name="goodsName" placeholder="商品名称" />
-    商品类型:<select name="typeId.typeId" class="goodtype"></select>
-    <input type="text" name="goodsDesc" placeholder="商品说明" />
-    <input type="number" name="goodsUnitPrice" placeholder="商品单价" />
-    <input type="text" name="goodsImageName" placeholder="商品图片名" />
-    <input type="number" name="sellCount" placeholder="商品库存" />
-    <input type="date" name="goodsDate" placeholder="商品时间" />
-</form>
-<input type="button" value="添加" class="savebutton" />
-</body>
-<script type="text/javascript">
-    $(function() {
-        show();
-        showtype();
-        alert("开始");
-    });
-    $(function() {
-        $(".savebutton").click(function(){
-            savegoods();
-        });
-    });
-    $(function(){
-        $("body").on("click",".degoods",function(){
-            degoods();
-        });
-    });
-    function degoods(){
-        if(confirm("确认删除吗")){
-            alert("12");
-            var goodsid = $(this).val();
-            alert(goodsid);
-        }
-    }
-    function savegoods(){
-        var goods= $(".save").serialize();
-        $.post("saveGoods.do",goods,function(data){
-            alert(data.result);
-            show();
-        })
-    };
-    function showtype() {
-        $.post("gtAll.do", function(data) {
-            for (i = 0; i < data.gtlist.length; i++) {
-                var op = "";
-                op += "<option value='" + data.gtlist[i].typeId + "'>";
-                op += data.gtlist[i].typeName;
-                op += "</option>";
-                $(".goodtype").append(op);
-            }
-        });
-    }
-    function show() {
-        $.post("gAll.do", function(data) {
-            $(".showlist").remove();
-            var de = "<table class='showlist'";
-            de += "<tr>";
-            de += "<td>商品编号</td>";
-            de += "<td>商品名称</td>";
-            de += "<td>商品类型</td>";
-            de += "<td>商品说明</td>";
-            de += "<td>商品单价</td>";
-            de += "<td>商品图片</td>";
-            de += "<td>商品库存</td>";
-            de += "<td>商品时间</td>";
-            de += "</tr>";
-            for (i = 0; i < data.glist.length; i++) {
-                de += "<tr>";
-                de += "<td>" + data.glist[i].goodsId + "</td>";
-                de += "<td>" + data.glist[i].goodsName + "</td>";
-                de += "<td>" + data.glist[i].typeId.typeName + "</td>";
-                de += "<td>" + data.glist[i].goodsDesc + "</td>";
-                de += "<td>" + data.glist[i].goodsUnitPrice + "</td>";
-                de += "<td>" + data.glist[i].goodsImageName + "</td>";
-                de += "<td>" + data.glist[i].sellCount + "</td>";
-                de += "<td>" + data.glist[i].goodsDate + "</td>";
-                de += "<td><button class='degoods' value='" + data.glist[i].goodsDate + "'>";
-                de += "删除</button></td>";
-                de += "</tr>";
-            }
-            de += "</table>";
-            $(".shujv").append(de);
-        });
-    }
-</script>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'index.jsp' starting page</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+  </head>
+  
+  <body>
+    <!--异步查询出的数据  -->
+  	<table id="table"></table>
+  	<!--/异步查询出的数据  -->
+	<button class="tianjia1">添加</button>
+  	<!--添加数据  -->
+	<table id="table1" style="display: none;">
+		<tr>
+			<td>账号</td>
+			<td>密码</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type="text" id="shopname" name="shopname" value=""></td>
+			<td><input type="text" id="shopprice" name="shopprice" value=""></td>
+			<td><input type="button" class="tianjia" value="添加"></td>
+		</tr>
+	</table> 
+  </body>
+  <script type="text/javascript">
+  
+ 	$(".tianjia1").click(function(){
+ 		$("#table1").css("display","block");
+ 	})
+  
+  //查询函数
+function a(){
+  	$.ajax({
+  			url:"a1/select",
+  			data:"",
+  			type:"post",
+  			dataType:"json",
+			success:function(data){
+				$("#table").html("");
+				var a ="";
+					a+="<tr><td>id</td>"
+					a+="<td>账号</td>"
+					a+="<td>密码</td></tr>"
+				for(i=0;i<data.list.length;i++){
+					var b = data.list[i]
+					a+="<tr class='id'><td>"+b.shopno+"</td>"
+					a+="<td>"+b.shopname+"</td>"
+					a+="<td>"+b.shopprice+"</td>"				
+				}
+				$("#table").append(a);
+			}  			
+  		})
+  }
+  	//执行查询函数
+  	$(a());
+  	//添加提交按钮函数
+  	$(".tianjia").click(function(){
+  		var shopname=$("#shopname").val();
+  		var shopprice=$("#shopprice").val();
+  		$.ajax({
+  			url:"a1/insert",
+  			data:{
+  				"shopname":shopname,
+  				"shopprice":shopprice
+  			},
+  			type:"post",
+  			dataType:"json",
+			success:function(data){
+			if(data.a==1){
+				$("#table1").css("display","none");
+				alert("成功");
+				a();
+			}else{
+				alert("失败");
+			}
+			}  			
+  		})
+  	})
+  	  </script>
 </html>
