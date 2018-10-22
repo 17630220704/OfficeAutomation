@@ -57,13 +57,16 @@
     function login() {
         var user = $(".login_form").serialize();
         var result = 0;
-        alert("序列化数据：   " + user);
         $.post("/permitLogin.do",user,function (data) {
             result= data.result;
-            if (result>0) {
-
-            }else {
-
+            if (result=0) {
+                alert("登陆成功");
+            }else if (result=1) {
+                alert("账号或密码不正确");
+            }else if (result=2){
+                alert("您已被加入黑名单，请联系管理员");
+            }else if (result=3) {
+                alert("系统繁忙");
             }
         });
     }

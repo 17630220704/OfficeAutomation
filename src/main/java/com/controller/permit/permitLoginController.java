@@ -22,16 +22,10 @@ public class permitLoginController {
     @RequestMapping(value = "/permitLogin.do")
     public Map permitLogin(TbUser user){
         Map<String,Object> map = new HashMap<String,Object>();
-        int login_result = 1;
-        int success = 0;
-        int error = 1;
-        int onLacklist = 2;
+        int login_result = 3;
         login_result = permitLoginServicedao.getlogin(user);
-        if (login_result==success){
-            map.put("result","success");
-        }else if (login_result==error){
-            map.put("result","error");
-        }
+        System.out.println("控制器:"+login_result);
+            map.put("result",login_result);
         return map;
     }
 
