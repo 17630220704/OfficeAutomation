@@ -141,14 +141,14 @@
     </dependency>
 
     <!-- JSP相关 -->
-    <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>${javaee-api.version}</version>
-      <scope>provided</scope>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>javax</groupId>-->
+      <!--<artifactId>javaee-api</artifactId>-->
+      <!--<version>${javaee-api.version}</version>-->
+      <!--<scope>provided</scope>-->
+    <!--</dependency>-->
 
-    <!-- <dependency>
+     <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>${servlet-api.version}</version>
@@ -170,7 +170,7 @@
         <artifactId>pager-taglib</artifactId>
         <version>2.0</version>
         <scope>provided</scope>
-    </dependency> -->
+    </dependency>
 
 
     <!-- 文件上传组件 -->
