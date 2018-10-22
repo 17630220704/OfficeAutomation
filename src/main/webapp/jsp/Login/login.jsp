@@ -23,7 +23,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .form-control {
             color: #FFFFFF;
         }
@@ -57,9 +56,15 @@
 <script>
     function login() {
         var user = $(".login_form").serialize();
+        var result = 0;
         alert("序列化数据：   " + user);
-        $.post("permitLogin.do",user,function (data) {
-            alert(data.result);
+        $.post("/permitLogin.do",user,function (data) {
+            result= data.result;
+            if (result>0) {
+
+            }else {
+
+            }
         });
     }
 </script>

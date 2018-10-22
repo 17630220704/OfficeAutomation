@@ -28,8 +28,10 @@ public class permitLoginServiceImp implements permitLoginService {
        //黑名单查询
         List<Map> Lacklist =  permitLogindao.LoginLacklist(userid);
         lackresult = Lacklist.size();
-        if (loginresult>0 &&lackresult>0 ){
-            return 1;
+        if (loginresult>0 && lackresult<=0 ){
+            return 0;
+        }else if(lackresult>0) {
+            return 0;
         }else {
             return 0;
         }

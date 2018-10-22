@@ -20,14 +20,16 @@ public class permitLoginController {
 
     @ResponseBody
     @RequestMapping(value = "/permitLogin.do")
-    public Map<String,Object> permitLogin(TbUser user){
-        System.out.println("进入登陆控制器");
+    public Map permitLogin(TbUser user){
         Map<String,Object> map = new HashMap<String,Object>();
         int login_result = 1;
-        //login_result = permitLoginServicedao.getlogin(user);
-        if (login_result>0){
+        int success = 0;
+        int error = 1;
+        int onLacklist = 2;
+        login_result = permitLoginServicedao.getlogin(user);
+        if (login_result==success){
             map.put("result","success");
-        }else {
+        }else if (login_result==error){
             map.put("result","error");
         }
         return map;
