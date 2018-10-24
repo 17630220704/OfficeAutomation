@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <%--引入ckeditor的网页上加入ckeditor.j--%>
-    <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/resources/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
@@ -34,8 +34,13 @@
     <div class="panel-body">
         <table border="1px" style="width: 100%">
             <tr>
+                <td style="width: 15%">发件人：</td>
+                <td style="width: 85%">
+                    <input type="text" class="form-control" style="width: 70%; Float:left" id="persoId">
+                </td>
+            <tr>
                 <td style="width: 15%">收件人：</td>
-                <td style="width: 85%"><input type="text" class="form-control" style="width: 70%; Float:left" id="">
+                <td style="width: 85%"><input type="text" class="form-control" style="width: 70%; Float:left" id="TO_ID2">
                     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                         添加
                     </button>
@@ -44,27 +49,29 @@
             <tr>
                 <td style="width: 15%">邮件主题：</td>
                 <td style="width: 85%">
-                    <input type="text" class="form-control" style="width: 70%;Float:left" id="">
-                    <select id="">
-                        <option value="0">一般邮件</option>
-                        <option value="1">重要邮件</option>
-                        <option value="2">非常重要</option>
-                    </select>
-
+                    <input type="text" class="form-control" style="width: 70%;Float:left" id="SUBJECT">
                 </td>
             </tr>
             <tr>
-                <td style="width: 15%">邮件内容：</td>
+                <td style="width: 15%">邮件内容：</br>
+                                  字数：
+                </td>
                 <td style="width: 85%">
                     <div>
-                        <textarea rows="30" cols="50" name="editor01"></textarea>
+                        <textarea rows="30" cols="50" name="CONTENT" id="CONTENT"></textarea>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 15%">时间：</td>
+                <td style="width: 85%">
+                    <input id="SEND_TIME" class="form-control" style="width: 70%;Float:left">
                 </td>
             </tr>
             <tr>
                 <td style="width: 15%">附件：</td>
                 <td style="width: 85%">
-
+                <input id="ATTACHMENT_NAME" class="form-control" style="width: 70%;Float:left">
                 </td>
             </tr>
             <tr>
@@ -84,7 +91,7 @@
             <tr>
                 <td style="width: 15%"></td>
                 <td style="width: 85%">
-                    <input type="button" value="立即发送"><input type="button" value="保存草稿箱">
+                    <input type="button" value="立即发送" id="button"><input type="button" value="保存草稿箱">
                 </td>
             </tr>
         </table>
@@ -124,7 +131,7 @@
 </body>
 </html>
 <script type="text/javascript">
-    CKEDITOR.replace('editor01');
+    CKEDITOR.replace('CONTENT');
     var flag = true;
 
     function chkRadio1(id) {
@@ -141,4 +148,33 @@
         id.checked = flag;
         flag = !flag;
     }
+    /*添加邮件*/
+    $(function() {
+        $("#btn").click(function() {
+            var persoId = $("#persoId").val();
+            var TO_ID2 = $("#TO_ID2").val();
+            var SUBJECT = $("#SUBJECT").val();
+            var CONTENT = $("#CONTENT").val();
+            var SEND_TIME = 100;
+            var ATTACHMENT_ID = $("#ATTACHMENT_ID").val();
+            var ATTACHMENT_NAME = $("#ATTACHMENT_NAME").val();
+            $.ajax({
+                url : "EmailAdd",
+                type : "post",
+                data : {
+                    "persoId" : persoId,
+                    "TO_ID2" : TO_ID2,
+                    "SUBJECT" : SUBJECT,
+                    "CONTENT" : CONTENT,
+                    "SEND_TIME" : SEND_TIME,
+                    "ATTACHMENT_ID" : ATTACHMENT_ID,
+                    "ATTACHMENT_NAME" : ATTACHMENT_NAME
+                },
+                dataType : "json",
+                success : function(data) {
+                    alert(data.message);
+                }
+            });
+        });
+    });
 </script>
