@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.dao.lcy.EmailDao">
+
+    <insert id="mailAdd" parameterType="com.entity.lcy.Mailboxinfo2">
+   insert into Mailboxinfo2(persoId,toId2,subject,size,content,sendTime,attachmentId,attachmentName) values(
+#{persoId},#{toId2},#{subject},#{size},#{content},#{sendTime},#{attachmentId},#{attachmentName}
+   )
+</insert>
+</mapper>

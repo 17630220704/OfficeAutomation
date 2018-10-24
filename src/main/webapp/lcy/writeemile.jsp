@@ -19,8 +19,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/resources/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
@@ -40,7 +39,7 @@
                 </td>
             <tr>
                 <td style="width: 15%">收件人：</td>
-                <td style="width: 85%"><input type="text" class="form-control" style="width: 70%; Float:left" id="TO_ID2">
+                <td style="width: 85%"><input type="text" class="form-control" style="width: 70%; Float:left" id="toId2">
                     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                         添加
                     </button>
@@ -49,7 +48,7 @@
             <tr>
                 <td style="width: 15%">邮件主题：</td>
                 <td style="width: 85%">
-                    <input type="text" class="form-control" style="width: 70%;Float:left" id="SUBJECT">
+                    <input type="text" class="form-control" style="width: 70%;Float:left" id="subject">
                 </td>
             </tr>
             <tr>
@@ -58,20 +57,20 @@
                 </td>
                 <td style="width: 85%">
                     <div>
-                        <textarea rows="30" cols="50" name="CONTENT" id="CONTENT"></textarea>
+                        <textarea rows="30" cols="50" name="content" id="content">111a</textarea>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td style="width: 15%">时间：</td>
                 <td style="width: 85%">
-                    <input id="SEND_TIME" class="form-control" style="width: 70%;Float:left">
+                    <input id="sendTime" class="form-control" style="width: 70%;Float:left" type="date">
                 </td>
             </tr>
             <tr>
                 <td style="width: 15%">附件：</td>
                 <td style="width: 85%">
-                <input id="ATTACHMENT_NAME" class="form-control" style="width: 70%;Float:left">
+                <input id="attachmentId" class="form-control" style="width: 70%;Float:left">
                 </td>
             </tr>
             <tr>
@@ -91,7 +90,7 @@
             <tr>
                 <td style="width: 15%"></td>
                 <td style="width: 85%">
-                    <input type="button" value="立即发送" id="button"><input type="button" value="保存草稿箱">
+                    <input type="button" value="立即发送" id="btnadd"><input type="button" value="保存草稿箱">
                 </td>
             </tr>
         </table>
@@ -131,7 +130,7 @@
 </body>
 </html>
 <script type="text/javascript">
-    CKEDITOR.replace('CONTENT');
+    CKEDITOR.replace('content');
     var flag = true;
 
     function chkRadio1(id) {
@@ -149,26 +148,31 @@
         flag = !flag;
     }
     /*添加邮件*/
+
     $(function() {
-        $("#btn").click(function() {
+        $("#btnadd").click(function() {
+            alert($("#content").html());
+
             var persoId = $("#persoId").val();
-            var TO_ID2 = $("#TO_ID2").val();
-            var SUBJECT = $("#SUBJECT").val();
-            var CONTENT = $("#CONTENT").val();
-            var SEND_TIME = 100;
-            var ATTACHMENT_ID = $("#ATTACHMENT_ID").val();
-            var ATTACHMENT_NAME = $("#ATTACHMENT_NAME").val();
+            var toId2 = $("#toId2").val();
+            var subject = $("#subject").val();
+            var content = $("#content").text();
+            var sendTime = $("#sendTime").val();
+            var attachmentId = 1;
+            var attachmentName = 1;
+            var size = 100;
             $.ajax({
-                url : "EmailAdd",
+                url : "/mailAdd",
                 type : "post",
                 data : {
                     "persoId" : persoId,
-                    "TO_ID2" : TO_ID2,
-                    "SUBJECT" : SUBJECT,
-                    "CONTENT" : CONTENT,
-                    "SEND_TIME" : SEND_TIME,
-                    "ATTACHMENT_ID" : ATTACHMENT_ID,
-                    "ATTACHMENT_NAME" : ATTACHMENT_NAME
+                    "toId2" : toId2,
+                    "subject" : subject,
+                    "size" : size,
+                    "content" : content,
+                    "sendTime" : sendTime,
+                    "attachmentId" : attachmentId,
+                    "attachmentName" : attachmentName
                 },
                 dataType : "json",
                 success : function(data) {
