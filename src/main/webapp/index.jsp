@@ -1,98 +1,20 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-  </head>
+<head>
+	<meta charset="utf-8" />
+	<title>布局测试页</title>
+	<script type="text/javascript" src="../../resources/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../../resources/jquery.serialize.js"></script>
+	<script src="../../resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<link href="../../resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="../../resources/bootstrap-3.3.7/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet"/>
+	<link href="../../resources/bootstrap-3.3.7/demo/demo.css" rel="stylesheet"/>
+	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+</head>
   
   <body>
-    <!--异步查询出的数据  -->
-  	<table id="table"></table>
-  	<!--/异步查询出的数据  -->
-	<button class="tianjia1">添加</button>
-  	<!--添加数据  -->
-	<table id="table1" style="display: none;">
-		<tr>
-			<td>账号</td>
-			<td>密码</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td><input type="text" id="shopname" name="shopname" value=""></td>
-			<td><input type="text" id="shopprice" name="shopprice" value=""></td>
-			<td><input type="button" class="tianjia" value="添加"></td>
-		</tr>
-	</table> 
+  <input type="button"  value="测试窗口" />
   </body>
-  <script type="text/javascript">
-  
- 	$(".tianjia1").click(function(){
- 		$("#table1").css("display","block");
- 	})
-  
-  //查询函数
-function a(){
-  	$.ajax({
-  			url:"a1/select",
-  			data:"",
-  			type:"post",
-  			dataType:"json",
-			success:function(data){
-				$("#table").html("");
-				var a ="";
-					a+="<tr><td>id</td>"
-					a+="<td>账号</td>"
-					a+="<td>密码</td></tr>"
-				for(i=0;i<data.list.length;i++){
-					var b = data.list[i]
-					a+="<tr class='id'><td>"+b.shopno+"</td>"
-					a+="<td>"+b.shopname+"</td>"
-					a+="<td>"+b.shopprice+"</td>"				
-				}
-				$("#table").append(a);
-			}  			
-  		})
-  }
-  	//执行查询函数
-  	$(a());
-  	//添加提交按钮函数
-  	$(".tianjia").click(function(){
-  		var shopname=$("#shopname").val();
-  		var shopprice=$("#shopprice").val();
-  		$.ajax({
-  			url:"a1/insert",
-  			data:{
-  				"shopname":shopname,
-  				"shopprice":shopprice
-  			},
-  			type:"post",
-  			dataType:"json",
-			success:function(data){
-			if(data.a==1){
-				$("#table1").css("display","none");
-				alert("成功");
-				a();
-			}else{
-				alert("失败");
-			}
-			}  			
-  		})
-  	})
-  	  </script>
 </html>

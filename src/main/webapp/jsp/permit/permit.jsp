@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
     <link href="../../resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../resources/bootstrap-3.3.7/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet"/>
     <link href="../../resources/bootstrap-3.3.7/demo/demo.css" rel="stylesheet"/>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
 </head>
 
 <body style="height: 100%">
@@ -24,67 +26,17 @@
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <ul class="nav clickstyle">
+            <ul class="nav clickstyle showthree">
                 <li>
-                    <a href="javascript:void(0)">
-                        <i class="now-ui-icons users_single-02"></i>
-                        <p>个人事务</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" target="inde">
-                        <i class="now-ui-icons business_bank"></i>
-                        <p>行政管理</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" target="inde">
-                        <i class="now-ui-icons education_hat"></i>
-                        <p>知识管理</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" target="inde">
-                        <i class="now-ui-icons ui-1_email-85"></i>
-                        <p>邮箱</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" target="inde">
-                        <i>
-                            <img src="../../resources/img/multiple-11.svg">
-                        </i>
-                        <p>人事管理</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" target="inde">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                        <p>权限管理</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" target="inde">
-                        <i class="now-ui-icons loader_gear spin"></i>
-                        <p>系统设置</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="../Login/login.jsp" target="inde">
-                        <i class="now-ui-icons loader_gear spin"></i>
-                        <p>登陆测试</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../index.jsp" target="aaa">
-                        <i class="now-ui-icons loader_gear spin"></i>
-                        <p>index</p>
+                    <a href="javascript:void(0)" target="inde" style="text-align: center;">
+                        <p style="font-size: 14px;">邮箱</p>
+                        <input type="file" />
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="main-panel"  style="height: 100%">
+    <div class="main-panel">
         <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
@@ -101,31 +53,24 @@
                     </form>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#pablo">
+                            <a class="nav-link" href="javascript:void(0);">
                                 <i class="now-ui-icons media-2_sound-wave"></i>
-                                <p>
-                                    <span class="d-lg-none d-md-block">Stats</span>
-                                </p>
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="now-ui-icons location_world"></i>
-                                <p>
-                                    <span class="d-lg-none d-md-block">Some Actions</span>
-                                </p>
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="now-ui-icons users_single-02"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="javascript:void(0);">${username}</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick=" function Signout(){$.session.clear();}">退出登陆</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#pablo">
-                                <i class="now-ui-icons users_single-02"></i>
+                            <a class="nav-link" href="javascript:void(0);">
+                                <i class="now-ui-icons location_world"></i>
                                 <p>
-                                    <span class="d-lg-none d-md-block">Account</span>
+                                    <span class="d-lg-none d-md-block"></span>
                                 </p>
                             </a>
                         </li>
@@ -142,7 +87,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="title">
-                                <font style="vertical-align: inherit;">测试页</font>
+                                <font style="vertical-align: inherit;">导航部分</font>
                             </h5>
                         </div>
                         <div class="card-body" style="height: 100%">
@@ -167,6 +112,11 @@
     $(".clickstyle li a").click(function () {
         $("li").removeClass("active");
         $(this).parent().addClass("active");
+    })
+</script>
+<script>
+    $(function(){
+        alert("页面加载");
     })
 </script>
 

@@ -33,41 +33,46 @@
 <div class="col-md-4 card-body col-center-block" style="margin-top: 10%">
     <form class="login_form">
         <div class="input-group no-border">
-            <input type="text" name="uLoginName" placeholder="请输入账号" class="form-control uloginName"/>
+            <input type="text" name="uLoginName" placeholder="请输入账号" class="form-control uloginName" />
         </div>
         <div class="input-group no-border">
             <input type="password" name="uLoginPassword" placeholder="请输入密码" class="form-control uloginPassword"/>
         </div>
     </form>
         <div class="col-center-block">
-            <input type="button" value="登陆" class="btn btn-danger login_button col-center-block"/>
+            <button type="button" class="btn btn-danger login_button col-center-block">登陆</button>
         </div>
 </div>
 </body>
 <script>
     $(".login_button").click(function () {
-       if (confirm("确认登陆？")) {
-        login();
-       }else {
-           alert("登陆已取消");
-       }
+        var  uloginName = $(".uloginName").val();
+        var  uloginPassword = $(".uloginPassword").val();
+        if (uloginName==null && uloginName =="" && uloginPassword==null&&uloginPassword==""){
+
+        }else {
+            login();
+        }
     })
 </script>
 <script>
     function login() {
         var user = $(".login_form").serialize();
         var result = 0;
-        $.post("/permitLogin.do",user,function (data) {
+        $.post("/permitLogin.do",user).done(function (data) {
             result= data.result;
-            if (result=0) {
-                alert("登陆成功");
-            }else if (result=1) {
+            if (result==0) {
+                window.location.replace("/jsp/permit/permit.jsp");
+            }else if (result==1) {
                 alert("账号或密码不正确");
-            }else if (result=2){
+            }else if (result==2){
                 alert("您已被加入黑名单，请联系管理员");
-            }else if (result=3) {
+            }else if (result==3) {
                 alert("系统繁忙");
             }
+        }).fail(function (xhr, status) {
+            alert(xhr.status);
+            alert(status);
         });
     }
 </script>
