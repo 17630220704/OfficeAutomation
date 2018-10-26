@@ -8,7 +8,9 @@ import java.util.Map;
 
 public interface permitLoginService {
     //登陆
-    public int getlogin(TbUser tbUser);
+    public Map<String,Object> getlogin(TbUser tbUser);
     //获取菜单
-    public  Map<String,Object> getTree(long userid);
+    public  List<Map> getTree(int userid);
+    //获取下级菜单
+    public List<Map> getTrees(int m_id);
 }

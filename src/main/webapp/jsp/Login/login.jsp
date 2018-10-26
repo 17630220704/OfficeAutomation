@@ -58,21 +58,18 @@
 <script>
     function login() {
         var user = $(".login_form").serialize();
-        var result = 0;
-        $.post("/permitLogin.do",user).done(function (data) {
-            result= data.result;
-            if (result==0) {
+        var results = 0;
+        $.post("/permitLogin.do",user,function (data) {
+            results= data.loginresult;
+            if (results==0) {
                 window.location.replace("/jsp/permit/permit.jsp");
-            }else if (result==1) {
+            }else if (results==1) {
                 alert("账号或密码不正确");
-            }else if (result==2){
+            }else if (results==2){
                 alert("您已被加入黑名单，请联系管理员");
-            }else if (result==3) {
+            }else if (results==3) {
                 alert("系统繁忙");
             }
-        }).fail(function (xhr, status) {
-            alert(xhr.status);
-            alert(status);
         });
     }
 </script>

@@ -23,9 +23,10 @@ public class permitLoginServiceImp implements permitLoginService {
     private permitLogin permitLogindao;
 
     @Override
-    public int getlogin(TbUser tbUser) {
+    public Map<String,Object> getlogin(TbUser tbUser) {
     HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
     HttpSession session = request.getSession();
+    Map<String,Object> map = new HashMap<String,Object>();
         int loginresult = 0;//登陆结果
         int lackresult = 1; //黑名单结果
         int userid = 0; //用户id
@@ -39,26 +40,35 @@ public class permitLoginServiceImp implements permitLoginService {
             userid = Integer.parseInt(loginlist.get(0).get("u_id").toString());
             List<Map> Lacklist =  permitLogindao.LoginLacklist(userid);
             lackresult = Lacklist.size();
-        }
-        if (loginresult>0 && lackresult<=0 ){
-            session.setAttribute("userid",userid);
-            session.setAttribute("username",username);
-            return 0;//登陆成功
-        }else if(loginresult>0 &&lackresult>0) {
-            return 2;//被加入黑名单
+            if (lackresult==0){
+                session.setAttribute("username",username);
+                map.put("loginresult",0);//登陆成功
+                map.put("userid",userid);
+                //System.out.println("登陆成功的map："+map);
+            }else {
+                map.put("loginresult",2);//被加入黑名单
+                // System.out.println("被加入黑名单的map："+map);
+            }
         }else if (loginresult<=0){
-            return 1;//账号密码错
+            map.put("loginresult",1);//账号密码错
+            //System.out.println("账号密码错的map："+map);
         }else {
-            return  3;//系统繁忙
+            map.put("loginresult",3);//系统繁忙
+            //System.out.println("系统繁忙的map："+map);
         }
-
+        return map;
     }
 
     @Override
-    public  Map<String,Object> getTree(long userid) {
-        Map<String,Object> map = new HashMap<String,Object>();
-        map = permitLogindao.ListTree(userid);
-        return map;
+    public  List<Map> getTree(int userid) {
+        List<Map> list= permitLogindao.ListTree(userid);
+        return list;
+    }
+
+    @Override
+    public List<Map> getTrees(int m_id) {
+        List<Map> list= permitLogindao.ListTrees(m_id);
+        return list;
     }
 
 }

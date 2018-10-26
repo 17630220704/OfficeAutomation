@@ -8,7 +8,10 @@
 	<select id="LoginLacklist" resultType="map">
 		select l.* from tb_lacklist as l where 1=1 and l.u_id=#{userid}
 	</select>
-	<select id="ListTree" resultType="map" parameterType="int">
+	<select id="ListTree" resultType="map">
         select tm.m_id,tm.m_parentid,tm.m_name,tm.m_url from tb_role_user tru, tb_permit_role tpr,tb_module tm where tru.u_id=#{userid} and tru.r_id=tpr.r_id and tpr.p_id=tm.p_id group by tm.m_id asc ;
+	</select>
+	<select id="ListTrees" resultType="map">
+		select tm.m_id,tm.m_parentid,tm.m_name,tm.m_url from tb_module tm where tm.m_parentid=#{m_id} group by tm.m_id asc ;
 	</select>
 </mapper>

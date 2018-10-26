@@ -26,11 +26,10 @@
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <ul class="nav clickstyle showthree">
+            <ul class="nav showthree">
                 <li>
                     <a href="javascript:void(0)" target="inde" style="text-align: center;">
                         <p style="font-size: 14px;">邮箱</p>
-                        <input type="file" />
                     </a>
                 </li>
             </ul>
@@ -63,7 +62,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="javascript:void(0);">${username}</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onclick=" function Signout(){$.session.clear();}">退出登陆</a>
+                                <a class="dropdown-item Signout" href="javascript:void(0);" >退出登陆</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -108,16 +107,77 @@
 </div>
 </body>
 <script>
+    $(".Signout").click(function () {
+        if (confirm("确认登出？")){
+        Signout();
+        }
+    })
+       function Signout(){
+           $.ajax({
+               url:"/Signout.do",
+               type:"post",
+               dataType:'json'
+           }).always(function () {
+               window.location.reload();
+           });
+        }
     //左侧导航选中变色
-    $(".clickstyle li a").click(function () {
-        $("li").removeClass("active");
-        $(this).parent().addClass("active");
+    $(function(){
+        $("body").on("click",".showthree li a",function () {
+            $("li").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    });
+</script>
+<script>
+    //获取一级菜单
+    $(function(){
+        $.ajax({
+            url:"/permitgetTree.do",
+            type:"post",
+            dataType:'json'
+        }).done(function(data){
+            var  tree = data.getTree;
+            for (i=0;i<tree.length;i++){
+                var stree = "<li>";
+                stree+="<a href='javascript:void(0);' style='text-align: center;' id='"+tree[i].m_id+"' class='getTrees'>";
+                stree+="<p style='font-size: 14px;'>";
+                stree+=tree[i].m_name;
+                stree+="</p></a>";
+                stree+="<ul class='nav showthrees' style='display: block'>"+"<li><a href='javascript:void(0);' style='text-align:right;line-height: 10px;' >123</a></li></ul>"
+                stree+="</li>";
+                $(".showthree").append(stree);
+            }
+
+        }).fail(function (xhr,status) {
+            alert(xhr.status);
+            alert(status)
+        });
     })
 </script>
 <script>
+    //获取二级菜单
     $(function(){
-        alert("页面加载");
-    })
+        $("body").on("click",".getTrees",function () {
+            var treeid = $(this).attr("id");
+            $.post("/getTrees.do",{m_id:treeid}).done(function (data) {
+                $(".showthrees li").remove();
+                var trees = data.getTrees;
+                for (i=0;i<trees.length;i++){
+                    var strees = "<li>";
+                    strees+="<a href='"+trees[i].m_url+"' target='inde' style='text-align:right;line-height: 10px;' >";
+                    strees+="<p style='font-size: 12px;'>";
+                    strees+=trees[i].m_name;
+                    strees+="</p></a>";
+                    strees+="</li>";
+                    $(".showthrees").append(strees);
+                }
+            }).fail(function (xhr,status) {
+                alert(xhr.status);
+                alert(status)
+            });
+        });
+    });
 </script>
 
 <!--   Core JS Files   -->
