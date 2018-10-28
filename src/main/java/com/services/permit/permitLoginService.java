@@ -12,5 +12,5 @@ public interface permitLoginService {
     //获取菜单
     public  List<Map> getTree(int userid);
     //获取下级菜单
-    public List<Map> getTrees(int m_id);
+    public List<Map> getTrees(Integer m_id);
 }

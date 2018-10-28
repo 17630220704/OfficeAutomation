@@ -27,11 +27,7 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav showthree">
-                <li>
-                    <a href="javascript:void(0)" target="inde" style="text-align: center;">
-                        <p style="font-size: 14px;">邮箱</p>
-                    </a>
-                </li>
+
             </ul>
         </div>
     </div>
@@ -144,11 +140,10 @@
                 stree+="<p style='font-size: 14px;'>";
                 stree+=tree[i].m_name;
                 stree+="</p></a>";
-                stree+="<ul class='nav showthrees' style='display: block'>"+"<li><a href='javascript:void(0);' style='text-align:right;line-height: 10px;' >123</a></li></ul>"
+                stree+="<ul class='nav showthrees"+tree[i].m_id+" showthreesremove'  style='display: block'>"+"</ul>";
                 stree+="</li>";
                 $(".showthree").append(stree);
             }
-
         }).fail(function (xhr,status) {
             alert(xhr.status);
             alert(status)
@@ -161,8 +156,8 @@
         $("body").on("click",".getTrees",function () {
             var treeid = $(this).attr("id");
             $.post("/getTrees.do",{m_id:treeid}).done(function (data) {
-                $(".showthrees li").remove();
                 var trees = data.getTrees;
+                    $(".showthreesremove li").remove();
                 for (i=0;i<trees.length;i++){
                     var strees = "<li>";
                     strees+="<a href='"+trees[i].m_url+"' target='inde' style='text-align:right;line-height: 10px;' >";
@@ -170,7 +165,7 @@
                     strees+=trees[i].m_name;
                     strees+="</p></a>";
                     strees+="</li>";
-                    $(".showthrees").append(strees);
+                    $(".showthrees"+trees[i].m_parentid).append(strees);
                 }
             }).fail(function (xhr,status) {
                 alert(xhr.status);

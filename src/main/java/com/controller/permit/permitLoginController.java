@@ -49,17 +49,15 @@ public class permitLoginController {
     public Map<String, Object> permitgetTree(){          //获取一级菜单
         Map<String,Object> map = new HashMap<String,Object>();
         List<Map> list= permitLoginServicedao.getTree(userid);
-        System.out.println("controller   菜单："+list);
         map.put("getTree",list);
         return map;
     };
     @ResponseBody
     @RequestMapping(value = "/getTrees.do")
-    public Map getTrees(int m_id){
+    public Map getTrees(Integer m_id){              //获取二级菜单
         Map<String,Object> map = new HashMap<String,Object>();
         List<Map> list= permitLoginServicedao.getTrees(m_id);
         map.put("getTrees",list);
-        System.out.println("controller 二级菜单："+list);
         return map;
     }
 

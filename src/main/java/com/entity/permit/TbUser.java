@@ -1,10 +1,13 @@
 package com.entity.permit;
 
 
+import java.sql.Timestamp;
+
 public class TbUser {
 
   private long uId;
-  private long dId;
+  private long deptId;
+  private long persoId;
   private String userName;
   private String uLoginName;
   private String uLoginPassword;
@@ -13,23 +16,29 @@ public class TbUser {
   private java.sql.Timestamp uDeadline;
 
 
-  public long getUId() {
+  public long getuId() {
     return uId;
   }
 
-  public void setUId(long uId) {
+  public void setuId(long uId) {
     this.uId = uId;
   }
 
-
-  public long getDId() {
-    return dId;
+  public long getDeptId() {
+    return deptId;
   }
 
-  public void setDId(long dId) {
-    this.dId = dId;
+  public void setDeptId(long deptId) {
+    this.deptId = deptId;
   }
 
+  public long getPersoId() {
+    return persoId;
+  }
+
+  public void setPersoId(long persoId) {
+    this.persoId = persoId;
+  }
 
   public String getUserName() {
     return userName;
@@ -39,62 +48,43 @@ public class TbUser {
     this.userName = userName;
   }
 
-
-  public String getULoginName() {
+  public String getuLoginName() {
     return uLoginName;
   }
 
-  public void setULoginName(String uLoginName) {
+  public void setuLoginName(String uLoginName) {
     this.uLoginName = uLoginName;
   }
 
-
-  public String getULoginPassword() {
+  public String getuLoginPassword() {
     return uLoginPassword;
   }
 
-  public void setULoginPassword(String uLoginPassword) {
+  public void setuLoginPassword(String uLoginPassword) {
     this.uLoginPassword = uLoginPassword;
   }
 
-
-  public long getUOnline() {
+  public long getuOnline() {
     return uOnline;
   }
 
-  public void setUOnline(long uOnline) {
+  public void setuOnline(long uOnline) {
     this.uOnline = uOnline;
   }
 
-
-  public long getULocking() {
+  public long getuLocking() {
     return uLocking;
   }
 
-  public void setULocking(long uLocking) {
+  public void setuLocking(long uLocking) {
     this.uLocking = uLocking;
   }
 
-
-  public java.sql.Timestamp getUDeadline() {
+  public Timestamp getuDeadline() {
     return uDeadline;
   }
 
-  public void setUDeadline(java.sql.Timestamp uDeadline) {
+  public void setuDeadline(Timestamp uDeadline) {
     this.uDeadline = uDeadline;
-  }
-
-  @Override
-  public String toString() {
-    return "TbUser{" +
-            "uId=" + uId +
-            ", dId=" + dId +
-            ", userName='" + userName + '\'' +
-            ", uLoginName='" + uLoginName + '\'' +
-            ", uLoginPassword='" + uLoginPassword + '\'' +
-            ", uOnline=" + uOnline +
-            ", uLocking=" + uLocking +
-            ", uDeadline=" + uDeadline +
-            '}';
   }
 }

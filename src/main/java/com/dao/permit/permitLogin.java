@@ -14,5 +14,5 @@ public interface permitLogin {
     //登陆菜单查询
     public List<Map> ListTree(int userid);
     //二级菜单查询
-    public List<Map> ListTrees(int m_id);
+    public List<Map> ListTrees(Integer m_id);
 }

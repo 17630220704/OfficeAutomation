@@ -66,7 +66,7 @@ public class permitLoginServiceImp implements permitLoginService {
     }
 
     @Override
-    public List<Map> getTrees(int m_id) {
+    public List<Map> getTrees(Integer m_id) {
         List<Map> list= permitLogindao.ListTrees(m_id);
         return list;
     }
