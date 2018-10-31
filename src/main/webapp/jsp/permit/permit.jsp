@@ -80,11 +80,6 @@
             <div class="row" style="height: 100%">
                 <div class="col-md-12" style="height: 100%">
                     <div class="card">
-                        <div class="card-header">
-                            <h5 class="title">
-                                <font style="vertical-align: inherit;">导航部分</font>
-                            </h5>
-                        </div>
                         <div class="card-body" style="height: 100%">
                             <div class="row"  style="height: 100%">
                                 <iframe name="inde" frameborder="0" height="900px" width="100%" style="overflow: hidden"></iframe>
@@ -107,7 +102,7 @@
         if (confirm("确认登出？")){
         Signout();
         }
-    })
+    });
        function Signout(){
            $.ajax({
                url:"/Signout.do",
@@ -138,7 +133,7 @@
                 var stree = "<li>";
                 stree+="<a href='javascript:void(0);' style='text-align: center;' id='"+tree[i].m_id+"' class='getTrees'>";
                 stree+="<p style='font-size: 14px;'>";
-                stree+=tree[i].m_name;
+                stree+=tree[i].m_Name;
                 stree+="</p></a>";
                 stree+="<ul class='nav showthrees"+tree[i].m_id+" showthreesremove'  style='display: block'>"+"</ul>";
                 stree+="</li>";
@@ -157,15 +152,15 @@
             var treeid = $(this).attr("id");
             $.post("/getTrees.do",{m_id:treeid}).done(function (data) {
                 var trees = data.getTrees;
-                    $(".showthreesremove li").remove();
+                $(".showthreesremove li").remove();
                 for (i=0;i<trees.length;i++){
                     var strees = "<li>";
                     strees+="<a href='"+trees[i].m_url+"' target='inde' style='text-align:right;line-height: 10px;' >";
                     strees+="<p style='font-size: 12px;'>";
-                    strees+=trees[i].m_name;
+                    strees+=trees[i].m_Name;
                     strees+="</p></a>";
                     strees+="</li>";
-                    $(".showthrees"+trees[i].m_parentid).append(strees);
+                    $(".showthrees"+trees[i].m_level).append(strees);
                 }
             }).fail(function (xhr,status) {
                 alert(xhr.status);

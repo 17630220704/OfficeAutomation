@@ -1,14 +1,11 @@
 package com.entity.permit;
 
 
-import java.sql.Timestamp;
-
 public class TbUser {
 
   private long uId;
   private long deptId;
   private long persoId;
-  private String userName;
   private String uLoginName;
   private String uLoginPassword;
   private long uOnline;
@@ -16,13 +13,14 @@ public class TbUser {
   private java.sql.Timestamp uDeadline;
 
 
-  public long getuId() {
+  public long getUId() {
     return uId;
   }
 
-  public void setuId(long uId) {
+  public void setUId(long uId) {
     this.uId = uId;
   }
+
 
   public long getDeptId() {
     return deptId;
@@ -32,6 +30,7 @@ public class TbUser {
     this.deptId = deptId;
   }
 
+
   public long getPersoId() {
     return persoId;
   }
@@ -40,51 +39,49 @@ public class TbUser {
     this.persoId = persoId;
   }
 
-  public String getUserName() {
-    return userName;
-  }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  public String getuLoginName() {
+  public String getULoginName() {
     return uLoginName;
   }
 
-  public void setuLoginName(String uLoginName) {
+  public void setULoginName(String uLoginName) {
     this.uLoginName = uLoginName;
   }
 
-  public String getuLoginPassword() {
+
+  public String getULoginPassword() {
     return uLoginPassword;
   }
 
-  public void setuLoginPassword(String uLoginPassword) {
+  public void setULoginPassword(String uLoginPassword) {
     this.uLoginPassword = uLoginPassword;
   }
 
-  public long getuOnline() {
+
+  public long getUOnline() {
     return uOnline;
   }
 
-  public void setuOnline(long uOnline) {
+  public void setUOnline(long uOnline) {
     this.uOnline = uOnline;
   }
 
-  public long getuLocking() {
+
+  public long getULocking() {
     return uLocking;
   }
 
-  public void setuLocking(long uLocking) {
+  public void setULocking(long uLocking) {
     this.uLocking = uLocking;
   }
 
-  public Timestamp getuDeadline() {
+
+  public java.sql.Timestamp getUDeadline() {
     return uDeadline;
   }
 
-  public void setuDeadline(Timestamp uDeadline) {
+  public void setUDeadline(java.sql.Timestamp uDeadline) {
     this.uDeadline = uDeadline;
   }
+
 }

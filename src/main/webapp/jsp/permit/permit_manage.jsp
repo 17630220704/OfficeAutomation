@@ -10,45 +10,42 @@
 <html>
 <head>
     <title>权限管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="../../resources/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="../../resources/jquery.serialize.js"></script>
-    <script src="../../resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <link href="../../resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../resources/bootstrap-3.3.7/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet"/>
-    <link href="../../resources/bootstrap-3.3.7/demo/demo.css" rel="stylesheet"/>
-    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
     <style>
-        .nav-item{
-            border: 1px solid #f2f2f2;
-            width: 10%;
-            height: 5%;
+        .breadcrumb li a{
+            color: #f96332;
+
         }
     </style>
 </head>
-<body>
-<div class="navbar-wrapper">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a style="color: #f96332;" class="nav-link" href="/jsp/permit/permitRole.jsp" target="permit"><i class="now-ui-icons media-2_sound-wave"></i>角色权限管理</a><br/>
-        </li>
-        <li class="nav-item">
-            <a style="color: #f96332;" class="nav-link" href="/jsp/permit/permitRoleUser.jsp" target="permit"><i class="now-ui-icons media-2_sound-wave"></i>角色用户管理</a><br/>
-        </li>
-    </ul>
+<body style="margin: 0px;padding: 0;width: 100%;height: 100%;">
+<div class="container">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="" href="/jsp/permit/permitRole.jsp" target="permit">角色权限管理</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="" href="/jsp/permit/permitRoleUser.jsp" target="permit">角色用户管理</a>
+            </li>
+        </ul>
 </div>
-<div>
-    <iframe name="permit" frameborder="0" ></iframe>
+<div style="border-top: 1px solid #e2e2e2;height: 100%;width: 100%;">
+    <iframe class="main" name="permit" id="iframe" scrolling="0" frameborder="0"  width="100%" ></iframe>
 </div>
 </body>
-<!--   Core JS Files   -->
-<script src="../../resources/bootstrap-3.3.7/js/core/jquery.min.js"></script>
-<script src="../../resources/bootstrap-3.3.7/js/core/popper.min.js"></script>
-<script src="../../resources/bootstrap-3.3.7/js/core/bootstrap.min.js"></script>
-<script src="../../resources/bootstrap-3.3.7/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Chart JS -->
-<script src="../../resources/bootstrap-3.3.7/js/plugins/chartjs.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../../resources/bootstrap-3.3.7/js/plugins/bootstrap-notify.js"></script>
-<script src="../../resources/bootstrap-3.3.7/js/now-ui-dashboard.js?v=1.0.1"></script>
-<script src="../../resources/bootstrap-3.3.7/demo/demo.js"></script>
+<script type="text/javascript">
+    $(function(){
+        function iframeLoad()
+        {
+            document.getElementById("iframe").height=0;
+            document.getElementById("iframe").height=document.getElementById("iframe").contentWindow.document.body.scrollHeight;
+        }
+    });
+</script>
 </html>

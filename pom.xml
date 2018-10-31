@@ -46,6 +46,13 @@
   <dependencies>
     <!-- shiro組件 -->
     <!-- 时间操作组件 -->
+    <!--分页插件-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.2</version>
+    </dependency>
+
     <!-- Apache工具组件 -->
     <dependency>
       <groupId>org.apache.commons</groupId>

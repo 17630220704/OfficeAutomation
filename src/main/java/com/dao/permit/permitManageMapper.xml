@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.permit.permitManage">
+    <!--查询角色-->
+    <select id="listRole" resultType="map" >
+        select tr.r_id,tr.r_Name,GROUP_CONCAT(tm.m_Name) as m_Name from
+        tb_role tr left join tb_permit_role tpr on tr.r_id = tpr.r_id left join tb_module tm on tpr.m_id = tm.m_id
+        group by tr.r_id asc;
+    </select>
+    <!--树形菜单查询-->
+    <select id="getModulTrees" resultType="map">
+        select tm.m_id as mid,(case when rmid.mid is not null then true else  false  end ) as checked,tm.m_level as mlevel,tm.m_Name as mname,tm.m_url as murl
+        from tb_module tm left join
+        (select tm.m_id as mid from tb_module tm left join tb_permit_role t on tm.m_id = t.m_id
+        left join tb_role t2 on t.r_id = t2.r_id where t.r_id=2)as rmid on tm.m_id=rmid.mid group by tm.m_id asc;
+    </select>
+</mapper>

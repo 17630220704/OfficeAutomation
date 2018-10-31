@@ -36,7 +36,7 @@ public class permitLoginServiceImp implements permitLoginService {
         loginresult = loginlist.size();
         //黑名单查询
         if (loginresult>0){
-            username = loginlist.get(0).get("userName").toString();
+            username = loginlist.get(0).get("PersonName").toString();
             userid = Integer.parseInt(loginlist.get(0).get("u_id").toString());
             List<Map> Lacklist =  permitLogindao.LoginLacklist(userid);
             lackresult = Lacklist.size();
@@ -66,8 +66,8 @@ public class permitLoginServiceImp implements permitLoginService {
     }
 
     @Override
-    public List<Map> getTrees(Integer m_id) {
-        List<Map> list= permitLogindao.ListTrees(m_id);
+    public List<Map> getTrees(Integer m_id,int userid) {
+        List<Map> list= permitLogindao.ListTrees(m_id,userid);
         return list;
     }
 

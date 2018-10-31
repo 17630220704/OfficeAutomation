@@ -51,13 +51,16 @@ public class permitLoginController {
         List<Map> list= permitLoginServicedao.getTree(userid);
         map.put("getTree",list);
         return map;
-    };
+    }
+
     @ResponseBody
     @RequestMapping(value = "/getTrees.do")
     public Map getTrees(Integer m_id){              //获取二级菜单
         Map<String,Object> map = new HashMap<String,Object>();
-        List<Map> list= permitLoginServicedao.getTrees(m_id);
+        if (m_id!=null&&userid!=0){
+        List<Map> list= permitLoginServicedao.getTrees(m_id,userid);
         map.put("getTrees",list);
+        }
         return map;
     }
 
