@@ -32,18 +32,18 @@ public class permit_manageController {
     }
     @ResponseBody
     @RequestMapping(value = "/getModulTrees.do")
-    public Map getModulTrees(String rid){
-        System.out.println("rid:"+rid);
+    public Map getModulTrees(Integer rid){
         Map map = new HashMap();
         List<Map<String,Object>> getmodulTrees = permitManageServicedao.getModulTrees(rid);
         map.put("getmodulTrees",getmodulTrees);
         return map;
     }
     @ResponseBody
-    @RequestMapping(value = "/getup.do")
-    public Map getup(){
-
+    @RequestMapping(value = "/updatepermit.do")
+    public Map updatepermit(String mid,Integer rid){
         Map map = new HashMap();
+        Boolean result = permitManageServicedao.updatePermit(mid,rid);
+        map.put("result",result);
         return map;
     }
 

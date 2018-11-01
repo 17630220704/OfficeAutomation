@@ -96,7 +96,11 @@
                 listadd+=listRole[i].r_Name;
                 listadd+="</td>";
                 listadd+="<td>";
-                listadd+=listRole[i].m_Name;
+                if (listRole[i].m_Name==undefined){
+                    listadd+="暂未分配";
+                }else {
+                    listadd+=listRole[i].m_Name;
+                }
                 listadd+="</td>";
                 listadd+="<td>";
                 listadd+="<button id='"+listRole[i].r_id+"' class='updatepermit layui-btn layui-btn-primary layui-btn-sm' data-toggle='modal' data-target='#myModal'>修改</button>";
@@ -145,7 +149,30 @@
         });
         form.on('submit(LAY-auth-tree-submit)', function(obj){
             var authids = authtree.getChecked('#LAY-auth-tree-index');
-            alert(authids);
+            $.ajax({
+                type: "Post",
+                url: "/updatepermit.do",
+                dataType: "json",
+                data:{
+                    'mid':authids.toString(),
+                    'rid':rid
+                },
+                success: function (data) {
+                    layer.load(1,{ // 此处1没有意义，随便写个东西
+                        icon: 1, // 0~2 ,0比较好看
+                        shade: [0.5,'black'] // 黑色透明度0.5背景
+                    });
+                    setTimeout(function () {
+                        layer.closeAll();
+                        location.reload();
+                    },500);
+
+                },
+                error:function (xhr,status) {
+                    alert(xhr.status);
+                    alert(status);
+                }
+            });
             return false;
         });
 
