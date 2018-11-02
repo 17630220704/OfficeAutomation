@@ -58,7 +58,7 @@
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn layui-btn-sm" type="submit" lay-submit lay-filter="LAY-auth-tree-submit">提交</button>
+                            <button class="layui-btn layui-btn-sm" type="submit" lay-submit lay-filter="LAY-auth-tree-submit" data-dismiss="modal">提交</button>
                             <button class="layui-btn layui-btn-primary layui-btn-sm" type="reset">重置</button>
                         </div>
                     </div>
@@ -158,19 +158,13 @@
                     'rid':rid
                 },
                 success: function (data) {
-                    layer.load(1,{ // 此处1没有意义，随便写个东西
-                        icon: 1, // 0~2 ,0比较好看
-                        shade: [0.5,'black'] // 黑色透明度0.5背景
-                    });
+                    layer.msg("设置成功！");
                     setTimeout(function () {
-                        layer.closeAll();
-                        location.reload();
+                     getRole();
                     },500);
-
                 },
                 error:function (xhr,status) {
-                    alert(xhr.status);
-                    alert(status);
+                    layer.msg("设置失败！"+"错误编号:"+xhr.status+"错误原因："+status);
                 }
             });
             return false;

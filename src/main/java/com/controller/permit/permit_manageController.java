@@ -7,6 +7,7 @@ import com.services.permit.permitManageService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -43,6 +44,14 @@ public class permit_manageController {
     public Map updatepermit(String mid,Integer rid){
         Map map = new HashMap();
         Boolean result = permitManageServicedao.updatePermit(mid,rid);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/saveRole.do")
+    public Map saveRole(String rname){
+        Map map = new HashMap();
+        Boolean result = permitManageServicedao.saveRole(rname);
         map.put("result",result);
         return map;
     }

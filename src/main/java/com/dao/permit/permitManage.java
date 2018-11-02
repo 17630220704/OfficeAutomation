@@ -14,4 +14,6 @@ public interface permitManage {
     Integer deletePermit(@Param("rid") int rid);
     //权限修改—添加
     Integer savePermit(@Param("rid") int rid, @Param("mid") Integer mid);
+    //添加角色
+    Integer saveRole(@Param("rname") String rname);
 }

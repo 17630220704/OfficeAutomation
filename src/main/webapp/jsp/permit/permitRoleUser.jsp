@@ -10,8 +10,15 @@
 <html>
 <head>
     <title>角色用户</title>
+    <link rel="stylesheet" href="/resources/permit-trees/layui-v2.4.4/layui/css/layui.css">
+    <script src="/resources/jquery-3.1.1.min.js"></script>
+    <script src="/resources/permit-trees/layui-v2.4.4/layui/layui.js"></script>
+    <script src="/resources/permit-trees/layui-v2.4.4/layui/extends/authtree.js"></script>
 </head>
 <body>
-角色用户
+<div>给用户设置角色</div>
+<div>
+
+</div>
 </body>
 </html>

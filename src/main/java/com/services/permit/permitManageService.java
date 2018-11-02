@@ -13,4 +13,6 @@ public interface permitManageService {
     List<Map<String,Object>> getModulTrees(Integer rid);
     //权限修改
     boolean updatePermit(String mid, int rid);
+    //添加角色
+    boolean saveRole(String rname);
 }

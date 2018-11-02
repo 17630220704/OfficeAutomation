@@ -21,4 +21,10 @@
     <select id="savePermit" resultType="Integer">
         insert into tb_permit_role(r_id,m_id) value (#{rid},#{mid});
     </select>
+   <!-- <select id="saveRole" resultType="Integer" parameterType="String">
+        insert into tb_role(r_Name) value (#{rname});
+    </select>-->
+    <insert id="saveRole" parameterType="String" >
+        insert into tb_role(r_Name) value (#{rname});
+    </insert>
 </mapper>

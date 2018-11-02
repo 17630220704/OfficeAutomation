@@ -55,4 +55,17 @@ public class permitManageServiceImp implements permitManageService {
         }
         return result;
     }
+
+    @Override
+    @Transactional
+    public boolean saveRole(String rname) {
+        Integer result = permitManagedao.saveRole(rname);
+        if (result==1){
+            return true;
+        }
+        if (result==null){
+            return false;
+        }
+        return false;
+    }
 }

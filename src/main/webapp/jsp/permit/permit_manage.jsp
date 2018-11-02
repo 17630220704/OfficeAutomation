@@ -33,10 +33,13 @@
             <li class="breadcrumb-item">
                 <a class="" href="/jsp/permit/permitRoleUser.jsp" target="permit">角色用户管理</a>
             </li>
+            <li class="breadcrumb-item">
+                <a class="" href="/jsp/permit/permitAddRole.jsp" target="permit">添加角色</a>
+            </li>
         </ul>
 </div>
 <div style="border-top: 1px solid #e2e2e2;height: 100%;width: 100%;">
-    <iframe class="main" name="permit" id="iframe" scrolling="0" frameborder="0"  width="100%" ></iframe>
+    <iframe class="main" name="permit" id="iframe" scrolling="0" frameborder="0"  width="100%" height="100%" ></iframe>
 </div>
 </body>
 <script type="text/javascript">
