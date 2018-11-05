@@ -1,15 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/10/18
-  Time: 18:59
+  Date: 2018/10/31
+  Time: 9:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <title>Bootstrap 实例 - 面板标题</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -33,13 +32,18 @@
             <tr>
                 <td style="width: 15%">发件人：</td>
                 <td style="width: 85%">
-                    <input type="text" class="form-control" style="width: 70%; Float:left" id="persoId">
+                    <input type="text" style="display: none" class="form-control" style="width: 70%; Float:left"
+                           id="bodyId" value="${map[0].BODY_ID}">
+                    <input type="text" class="form-control" style="width: 70%; Float:left" id="persoId"
+                           value="${map[0].persoId}">
                 </td>
             <tr>
                 <td style="width: 15%">收件人：</td>
                 <td style="width: 85%">
-                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId1">
-                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId2">
+                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId1"
+                           value="${map[0].TO_ID2}">
+                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId2"
+                           value="${map[0].TO_ID2}">
                     <button class="btn btn-primary btn-lg btn-xs" data-toggle="modal" data-target="#myModal"
                             id="Eselect">
                         添加
@@ -49,7 +53,8 @@
             <tr>
                 <td style="width: 15%">邮件主题：</td>
                 <td style="width: 85%">
-                    <input type="text" class="form-control" style="width: 70%;Float:left" id="subject">
+                    <input type="text" class="form-control" style="width: 70%;Float:left" id="subject"
+                           value="${map[0].SUBJECT}">
                 </td>
             </tr>
             <tr>
@@ -58,7 +63,8 @@
                 </td>
                 <td style="width: 85%">
                     <div>
-                        <textarea rows="30" cols="50" name="content" id="content" class="ckeditor"></textarea>
+                        <textarea rows="30" cols="50" name="content" id="content"
+                                  class="ckeditor">${map[0].CONTENT}</textarea>
                     </div>
                 </td>
             </tr>
@@ -73,7 +79,8 @@
             <tr>
                 <td style="width: 15%"></td>
                 <td style="width: 85%">
-                    <input type="button" value="立即发送" id="btnadd"><input type="button" value="保存草稿箱" id="btnBox">
+                    <input type="button" onclick="tbb()" value="立即发送" id="btnadd">
+                    <input type="button" onclick="fbb()" value="保存草稿箱" id="btnBox">
                 </td>
             </tr>
         </table>
@@ -126,8 +133,6 @@
     </div><!-- /.modal -->
 </div>
 </div>
-
-
 </body>
 </html>
 <script type="text/javascript">
@@ -155,36 +160,6 @@
     }
 
     $(function () {
-        $("#btnadd").click(function () {
-            var persoId = $("#persoId").val();
-            var toId2 = $("#toId1").val();
-            var subject = $("#subject").val();
-            var content = getContent();
-            var attachmentId = 1;
-            var attachmentName = 1;
-            var size = 100;
-            alert(content)
-            $.ajax({
-                url: "/mailAdd",
-                type: "post",
-                data: {
-                    "persoId": persoId,
-                    "toId2": toId2,
-                    "subject": subject,
-                    "size": size,
-                    "content": content,
-                    "attachmentId": attachmentId,
-                    "attachmentName": attachmentName
-                },
-                dataType: "json",
-                success: function (data) {
-                    alert(data.message);
-                    window.location.reload();
-                }
-            });
-        });
-    });
-    $(function () {
         //选择一项
         $("#addOne").click(function () {
             $("#from option:selected").clone().appendTo("#to");
@@ -206,7 +181,19 @@
         });
 
     });
+    $("#xz").click(function () {
+        var aaa = [];
+        $("#to option").each(function () {
+            aaa.push($(this).text());
+        });
+        $("#toId2").val(aaa);
+        var bbb = [];
+        $("#to option").each(function () {
+            bbb.push($(this).val());
+        });
+        $("#toId1").val(bbb);
 
+    });
     $(function () {
         $("#Eselect").click(function () {
             $.ajax({
@@ -239,36 +226,62 @@
         $("#toId1").val(bbb);
 
     });
-    /*保存草稿邮件*/
-    $(function () {
-        $("#btnBox").click(function () {
-
-            var persoId = $("#persoId").val();
-            var toId2 = $("#toId1").val();
-            var subject = $("#subject").val();
-            var content = getContent();
-            var attachmentId = 1;
-            var attachmentName = 1;
-            var size = 100;
-            alert(content)
-            $.ajax({
-                url: "/mailAddBox",
-                type: "post",
-                data: {
-                    "persoId": persoId,
-                    "toId2": toId2,
-                    "subject": subject,
-                    "size": size,
-                    "content": content,
-                    "attachmentId": attachmentId,
-                    "attachmentName": attachmentName
-                },
-                dataType: "json",
-                success: function (data) {
-                    alert(data.message);
-                    window.location.reload();
-                }
-            });
-        });
-    });
+    function tbb() {
+        var bodyId = $("#bodyId").val();
+        var persoId = $("#persoId").val();
+        var toId2 = $("#toId1").val();
+        var subject = $("#subject").val();
+        var content = getContent();
+        var attachmentId = 1;
+        var attachmentName = 1;
+        var size = 100;
+        $.ajax({
+            url: "/CGAddUP",
+            type: "post",
+            data: {
+                "bodyId": bodyId,
+                "persoId": persoId,
+                "toId2": toId2,
+                "subject": subject,
+                "size": size,
+                "content": content,
+                "attachmentId": attachmentId,
+                "attachmentName": attachmentName
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.message);
+                window.location.reload();
+            }
+        })
+    }
+    function fbb() {
+        var bodyId = $("#bodyId").val();
+        var persoId = $("#persoId").val();
+        var toId2 = $("#toId1").val();
+        var subject = $("#subject").val();
+        var content = getContent();
+        var attachmentId = 1;
+        var attachmentName = 1;
+        var size = 100;
+        $.ajax({
+            url: "/CGAddUP1",
+            type: "post",
+            data: {
+                "bodyId": bodyId,
+                "persoId": persoId,
+                "toId2": toId2,
+                "subject": subject,
+                "size": size,
+                "content": content,
+                "attachmentId": attachmentId,
+                "attachmentName": attachmentName
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.message);
+                window.location.reload();
+            }
+        })
+    }
 </script>
