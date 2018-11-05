@@ -21,10 +21,29 @@
     <select id="savePermit" resultType="Integer">
         insert into tb_permit_role(r_id,m_id) value (#{rid},#{mid});
     </select>
-   <!-- <select id="saveRole" resultType="Integer" parameterType="String">
-        insert into tb_role(r_Name) value (#{rname});
-    </select>-->
     <insert id="saveRole" parameterType="String" >
         insert into tb_role(r_Name) value (#{rname});
+    </insert>
+    <delete id="deleteRole" parameterType="int">
+        delete from tb_role where r_id=#{rid} and r_id!=1;
+    </delete>
+    <select id="listDept" resultType="map">
+        select td.DeptId as DeptId,td.DeptNumber as DeptNumber,td.DeptName as DeptName from tb_deparment td;
+    </select>
+    <select id="getDept" resultType="map">
+        select td.DeptId,td.DeptNumber,td.DeptName from tb_deparment td;
+    </select>
+    <delete id="deleteDept">
+        delete from tb_deparment where DeptId=#{deptid};
+    </delete>
+    <update id="updateDept" >
+        update tb_deparment
+        <set>
+          ${DeptType} = #{DeptName}
+        </set>
+        where DeptId = #{DeptId};
+    </update>
+    <insert id="saveDept">
+        insert into tb_deparment(DeptNumber,DeptName) value(#{DeptNumber},#{DeptName});
     </insert>
 </mapper>

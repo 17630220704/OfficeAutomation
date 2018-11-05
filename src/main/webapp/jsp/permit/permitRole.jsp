@@ -24,13 +24,16 @@
 </head>
 <body style="padding: 0px;margin: 0px; height: auto;">
 <div class="container">
+    <div>
+        条件
+    </div>
     <table class="table table table-hover">
         <thead>
         <tr>
             <th>角色编号</th>
             <th>角色名</th>
             <th>权限</th>
-            <th colspan="2">操作</th>
+            <th colspan="4">操作</th>
         </tr>
         </thead>
         <tbody class="showlistRole">
@@ -89,10 +92,10 @@
             var listRole = data.listRole;
             for (var i=0;i<listRole.length;i++){
                 var  listadd = "<tr>";
-                listadd+="<td>";
+                listadd+="<td width='10%'>";
                 listadd+=listRole[i].r_id;
                 listadd+="</td>";
-                listadd+="<td>";
+                listadd+="<td width='10%'>";
                 listadd+=listRole[i].r_Name;
                 listadd+="</td>";
                 listadd+="<td>";
@@ -102,8 +105,9 @@
                     listadd+=listRole[i].m_Name;
                 }
                 listadd+="</td>";
-                listadd+="<td>";
+                listadd+="<td width='20%'>";
                 listadd+="<button id='"+listRole[i].r_id+"' class='updatepermit layui-btn layui-btn-primary layui-btn-sm' data-toggle='modal' data-target='#myModal'>修改</button>";
+                listadd+="<button id='"+listRole[i].r_id+"' class='deletepermit layui-btn layui-btn-danger layui-btn-sm'>删除</button>";
                 listadd+="</td>";
                 listadd+="</tr>";
                 $(".showlistRole").append(listadd);
@@ -170,6 +174,21 @@
             return false;
         });
 
+    }
+</script>
+<script>
+    $(function () {
+        deletepermit();
+    });
+    function deletepermit() {
+        $("body").on("click",".deletepermit",function () {
+            var rid = $(this).attr("id");
+            $.post("/deleteRole.do",{'rid':rid}).done(function (date) {
+                layer.msg(date.result,{time:1000},function () {
+                    getRole();
+                });
+            });
+        });
     }
 </script>
 <script>

@@ -68,4 +68,64 @@ public class permitManageServiceImp implements permitManageService {
         }
         return false;
     }
+
+    @Override
+    public boolean deleteRole(int rid) {
+        Integer result = permitManagedao.deleteRole(rid);
+        if (result==1){
+            return true;
+        }
+        if (result==null){
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Map<String, Object>> listDept() {
+        List<Map<String,Object>> list = permitManagedao.listDept();
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> getDept() {
+        List<Map<String,Object>> list = permitManagedao.getDept();
+        return list;
+    }
+
+    @Override
+    public boolean deleteDept(int deptid) {
+        Integer result = permitManagedao.deleteDept(deptid);
+        if (result==1){
+            return true;
+        }
+        if (result==null){
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateDept(int DeptId,String DeptType,String DeptName) {
+        Integer result = permitManagedao.updateDept(DeptId,DeptType,DeptName);
+        if (result==1){
+            return true;
+        }
+        if (result==null){
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean saveDept(int DeptNumber, String DeptName) {
+        Integer result = permitManagedao.saveDept(DeptNumber,DeptName);
+        if (result==1){
+            return true;
+        }
+        if (result==null){
+            return false;
+        }
+        return false;
+    }
 }

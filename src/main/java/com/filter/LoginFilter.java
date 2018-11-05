@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class LoginFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
@@ -20,13 +20,13 @@ public class LoginFilter implements Filter {
         HttpSession session = Request.getSession();
         String username = (String) session.getAttribute("username");
         String path = Request.getRequestURI();
-        if(path.indexOf("/jsp/Login/login.jsp") > -1) {
+        if(path.indexOf("../jsp/Login/login.jsp") > -1) {
             chain.doFilter(Request, Response);
             return;
         }
         if (username == null || "".equals(username)) {
             // 跳转到登陆页面
-            Response.sendRedirect("/jsp/Login/login.jsp");
+            Response.sendRedirect("../jsp/Login/login.jsp");
         } else {
             // 已经登陆,继续此次请求
             chain.doFilter(request, response);

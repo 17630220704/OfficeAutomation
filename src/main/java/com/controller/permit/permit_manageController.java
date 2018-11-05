@@ -1,8 +1,5 @@
 package com.controller.permit;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.services.permit.permitManageService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -52,6 +49,57 @@ public class permit_manageController {
     public Map saveRole(String rname){
         Map map = new HashMap();
         Boolean result = permitManageServicedao.saveRole(rname);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/deleteRole.do")
+    public Map deleteRole(int rid){
+        Map map = new HashMap();
+        Boolean result = permitManageServicedao.deleteRole(rid);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/listDept.do")
+    public Map listDept(){
+        Map map = new HashMap();
+        List<Map<String,Object>> result = permitManageServicedao.listDept();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("data",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/getDept.do")
+    public Map getDept(){
+        Map map = new HashMap();
+        List<Map<String,Object>> result = permitManageServicedao.getDept();
+        map.put("getDept",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/deleteDept.do")
+    public Map deleteDept(int deptid){
+        Map map = new HashMap();
+        boolean result = permitManageServicedao.deleteDept(deptid);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/updateDept.do")
+    public Map updateDept(Integer DeptId,String DeptName,String DeptType){
+        Map map = new HashMap();
+        boolean result = permitManageServicedao.updateDept(DeptId,DeptType,DeptName);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/saveDept.do")
+    public Map saveDept(Integer DeptNumber, String DeptName){
+        Map map = new HashMap();
+        boolean result = permitManageServicedao.saveDept(DeptNumber,DeptName);
+        System.out.println("result:"+result);
         map.put("result",result);
         return map;
     }

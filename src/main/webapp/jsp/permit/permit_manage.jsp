@@ -36,6 +36,9 @@
             <li class="breadcrumb-item">
                 <a class="" href="/jsp/permit/permitAddRole.jsp" target="permit">添加角色</a>
             </li>
+            <li class="breadcrumb-item">
+                <a class="" href="/jsp/permit/permitDept.jsp" target="permit">部门管理</a>
+            </li>
         </ul>
 </div>
 <div style="border-top: 1px solid #e2e2e2;height: 100%;width: 100%;">

@@ -48,10 +48,9 @@
                 },
                 success:function (data) {
                     if (data.result){
-                        layer.msg("添加成功");
-                        setTimeout(function () {
+                        layer.msg("添加成功",{time:800},function () {
                             location.replace("/jsp/permit/permitRole.jsp");
-                        },1000)
+                        });
                     }else {
                         layer.msg("添加失败");
                     }
