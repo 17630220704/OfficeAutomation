@@ -126,7 +126,6 @@
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
-
             $.post("/updateDept.do",{'DeptId':data.DeptId,'DeptType':field,'DeptName':value},function (date) {
                 layer.msg(date.result,{time:800});
             })

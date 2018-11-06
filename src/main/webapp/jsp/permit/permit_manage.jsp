@@ -42,16 +42,20 @@
         </ul>
 </div>
 <div style="border-top: 1px solid #e2e2e2;height: 100%;width: 100%;">
-    <iframe class="main" name="permit" id="iframe" scrolling="0" frameborder="0"  width="100%" height="100%" ></iframe>
+    <iframe class="main" name="permit" id="iframe" scrolling="0" frameborder="0"  width="100%" height="100%" onload="this.height=100"></iframe>
 </div>
 </body>
 <script type="text/javascript">
-    $(function(){
-        function iframeLoad()
-        {
-            document.getElementById("iframe").height=0;
-            document.getElementById("iframe").height=document.getElementById("iframe").contentWindow.document.body.scrollHeight;
-        }
-    });
+    function reinitIframe(){
+        var iframe = document.getElementById("iframe");
+        try{
+            var bHeight = iframe.contentWindow.document.body.scrollHeight;
+            var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+            var height = Math.max(bHeight, dHeight);
+            iframe.height = height;
+            console.log(height);
+        }catch (ex){}
+    }
+    window.setInterval("reinitIframe()", 200);
 </script>
 </html>

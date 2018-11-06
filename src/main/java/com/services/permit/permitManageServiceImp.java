@@ -128,4 +128,10 @@ public class permitManageServiceImp implements permitManageService {
         }
         return false;
     }
+
+    @Override
+    public List<Map<String, Object>> listRoleUser(String personname) {
+         List<Map<String,Object>> list =  permitManagedao.listRoleUser(personname);
+        return list;
+    }
 }

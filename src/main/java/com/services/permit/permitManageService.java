@@ -27,4 +27,6 @@ public interface permitManageService {
     boolean updateDept(int DeptId,String DeptType,String DeptName);
     //添加部门
     boolean saveDept(int DeptNumber,String DeptName);
+    //用户角色查询
+    List<Map<String,Object>> listRoleUser(String personname);
 }

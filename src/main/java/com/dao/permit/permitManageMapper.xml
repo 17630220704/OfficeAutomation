@@ -46,4 +46,10 @@
     <insert id="saveDept">
         insert into tb_deparment(DeptNumber,DeptName) value(#{DeptNumber},#{DeptName});
     </insert>
+    <select id="listRoleUser" resultType="map">
+        select tu.*,tp.*,tru.*,td.*,tr.* from tb_user tu left join tb_role_user tru on tu.u_id = tru.u_id left join tb_personinfo tp on tu.persoId = tp.persoId left join tb_role tr on tru.r_id = tr.r_id left join tb_deparment td on tu.DeptId = td.DeptId where 1=1
+      <if test="personname!=null and personname!=''">
+          and tp.PersonName like '%'#{personname}'%';
+      </if>
+    </select>
 </mapper>

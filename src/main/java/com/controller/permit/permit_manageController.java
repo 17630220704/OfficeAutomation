@@ -4,7 +4,6 @@ import com.services.permit.permitManageService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -99,8 +98,17 @@ public class permit_manageController {
     public Map saveDept(Integer DeptNumber, String DeptName){
         Map map = new HashMap();
         boolean result = permitManageServicedao.saveDept(DeptNumber,DeptName);
-        System.out.println("result:"+result);
         map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/listRoleUser.do")
+    public Map listRoleUser(String personname){
+        Map map = new HashMap();
+        List<Map<String,Object>> result = permitManageServicedao.listRoleUser(personname);
+        map.put("code",0);
+        map.put("msg","");
+        map.put("data",result);
         return map;
     }
 

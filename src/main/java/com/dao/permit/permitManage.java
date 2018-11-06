@@ -28,5 +28,7 @@ public interface permitManage {
     Integer updateDept(@Param("DeptId") int DeptId,@Param("DeptType") String DeptType,@Param("DeptName") String DeptName);
     //添加部门
     Integer saveDept(@Param("DeptNumber") int DeptNumber,@Param("DeptName") String DeptName );
+    //查询角色用户
+    List<Map<String, Object>> listRoleUser(@Param("personname") String personname);
 
 }

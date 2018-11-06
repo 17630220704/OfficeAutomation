@@ -183,11 +183,14 @@
     function deletepermit() {
         $("body").on("click",".deletepermit",function () {
             var rid = $(this).attr("id");
-            $.post("/deleteRole.do",{'rid':rid}).done(function (date) {
-                layer.msg(date.result,{time:1000},function () {
-                    getRole();
+            layer.confirm('真的删除行么', function(){
+                $.post("/deleteRole.do",{'rid':rid}).done(function (date) {
+                    layer.msg(date.result,{time:500},function () {
+                        getRole();
+                    });
                 });
             });
+
         });
     }
 </script>
