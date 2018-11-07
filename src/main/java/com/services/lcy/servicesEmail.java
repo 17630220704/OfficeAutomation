@@ -46,6 +46,11 @@ public interface servicesEmail {
     public int Tbuserupp(TbPersoninfo td);
     List<Mailboxinfo2> queryAllDataFromTable(@Param("page") int page, @Param("limit") int limit, @Param("keyWord") String keyWord,@Param("persoId") int persoId,@Param("EmailBoxid") int EmailBoxid);
     int queryAllCount(String keyWord,@Param("persoId") int persoId,@Param("EmailBoxid") int EmailBoxid);
+    List<Mailboxinfo2> YfsQuery(@Param("page") int page, @Param("limit") int limit, @Param("keyWord") String keyWord, @Param("persoId") int persoId);
+    int YfsQueryCount(String keyWord, @Param("persoId") int persoId);
+    List<Mailboxinfo2> dustbin(@Param("page") int page, @Param("limit") int limit, @Param("keyWord") String keyWord, @Param("persoId") int persoId, @Param("EmailBoxid") int EmailBoxid);
+
+    int dustbinCount(String keyWord, @Param("persoId") int persoId, @Param("EmailBoxid") int EmailBoxid);
 
 
 }

@@ -161,14 +161,35 @@ public class servicesEmailImpl implements servicesEmail {
     }
 
     @Override
-    public List<Mailboxinfo2> queryAllDataFromTable(int page, int limit, String keyWord, int persoId,int EmailBoxid) {
+    public List<Mailboxinfo2> queryAllDataFromTable(int page, int limit, String keyWord, int persoId, int EmailBoxid) {
         page = (page - 1) * limit;
-        return dao.queryAllDataFromTable(page, limit, keyWord, persoId,EmailBoxid);
+        return dao.queryAllDataFromTable(page, limit, keyWord, persoId, EmailBoxid);
     }
 
     @Override
-    public int queryAllCount(String keyWord,int persoId,int EmailBoxid) {
-        return dao.queryAllCount(keyWord,persoId,EmailBoxid);
+    public int queryAllCount(String keyWord, int persoId, int EmailBoxid) {
+        return dao.queryAllCount(keyWord, persoId, EmailBoxid);
     }
 
+    @Override
+    public List<Mailboxinfo2> YfsQuery(int page, int limit, String keyWord, int persoId) {
+        page = (page - 1) * limit;
+        return dao.YfsQuery(page, limit, keyWord, persoId);
+    }
+
+    @Override
+    public int YfsQueryCount(String keyWord, int persoId) {
+        return dao.YfsQueryCount(keyWord, persoId);
+    }
+
+    @Override
+    public List<Mailboxinfo2> dustbin(int page, int limit, String keyWord, int persoId,int EmailBoxid) {
+        page = (page - 1) * limit;
+        return dao.dustbin(page, limit, keyWord, persoId,EmailBoxid);
+    }
+
+    @Override
+    public int dustbinCount(String keyWord, int persoId,int EmailBoxid) {
+        return dao.dustbinCount(keyWord, persoId, EmailBoxid);
+    }
 }

@@ -104,19 +104,7 @@
     <delete id="LjUpdate" parameterType="int">
         delete from email where emailId = #{emailId}
     </delete>
-    <select id="YfsQuery" resultMap="getEmail" parameterType="map">
-        select
-        e.EmailId,e.EmailBoxid,e.PosiId,e.READ_FLAG,e.DELETE_FLAG,e.RECEIPT,e.IS_F,e.IS_R,e.SIGN,m.BODY_ID,m.persoId,m.TO_ID2,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME
-        from mailboxinfo2 m right join email e on e.BODY_ID = m.BODY_ID
-        <where>
-            <if test="posiId!=null and posiId!=''">
-                and e.posiId = #{posiId}
-            </if>
-            <if test="emailBoxid !=null and emailBoxid!=''">
-                and e.emailBoxid = #{emailBoxid}
-            </if>
-        </where>
-    </select>
+
     <select id="YfsXq" resultType="Map">
 	    select BODY_ID,persoId,TO_ID2,toidname,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME from Mailboxinfo2 where BODY_ID = #{bodyId}
 	</select>
@@ -216,7 +204,8 @@
         where persoId = #{persoId}
     </update>
     <select id="queryAllDataFromTable" resultType="Map">
-        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on
+        m.BODY_ID = e.BODY_ID
         <where>
             <if test='keyWord!="" or keyWord!=null'>
                 and m.SUBJECT like '%${keyWord}%'
@@ -228,13 +217,59 @@
                 and e.EmailBoxid= #{EmailBoxid}
             </if>
         </where>
-
         limit #{page},#{limit}
     </select>
     <select id="queryAllCount" resultType="java.lang.Integer" parameterType="java.lang.String">
         select count(m.BODY_ID) from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
         <where>
-
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+    </select>
+    <select id="YfsQuery" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,t.PersonName from Mailboxinfo2 m left join tb_PersonInfo t on
+        m.persoId = t.persoId
+        <where>
+            <if test='keyWord!=""or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and m.persoId= #{persoId}
+            </if>
+        </where>
+        limit #{page},#{limit}
+    </select>
+    <select id="YfsQueryCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from Mailboxinfo2
+        <where>
+            <if test="persoId!=null and persoId!=''">
+                and persoId= #{persoId}
+            </if>
+        </where>
+    </select>
+    <select id="dustbin" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on
+        m.BODY_ID = e.BODY_ID
+        <where>
+            <if test='keyWord!="" or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+        limit #{page},#{limit}
+    </select>
+    <select id="dustbinCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(m.BODY_ID) from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        <where>
             <if test="persoId!=null and persoId!=''">
                 and e.PosiId= #{persoId}
             </if>

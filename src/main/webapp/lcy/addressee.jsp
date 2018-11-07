@@ -18,6 +18,9 @@
 </head>
 <body>
 <div>
+    <h1 style="text-align: center">收件箱</h1>
+</div>
+<div>
     <table class="layui-hide" id="test" lay-filter="test"></table>
 </div>
 <script type="text/html" id="toolbarDemo">
@@ -88,11 +91,15 @@
                 ]]
                 , page: true,
                 done:function (res,curr,count) {
+                    $("[data-field='BODY_ID']").css('display','none');
+                    $("[data-field='EmailId']").css('display','none');
                     $("[data-field='READ_FLAG']").children().each(function () {
-                        if ($(this).text()=='1'){
+                        if ($(this).text()=='0'){
+                            $(this).text("未读").addClass("layui-badge layui-bg-orange");
+                        }else if($(this).text()=='1'){
                             $(this).text("已读").addClass("layui-badge layui-bg-green");
                         }else{
-                            $(this).text("未读").addClass("layui-badge layui-bg-orange");
+                            $(this).text("状态");
                         }
                     })
                 }
@@ -132,7 +139,6 @@
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         var emailId = data.EmailId;
-
                         obj.del();
                         layer.close(index);
                         $.ajax({

@@ -145,7 +145,7 @@ public class EmailController {
         e.setEmailId(e.getEmailId());
         e.setEmailBoxid(3);
         e.setDeleteFlag(1);
-        int aaa =mail.mailUpdate(e);
+        int aaa = mail.mailUpdate(e);
         if (aaa > 0) {
             map.put("message", "删除成功");
         } else {
@@ -379,4 +379,40 @@ public class EmailController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping("/shipment")
+    public Map<String, Object> shipment(
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "15") int limit,
+            String keyWord
+    ) {
+        int persoId = 1;
+        List<Mailboxinfo2> datas = mail.YfsQuery(page, limit, keyWord, persoId);
+        int countx = mail.YfsQueryCount(keyWord, persoId);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", countx);
+        map.put("data", datas);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping("/dustbin")
+    public Map<String, Object> dustbin(
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "15") int limit,
+            String keyWord
+    ) {
+        int persoId = 1;
+        int EmailBoxid = 3;
+        List<Mailboxinfo2> datas = mail.dustbin(page, limit, keyWord, persoId, EmailBoxid);
+        int countx = mail.dustbinCount(keyWord, persoId, EmailBoxid);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", countx);
+        map.put("data", datas);
+        System.out.println(map.toString());
+        return map;
+    }
 }
