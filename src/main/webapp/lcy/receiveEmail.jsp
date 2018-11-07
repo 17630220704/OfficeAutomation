@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="../resources/layui-v2.0.1/layui/css/layui.css" media="all">
 </head>
 <body>
-<table class="table table-hover" id="table1">
+<div id="table1">
 
-</table>
+</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -74,9 +74,8 @@
             type: "post",
             dataType: "json",
             success: function (data) {
-                var a = "";
-                a += "<tr><td>邮件编号</td>"
-                a += "<td>发件人</td>"
+                var a = "<table  class='table table-striped'>"
+                a += "<tr><td>发件人</td>"
                 a += "<td>主题</td>"
                 a += "<td>时间</td>"
                 a += "<td>状态</td>"
@@ -84,15 +83,19 @@
                 a += "</tr>"
                 for (i = 0; i < data.length; i++) {
                     var b = data[i];
-                    a += "<tr><td>" + b.emailId + "</td>"
-                    a += "<td>" + b.m2.persoId + "</td>"
+                    a += "<tr><td>" + b.m2.persoId + "</td>"
                     a += "<td>" + b.m2.subject + "</td>"
                     a += "<td>" + b.m2.sendTime + "</td>"
-                    a += "<td>" + b.readFlag + "</td>"
+                    if(b.readFlag==1){
+                        a += "<td><span class='layui-badge layui-bg-green'>已阅</span></td>"
+                    }else {
+                        a += "<td><span class='layui-badge layui-bg-orange'>未读</span></td>"
+                    }
+
                     a += "<td><button class='cx layui-btn layui-btn-sm layui-btn-normal' data-toggle='modal' data-target='#myModal' onclick='a(this)' value='" + b.bodyId + "'>查看</button><button class='layui-btn layui-btn-sm layui-btn-normal' onclick='b(this)' value='" + b.emailId + "'><i class=\"layui-icon\"></i></button></td>"
                     a += "</tr>";
                 }
-                $("#table1").html(a);
+                $("#table1").html(a += "</table>");
             }
         })
     }
@@ -110,7 +113,7 @@
             dataType: "json",
             success: function (data) {
                 $("#persoId").html(data[0].persoId);
-                $("#toid2").html(data[0].TO_ID2);
+                $("#toid2").html(data[0].toidname);
                 $("#subject").html(data[0].SUBJECT);
                 $("#content").html(data[0].CONTENT);
                 $("#sendTime").html(data[0].SEND_TIME);

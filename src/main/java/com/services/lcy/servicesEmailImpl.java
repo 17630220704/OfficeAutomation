@@ -159,4 +159,16 @@ public class servicesEmailImpl implements servicesEmail {
     public int Tbuserupp(TbPersoninfo td) {
         return dao.Tbuserupp(td);
     }
+
+    @Override
+    public List<Mailboxinfo2> queryAllDataFromTable(int page, int limit, String keyWord, int persoId,int EmailBoxid) {
+        page = (page - 1) * limit;
+        return dao.queryAllDataFromTable(page, limit, keyWord, persoId,EmailBoxid);
+    }
+
+    @Override
+    public int queryAllCount(String keyWord,int persoId,int EmailBoxid) {
+        return dao.queryAllCount(keyWord,persoId,EmailBoxid);
+    }
+
 }

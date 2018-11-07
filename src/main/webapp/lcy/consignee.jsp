@@ -16,9 +16,9 @@
     <script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<table class="table table-hover" id="table1">
+<div class="table table-hover" id="table1">
 
-</table>
+</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -69,23 +69,21 @@
             type: "post",
             dataType: "json",
             success: function (data) {
-                var a = "";
-                a += "<tr><td>邮件编号</td>"
-                a += "<td>发件人</td>"
+                var a = "<table  class='table table-striped'>"
+                a += "<tr><td>发件人</td>"
                 a += "<td>主题</td>"
                 a += "<td>时间</td>"
                 a += "<td>操作</td>"
                 a += "</tr>"
                 for (i = 0; i < data.length; i++) {
                     var b = data[i];
-                    a += "<tr><td>"+b.emailId+"</td>"
-                    a += "<td>" + b.m2.persoId + "</td>"
+                    a += "<tr><td>" + b.m2.persoId + "</td>"
                     a += "<td>" + b.m2.subject+ "</td>"
                     a += "<td>" + b.m2.sendTime + "</td>"
                     a += "<td><button class='cx' data-toggle='modal' data-target='#myModal' onclick='a(this)' value='" + b.bodyId + "'>查看</button><button onclick='b(this)' value='" + b.emailId + "'>销毁</button></td>"
                     a += "</tr>";
                 }
-                $("#table1").html(a);
+                $("#table1").html(a += "</table>");
             }
         })
     }
@@ -103,7 +101,7 @@
             dataType: "json",
             success: function (data) {
                 $("#persoId").html(data[0].persoId);
-                $("#toid2").html(data[0].TO_ID2);
+                $("#toid2").html(data[0].toidname);
                 $("#subject").html(data[0].SUBJECT);
                 $("#lLabel").html(data[0].SUBJECT);
                 $("#content").html(data[0].CONTENT);

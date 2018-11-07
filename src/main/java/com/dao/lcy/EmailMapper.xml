@@ -28,8 +28,8 @@
     </resultMap>
 
     <insert id="mailAdd" useGeneratedKeys="true" keyProperty="bodyId" parameterType="com.entity.lcy.Mailboxinfo2">
-   insert into mailboxinfo2(persoId,TO_ID2,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME)VALUES(
-#{persoId},#{toId2},#{subject},#{size},#{content},#{sendTime},#{attachmentId},#{attachmentName}
+   insert into mailboxinfo2(persoId,TO_ID2,toidname,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME)VALUES(
+#{persoId},#{toId2},#{toidname},#{subject},#{size},#{content},#{sendTime},#{attachmentId},#{attachmentName}
 )
 </insert>
     <select id="emailQuery" resultType="com.entity.lcy.TbPersoninfo">
@@ -42,8 +42,8 @@
     </insert>
 
     <insert id="mailAddBox" useGeneratedKeys="true" keyProperty="bodyId" parameterType="com.entity.lcy.Mailboxinfo2">
-   insert into mailboxinfo2(persoId,TO_ID2,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME)VALUES(
-#{persoId},#{toId2},#{subject},#{size},#{content},#{sendTime},#{attachmentId},#{attachmentName}
+   insert into mailboxinfo2(persoId,TO_ID2,toidname,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME)VALUES(
+#{persoId},#{toId2},#{toidname},#{subject},#{size},#{content},#{sendTime},#{attachmentId},#{attachmentName}
 )
 </insert>
     <insert id="mailAddBox1" parameterType="com.entity.lcy.Email">
@@ -65,7 +65,7 @@
         </where>
     </select>
     <select id="mailXq" resultType="Map">
-	    select BODY_ID,persoId,TO_ID2,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME from Mailboxinfo2 where BODY_ID = #{bodyId}
+	    select m.BODY_ID,m.persoId,m.TO_ID2,m.toidname,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME,t.PersonName from Mailboxinfo2 m left join Tb_Personinfo t on m.persoId = t.persoId where BODY_ID = #{bodyId}
 	</select>
     <update id="mailUpdate" parameterType="com.entity.lcy.Email">
         update Email
@@ -99,7 +99,7 @@
         </where>
     </select>
     <select id="LjXq" resultType="Map">
-	    select BODY_ID,persoId,TO_ID2,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME from Mailboxinfo2 where BODY_ID = #{bodyId}
+	    select BODY_ID,persoId,TO_ID2,toidname,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME from Mailboxinfo2 where BODY_ID = #{bodyId}
 	</select>
     <delete id="LjUpdate" parameterType="int">
         delete from email where emailId = #{emailId}
@@ -118,7 +118,7 @@
         </where>
     </select>
     <select id="YfsXq" resultType="Map">
-	    select BODY_ID,persoId,TO_ID2,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME from Mailboxinfo2 where BODY_ID = #{bodyId}
+	    select BODY_ID,persoId,TO_ID2,toidname,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME from Mailboxinfo2 where BODY_ID = #{bodyId}
 	</select>
     <select id="CGQuery" resultMap="getEmail" parameterType="map">
         select
@@ -154,6 +154,7 @@
         <set>
             <if test="persoId!=null">persoId=#{persoId},</if>
             <if test="toId2!=null">TO_ID2=#{toId2},</if>
+            <if test="toidname!=null">toidname=#{toidname},</if>
             <if test="subject!=null">SUBJECT=#{subject},</if>
             <if test="size!=null">SIZE=#{size},</if>
             <if test="content!=null">CONTENT=#{content},</if>
@@ -178,6 +179,7 @@
         <set>
             <if test="persoId!=null">persoId=#{persoId},</if>
             <if test="toId2!=null">TO_ID2=#{toId2},</if>
+            <if test="toidname!=null">toidname=#{toidname},</if>
             <if test="subject!=null">SUBJECT=#{subject},</if>
             <if test="size!=null">SIZE=#{size},</if>
             <if test="content!=null">CONTENT=#{content},</if>
@@ -213,4 +215,32 @@
         </set>
         where persoId = #{persoId}
     </update>
+    <select id="queryAllDataFromTable" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        <where>
+            <if test='keyWord!="" or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+
+        limit #{page},#{limit}
+    </select>
+    <select id="queryAllCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(m.BODY_ID) from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        <where>
+
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+    </select>
 </mapper>

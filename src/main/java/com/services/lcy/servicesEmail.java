@@ -44,6 +44,8 @@ public interface servicesEmail {
     public void TbuserUP(@Param("uId")int uId,@Param("uloginPassword")String uloginPassword);
     public List<Map> TbuserXq(@Param("persoId")int persoId);
     public int Tbuserupp(TbPersoninfo td);
+    List<Mailboxinfo2> queryAllDataFromTable(@Param("page") int page, @Param("limit") int limit, @Param("keyWord") String keyWord,@Param("persoId") int persoId,@Param("EmailBoxid") int EmailBoxid);
+    int queryAllCount(String keyWord,@Param("persoId") int persoId,@Param("EmailBoxid") int EmailBoxid);
 
 
 }

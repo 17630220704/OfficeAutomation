@@ -38,7 +38,7 @@
             <tr>
                 <td style="width: 15%">收件人：</td>
                 <td style="width: 85%">
-                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId1">
+                    <input type="text" class="form-control" style="Float:left;display: none" id="toId1">
                     <input type="text" class="form-control" style="width: 70%; Float:left" id="toId2">
                     <button class="btn btn-primary btn-lg btn-xs" data-toggle="modal" data-target="#myModal"
                             id="Eselect">
@@ -158,6 +158,7 @@
         $("#btnadd").click(function () {
             var persoId = $("#persoId").val();
             var toId2 = $("#toId1").val();
+            var toidname = $("#toId2").val();
             var subject = $("#subject").val();
             var content = getContent();
             var attachmentId = 1;
@@ -170,6 +171,7 @@
                 data: {
                     "persoId": persoId,
                     "toId2": toId2,
+                    "toidname": toidname,
                     "subject": subject,
                     "size": size,
                     "content": content,
@@ -245,6 +247,7 @@
 
             var persoId = $("#persoId").val();
             var toId2 = $("#toId1").val();
+            var toidname = $("#toId2").val();
             var subject = $("#subject").val();
             var content = getContent();
             var attachmentId = 1;
@@ -257,6 +260,7 @@
                 data: {
                     "persoId": persoId,
                     "toId2": toId2,
+                    "toidname": toidname,
                     "subject": subject,
                     "size": size,
                     "content": content,

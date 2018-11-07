@@ -22,9 +22,9 @@
     <script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<table class="table table-hover" id="table1">
+<div class="table table-hover" id="table1">
 
-</table>
+</div>
 </body>
 </html>
 <script>
@@ -35,21 +35,19 @@
             type: "post",
             dataType: "json",
             success: function (data) {
-                var a = "";
-                a += "<tr><td>邮件编号</td>"
-                a += "<td>主题</td>"
+                var a = "<table  class='table table-striped'>"
+                a += "<tr><td>主题</td>"
                 a += "<td>时间</td>"
                 a += "<td>操作</td>"
                 a += "</tr>"
                 for (i = 0; i < data.length; i++) {
                     var b = data[i];
-                    a += "<tr><td>"+b.BODY_ID+"</td>"
-                    a += "<td>" + b.SUBJECT+ "</td>"
+                    a += "<tr><td>" + b.SUBJECT+ "</td>"
                     a += "<td>" + b.SEND_TIME + "</td>"
-                    a += "<td><a href='/CGQueryt?bodyId="+b.BODY_ID+"'>sss</a><button onclick='b(this)' value='" + b.BODY_ID + "'>删除</button></td>"
+                    a += "<td><a href='/CGQueryt?bodyId="+b.BODY_ID+"'>编辑</a><button onclick='b(this)' value='" + b.BODY_ID + "'>删除</button></td>"
                     a += "</tr>";
                 }
-                $("#table1").html(a);
+                $("#table1").html(a += "</table>");
             }
         })
     }

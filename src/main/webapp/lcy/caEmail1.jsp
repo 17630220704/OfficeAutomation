@@ -40,10 +40,10 @@
             <tr>
                 <td style="width: 15%">收件人：</td>
                 <td style="width: 85%">
-                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId1"
+                    <input type="text" class="form-control" style="width: 70%; Float:left;display: none" id="toId1"
                            value="${map[0].TO_ID2}">
                     <input type="text" class="form-control" style="width: 70%; Float:left" id="toId2"
-                           value="${map[0].TO_ID2}">
+                           value="${map[0].toidname}">
                     <button class="btn btn-primary btn-lg btn-xs" data-toggle="modal" data-target="#myModal"
                             id="Eselect">
                         添加
@@ -230,6 +230,7 @@
         var bodyId = $("#bodyId").val();
         var persoId = $("#persoId").val();
         var toId2 = $("#toId1").val();
+        var toidname = $("#toId2").val();
         var subject = $("#subject").val();
         var content = getContent();
         var attachmentId = 1;
@@ -242,6 +243,7 @@
                 "bodyId": bodyId,
                 "persoId": persoId,
                 "toId2": toId2,
+                "toidname": toidname,
                 "subject": subject,
                 "size": size,
                 "content": content,

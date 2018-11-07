@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -116,7 +117,6 @@ public class EmailController {
         int posiId = 1;
         int emailBoxid = 1;
         List<Map<String, Object>> list = mail.mailQuery(posiId, emailBoxid);
-        System.out.println(list);
         return list;
     }
 
@@ -127,9 +127,9 @@ public class EmailController {
         response.setCharacterEncoding("utf-8");
         List<Email> aaaaaa = mail.app(bodyId, posiId);
         e.setEmailId(aaaaaa.get(0).getEmailId());
-        System.out.println(aaaaaa.get(0).getEmailId());
         e.setReadFlag(1);
         mail.mailUpdelete(e);
+        System.out.println(bodyId);
         List<Map> queryQx = mail.mailXq(bodyId);
         System.out.println(queryQx);
         return queryQx;
@@ -141,10 +141,11 @@ public class EmailController {
         response.setContentType("html/text;charset=utf-8");
         response.setCharacterEncoding("utf-8");
         Map<String, Object> map = new HashMap<String, Object>();
+        System.out.println(e.getEmailId());
         e.setEmailId(e.getEmailId());
         e.setEmailBoxid(3);
         e.setDeleteFlag(1);
-        int aaa = mail.mailUpdate(e);
+        int aaa =mail.mailUpdate(e);
         if (aaa > 0) {
             map.put("message", "删除成功");
         } else {
@@ -357,4 +358,25 @@ public class EmailController {
         }
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping("/showData")
+    public Map<String, Object> methodx(
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "15") int limit,
+            String keyWord
+    ) {
+        int persoId = 1;
+        int EmailBoxid = 1;
+        List<Mailboxinfo2> datas = mail.queryAllDataFromTable(page, limit, keyWord, persoId, EmailBoxid);
+        int countx = mail.queryAllCount(keyWord, persoId, EmailBoxid);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", countx);
+        map.put("data", datas);
+        System.out.println(map.toString());
+        return map;
+    }
+
 }
