@@ -1,7 +1,8 @@
 package com.services.permit;
 
 
-import org.apache.ibatis.annotations.Param;
+import com.entity.permit.TbUser;
+import com.entity.permit.upRoleUser;
 
 import java.util.List;
 import java.util.Map;
@@ -29,4 +30,8 @@ public interface permitManageService {
     boolean saveDept(int DeptNumber,String DeptName);
     //用户角色查询
     List<Map<String,Object>> listRoleUser(String personname);
+    //修改角色
+    boolean updateRole(upRoleUser upru);
+    //登陆锁定&&解锁
+    String updatelocking(int uid,int ulocking);
 }

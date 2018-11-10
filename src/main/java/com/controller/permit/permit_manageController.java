@@ -1,5 +1,7 @@
 package com.controller.permit;
 
+import com.entity.permit.TbUser;
+import com.entity.permit.upRoleUser;
 import com.services.permit.permitManageService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import java.util.Map;
 @Controller
 @Scope("singleton")
 public class permit_manageController {
+
     @Resource(name="permitManageServiceImp")
     private permitManageService permitManageServicedao;
 
@@ -109,6 +112,22 @@ public class permit_manageController {
         map.put("code",0);
         map.put("msg","");
         map.put("data",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/updateRole.do")
+    public Map updateRole(upRoleUser upru){
+        Map map = new HashMap();
+        boolean result =  permitManageServicedao.updateRole(upru);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/updatelocking.do")
+    public Map updatelocking(int uid,int ulocking){
+        Map map = new HashMap();
+        String result =  permitManageServicedao.updatelocking(uid,ulocking);
+        map.put("result",result);
         return map;
     }
 

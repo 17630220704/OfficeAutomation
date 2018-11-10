@@ -52,4 +52,29 @@
           and tp.PersonName like '%'#{personname}'%';
       </if>
     </select>
+    <update id="updateRole" parameterType="com.entity.permit.upRoleUser">
+        update tb_user
+        <set>
+            DeptId = #{deptid},
+            u_loginName = #{uloginname},
+            u_loginPassword = #{uloginpassword},
+            u_locking = #{ulocking}
+        </set>
+        where u_id = #{uid}
+    </update>
+    <update id="updateUser" parameterType="com.entity.permit.upRoleUser">
+        update tb_role_user
+        <set>
+            r_id = #{rid}
+        </set>
+        where ru_id = #{ruid}
+    </update>
+    <update id="updatelocking">
+        update tb_user
+        <set>
+            u_locking = #{ulocking}
+        </set>
+        where u_id = #{uid}
+    </update>
+
 </mapper>

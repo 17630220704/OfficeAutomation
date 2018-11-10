@@ -31,13 +31,56 @@
                 </button>
             </div>
             <div class="modal-body">
-                在这里添加一些文本
+                <form class="layui-form" action="" lay-filter="example">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">员工名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="无数据" class="layui-input usname" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">登录名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="uid" style="display: none" class="uid">
+                            <input type="text" name="ruid" style="display: none" class="ruid">
+                            <input type="text" name="uloginname" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input uploginname">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">登陆密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="uloginpassword" placeholder="请输入密码" autocomplete="off" class="layui-input uploginpassword">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择部门</label>
+                        <div class="layui-input-block">
+                            <select name="deptid" lay-filter="aihao" class="updept">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择角色</label>
+                        <div class="layui-input-block">
+                            <select name="rid" lay-filter="aihao" class="uprole">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否锁定登陆</label>
+                        <div class="layui-input-block">
+                            <input name="ulocking" type="checkbox" lay-skin="switch" lay-text="锁定|解锁" class="upu_locking" value="1">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="demo1" data-dismiss="modal">立即提交</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                </button>
-                <button type="button" class="btn btn-primary">
-                    提交更改
                 </button>
             </div>
         </div><!-- /.modal-content -->
@@ -49,7 +92,35 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="checkboxTpl">
-    <input type="checkbox" disabled="" name="sex" value="{{d.u_locking}}" lay-skin="switch" lay-text="锁定|解锁" lay-filter="sexDemo" {{ d.u_locking == 1 ? 'checked' : '' }}>
+    <input type="checkbox" class="{{d.u_id}}" name="ulockingaa" value="{{d.u_locking}}" lay-skin="switch" lay-text="锁定|解锁" lay-filter="sexDemo" {{ d.u_locking == 1 ? 'checked' : '' }}>
+</script>
+<script>
+    function showrole() {
+        $.post("/listRole.do").done(function (data) {
+            var date = data.listRole;
+            for (i=0;i<date.length;i++){
+                var op = "";
+                op+="<option value='"+date[i].r_id+"'>";
+                op+=date[i].r_Name;
+                op+="</option>";
+                $(".uprole").append(op);
+            }
+                form.render();
+        })
+    }
+    function showdept() {
+        $.post("/listDept.do").done(function (data) {
+            var date = data.data;
+            for (i=0;i<date.length;i++){
+                var op = "";
+                op+="<option value='"+date[i].DeptId+"'>";
+                op+=date[i].DeptName;
+                op+="</option>";
+                $(".updept").append(op);
+            }
+            form.render();
+        })
+    }
 </script>
 <script>
     layui.use('table', function(){
@@ -66,6 +137,7 @@
             ,cols: [[
                  {field:'u_id', title:'ID',fixed: 'left', unresize: true, sort: true}
                 ,{field:'u_loginName',title:'登录名',align: 'center'}
+                ,{field:'u_loginPassword',title:'登录密码',align: 'center',hide:"true"}
                 ,{field:'PersonName',title:'用户名',align: 'center'}
                 ,{field:'ru_id',title:'角色id',align: 'center' ,hide:"true"}
                 ,{field:'r_Name',title:'角色名',align: 'center'}
@@ -75,13 +147,34 @@
                 ,{fixed: 'right',title:'操作', templet: '#barDemo', unresize: true,fixed: 'right',}
             ]]
         });
+        //获取角色
+        showrole();
+        //获取部门
+        showdept();
         //监听锁定操作
-        form.on('checkbox(lockDemo)', function(obj){
-            layer.tips(this.value);
-        });
+            form.on('switch(sexDemo)', function(obj){
+                /* layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);*/
+                var chkval = this.value;
+                var datalockingu_id = this.className;
+                alert(datalockingu_id);
+                alert(chkval);
+                if(chkval==1){
+                    $.post("/updatelocking.do",{'uid':datalockingu_id,'ulocking':chkval}).done(function (date) {
+                        layer.msg(date.result,{time:800});
+                        table.reload('roletable',{url:'/listRoleUser.do'});
+                    });
+                }else if (chkval ==0) {
+                    $.post("/updatelocking.do",{'uid':datalockingu_id,'ulocking':chkval}).done(function (date) {
+                        layer.msg(date.result,{time:800});
+                        table.reload('roletable',{url:'/listRoleUser.do'});
+                    });
+                }
+            });
+
         //监听行工具事件
         table.on('tool(test)', function(obj){
             var data = obj.data;
+            var field = obj.field;
             var uid = data.u_id;
             //console.log(obj)
             if(obj.event === 'del'){
@@ -90,17 +183,35 @@
                     layer.close(index);
                 });
             } else if(obj.event === 'edit'){
-                layer.msg(uid,function () {
-                });
-                /*layer.prompt({
-                    formType: 2
-                    ,value: data.email
-                }, function(value, index){
-                    obj.update({
-                        email: value
+                //获取并重写表格数据
+                $(".usname").val("");
+                $(".uid").val("");
+                $(".ruid").val("");
+                $(".uploginname").val("");
+                $(".uploginpassword").val("");
+                $(".uprole").find("option").attr("selected",false);
+                $(".updept").find("option").attr("selected",false);
+                $(".usname").val(data.PersonName);
+                $(".ruid").val(data.ru_id);
+                $(".uid").val(data.u_id);
+                $(".uploginname").val(data.u_loginName);
+                $(".uploginpassword").val(data.u_loginPassword);
+                //设置默认选中
+                var ckru_id = data.ru_id;
+                var ckdeptid = data.DeptId;
+                $(".uprole").find("option[value='"+ckru_id+"']").attr("selected",true);
+                $(".updept").find("option[value='"+ckdeptid+"']").attr("selected",true);
+                //重载表单
+                form.render();
+                //提交监听
+                form.on('submit(demo1)', function(data){
+                    $.post("/updateRole.do",data.field).done(function (date) {
+                        layer.msg("更新"+date.result+"",{time:500}, function () {
+                            table.reload("roletable", {url:'/listRoleUser.do'});
+                        })
                     });
-                    layer.close(index);
-                });*/
+                    return false;
+                });
             }
         });
     });

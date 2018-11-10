@@ -1,5 +1,7 @@
 package com.dao.permit;
 
+import com.entity.permit.TbUser;
+import com.entity.permit.upRoleUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,5 +32,11 @@ public interface permitManage {
     Integer saveDept(@Param("DeptNumber") int DeptNumber,@Param("DeptName") String DeptName );
     //查询角色用户
     List<Map<String, Object>> listRoleUser(@Param("personname") String personname);
+    //修改角色
+    Integer updateRole(upRoleUser upru);
+    //修改角色
+    Integer updateUser(upRoleUser upru);
+    //登陆锁定&&解锁
+    Integer updatelocking(@Param("uid")int uid,@Param("ulocking")int ulocking);
 
 }

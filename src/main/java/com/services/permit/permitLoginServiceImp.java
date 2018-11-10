@@ -4,15 +4,11 @@ import com.dao.permit.permitLogin;
 import com.entity.permit.TbUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +38,7 @@ public class permitLoginServiceImp implements permitLoginService {
             lackresult = Lacklist.size();
             if (lackresult==0){
                 session.setAttribute("username",username);
+                session.setAttribute("userid",userid);
                 map.put("loginresult",0);//登陆成功
                 map.put("userid",userid);
                 //System.out.println("登陆成功的map："+map);

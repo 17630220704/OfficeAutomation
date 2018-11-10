@@ -1,6 +1,8 @@
 package com.services.permit;
 
 import com.dao.permit.permitManage;
+import com.entity.permit.TbUser;
+import com.entity.permit.upRoleUser;
 import com.factory.permit.treefactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -133,5 +135,45 @@ public class permitManageServiceImp implements permitManageService {
     public List<Map<String, Object>> listRoleUser(String personname) {
          List<Map<String,Object>> list =  permitManagedao.listRoleUser(personname);
         return list;
+    }
+
+    @Override
+    @Transactional
+    public boolean updateRole(upRoleUser upru) {
+        Integer result2 = permitManagedao.updateUser(upru);
+        Integer result = permitManagedao.updateRole(upru);
+        if (result==1&&result2==1){
+            return true;
+        }
+        if (result==null || result2==null ){
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public String updatelocking(int uid, int ulocking) {
+        System.out.println("uid="+uid+"      ulocking="+ulocking);
+        if (ulocking == 1){
+            System.out.println("开始解锁");
+            Integer result = permitManagedao.updatelocking(uid,0);
+            if (result==1){
+                return "解锁成功";
+            }
+            if (result!=1){
+                return "解锁失败";
+            }
+        }else if(ulocking ==0){
+            System.out.println("开始锁定");
+            Integer result = permitManagedao.updatelocking(uid,1);
+            if (result==1){
+                return "锁定成功";
+            }
+            if (result!=1){
+                return "锁定失败";
+            }
+        }
+        return "操作失败";
     }
 }
