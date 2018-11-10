@@ -415,4 +415,23 @@ public class EmailController {
         System.out.println(map.toString());
         return map;
     }
+    @ResponseBody
+    @RequestMapping("/rough")
+    public Map<String, Object> rough(
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "15") int limit,
+            String keyWord
+    ) {
+        int persoId = 1;
+        int EmailBoxid = 4;
+        List<Mailboxinfo2> datas = mail.rough(page, limit, keyWord, persoId, EmailBoxid);
+        int countx = mail.roughCount(keyWord, persoId, EmailBoxid);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", countx);
+        map.put("data", datas);
+        System.out.println(map.toString());
+        return map;
+    }
 }

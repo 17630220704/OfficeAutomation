@@ -278,4 +278,31 @@
             </if>
         </where>
     </select>
+    <select id="rough" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on
+        m.BODY_ID = e.BODY_ID
+        <where>
+            <if test='keyWord!="" or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+        limit #{page},#{limit}
+    </select>
+    <select id="roughCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(m.BODY_ID) from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        <where>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -10,39 +10,51 @@
 <head>
     <meta charset="utf-8">
     <title>修改密码</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../resources/layui-v2.4.5/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<table border="1px" style="width: 50%">
-    <caption>修改密码</caption>
+<table class="layui-table" style="width: 500px">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col>
+    </colgroup>
     <thead>
     <tr>
-        <td>用户名：</td>
-        <td><input type="text" class="form-control" style="width: 70%; Float:left" id="uId">
-            <input type="text" class="form-control" style="width: 70%; Float:left" id="uloginName"></td>
+        <th style="width: 20%">昵称</th>
+        <th style="width: 80%"><input type="text" class="form-control" style="width: 100%; Float:left;display: none"
+                                      id="uId">
+            <input type="text" class="form-control" disabled="disabled" style="width: 100%; Float:left" id="uloginName">
+        </th>
+    </tr>
+    </thead>
+    <thead>
+    <tr>
+        <th>原始密码</th>
+        <th><input type="password" class="form-control" style="width: 100%; Float:left" id="uloginPassword"></th>
     </tr>
     <tr>
-        <td>原密码：</td>
-        <td><input type="text" class="form-control" style="width: 70%; Float:left" id="uloginPassword"></td>
+        <th>新密码</th>
+        <th><input type="password" class="form-control" style="width: 100%; Float:left" id="uloginPassword1"></th>
     </tr>
     <tr>
-        <td>新密码：</td>
-        <td><input type="text" class="form-control" style="width: 70%; Float:left" id="uloginPassword1"></td>
+        <th>确认密码</th>
+        <th><input type="password" class="form-control" style="width: 100%; Float:left" id="uloginPassword2"
+                   onblur="pass()"></th>
     </tr>
     <tr>
-        <td>确认密码：</td>
-        <td><input type="text" class="form-control" style="width: 70%; Float:left" id="uloginPassword2"></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><input type="button" value="保存" id="btnadd"></td>
+        <th></th>
+        <th><input type="button" class="layui-btn layui-btn-normal" value="保存" id="btnadd"></th>
     </tr>
     </thead>
 </table>
-
 </body>
 </html>
 <script>
@@ -64,9 +76,9 @@
 
     $(function () {
         $("#btnadd").click(function () {
-            alert($("#uloginPassword1").val())
             var uId = $("#uId").val();
             var uloginPassword = $("#uloginPassword1").val();
+            alert(uloginPassword)
             $.ajax({
                 url: "/TbuserUP",
                 type: "post",
@@ -84,4 +96,17 @@
         });
     });
     $(query2());
+
+    function pass() {
+        var a = $("#uloginPassword1").val()
+        var b = $("#uloginPassword2").val()
+        if (a != b || a == '' || b == '') {
+            alert("错误")
+            $("#btnadd").attr('disabled',true).addClass('layui-btn layui-btn-disabled');
+
+        } else {
+            alert("正确")
+            $("#btnadd").prop('disabled',false).addClass('layui-btn layui-btn-warm');
+        }
+    }
 </script>

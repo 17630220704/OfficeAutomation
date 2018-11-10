@@ -192,4 +192,14 @@ public class servicesEmailImpl implements servicesEmail {
     public int dustbinCount(String keyWord, int persoId,int EmailBoxid) {
         return dao.dustbinCount(keyWord, persoId, EmailBoxid);
     }
+    @Override
+    public List<Mailboxinfo2> rough(int page, int limit, String keyWord, int persoId,int EmailBoxid) {
+        page = (page - 1) * limit;
+        return dao.dustbin(page, limit, keyWord, persoId,EmailBoxid);
+    }
+
+    @Override
+    public int roughCount(String keyWord, int persoId,int EmailBoxid) {
+        return dao.dustbinCount(keyWord, persoId, EmailBoxid);
+    }
 }

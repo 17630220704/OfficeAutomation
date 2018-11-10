@@ -51,6 +51,8 @@ public interface servicesEmail {
     List<Mailboxinfo2> dustbin(@Param("page") int page, @Param("limit") int limit, @Param("keyWord") String keyWord, @Param("persoId") int persoId, @Param("EmailBoxid") int EmailBoxid);
 
     int dustbinCount(String keyWord, @Param("persoId") int persoId, @Param("EmailBoxid") int EmailBoxid);
+    List<Mailboxinfo2> rough(@Param("page") int page, @Param("limit") int limit, @Param("keyWord") String keyWord, @Param("persoId") int persoId, @Param("EmailBoxid") int EmailBoxid);
 
+    int roughCount(String keyWord, @Param("persoId") int persoId, @Param("EmailBoxid") int EmailBoxid);
 
 }
