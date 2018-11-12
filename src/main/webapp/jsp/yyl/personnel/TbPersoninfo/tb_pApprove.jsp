@@ -53,8 +53,8 @@
             a = new Date();
             var b = a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate();
         }
-    )
-    $(TbPersoninfoQuery())
+    );
+    $(TbPersoninfoQuery());
     function TbPersoninfoQuery(){
         $.ajax({
             url:"/TbPersoninfoController/tpquery.do",
@@ -63,11 +63,11 @@
             success:function(data){
                 var a = "<table class='table table-striped' style='text-align: center;font-size: 12px;'>"
                     +"<tr style='font-weight:800;'><td>姓名</td><td>职位</td><td>手机号</td><td>办公电话</td><td>生日</td><td>邮箱</td>" +
-                    "<td>现住址</td><td>备注</td><td colspan='3'>操作</td></tr>"
+                    "<td>现住址</td><td>备注</td><td colspan='3'>操作</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     var c = Math.round(data[i].NowState);
                     var d = "";
-                    var f = ""
+                    var f = "";
                     if(c==0){
                         continue;
                     }else if(c==2){

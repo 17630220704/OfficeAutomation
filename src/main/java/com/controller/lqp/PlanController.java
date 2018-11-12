@@ -103,7 +103,7 @@ public class PlanController {
     }*/
 
     @RequestMapping("input")
-    public String input(Long planId, Model model) throws  Exception{
+    public String input(Long planId, Model model) {
 
         if(planId != null){
             model.addAttribute("entity", planServiceImp.getClass());
@@ -113,7 +113,7 @@ public class PlanController {
     }
 
     @RequestMapping("saveOrUpdate")
-    public String saveOrUpdate(TbRecruitmentplan tbRecruitmentplan) throws  Exception{
+    public String saveOrUpdate(TbRecruitmentplan tbRecruitmentplan) {
         Long planId=tbRecruitmentplan.getPlanId();
         if(planId!= null){
             planServiceImp.updateByPlan(tbRecruitmentplan);
@@ -124,7 +124,7 @@ public class PlanController {
     }
 
     @RequestMapping("delete")
-    public String input(Long planId) throws  Exception{
+    public String input(Long planId) {
         if(planId != null){
             planServiceImp.deleteByPlan(planId);
         }

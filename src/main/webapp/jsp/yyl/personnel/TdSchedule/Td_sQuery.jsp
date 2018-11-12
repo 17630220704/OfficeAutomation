@@ -36,7 +36,7 @@
     <div id="tdquery"></div>
 </body>
     <script>
-        $(Td_sQuery())
+        $(Td_sQuery());
         function Td_sQuery(){
             $.ajax({
                 url:"/TdScheduleController/td_squery.do",
@@ -44,7 +44,7 @@
                 dataType:"json",
                 success:function(data){
                     var a = "<table class='table table-striped' style='text-align: center;font-size: 12px;'><tr style='font-weight:800;'><td>编号</td><td>排班名称</td> " +
-                        "<td>考勤类型</td><td>应用人员</td><td>状态</td><td>操作</td> </tr>"
+                        "<td>考勤类型</td><td>应用人员</td><td>状态</td><td>操作</td> </tr>";
                     for(var i=0;i<data.length;i++){
                         a+="<tr><td id='DUTY_TYPE"+i+"'>"+data[i].ScheduleId
                             +"</td><td id='DUTY_TIME3"+i+"'>"+data[i].ScheduleName

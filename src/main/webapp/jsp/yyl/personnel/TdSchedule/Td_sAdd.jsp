@@ -58,7 +58,7 @@
 </body>
 <script>
     function tdSchedule() {
-        alert($("#test_form").serialize())
+        alert($("#test_form").serialize());
         $.ajax({
             url:"/TdScheduleController/td_sadd.do",
             type:"post",

@@ -15,7 +15,7 @@ public interface PlanService {
 
     List<TbRecruitmentplan> queryAllTbRecruitmentplan();
     //分页查询
-   public List<TbRecruitmentplan> findAllPlan();
+    List<TbRecruitmentplan> findAllPlan();
   /*  public PageBean getplanList(int pageCode, int sizePage);*/
 
     /*new*/

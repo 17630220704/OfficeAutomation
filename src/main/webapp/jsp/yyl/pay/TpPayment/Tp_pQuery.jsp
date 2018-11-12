@@ -104,8 +104,8 @@
 </div>
 </body>
 <script>
-    $(TpPaymentQuery())
-    $(date1())
+    $(TpPaymentQuery());
+    $(date1());
     function date1(){
         a = new Date();
         $(".date").val(a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate());
@@ -118,7 +118,7 @@
             success:function(data){
                 var a = "<table class='table table-striped' style='text-align: center;font-size: 12px;margin:0 auto;width: 600px'>" +
                     "<tr><td colspan='5'style='font-size: 16px'>已定义薪酬项目</td></tr>"+
-                    "<tr style='font-weight:800;'><td>项目ID</td><td>项目名称</td><td>项目类型</td><td colspan='2'>操作</td></tr>"
+                    "<tr style='font-weight:800;'><td>项目ID</td><td>项目名称</td><td>项目类型</td><td colspan='2'>操作</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].paymentId//ID自增
                         +"</td><td>"+parseInt(i+1)//项目序号

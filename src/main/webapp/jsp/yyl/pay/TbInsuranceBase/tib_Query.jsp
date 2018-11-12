@@ -53,8 +53,8 @@
 <div id="tdquery" class="body"></div>
 </body>
 <script>
-    $(TbInsuranceBaseQuery())
-    $(date1())
+    $(TbInsuranceBaseQuery());
+    $(date1());
     function date1(){
         a = new Date();
         $(".date").val(a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate());
@@ -65,9 +65,9 @@
             type:"post",
             dataType:"json",
             success:function(data){
-                var i = 0
+                var i = 0;
                 var a = "<form id='tib_Update'><table class='table table-striped' style='text-align: center;font-size: 12px;margin:0 auto;width: 600px'>" +
-                    "<tr style='font-weight:800;'><td>保险类型</td><td>保险基数</td></tr>"
+                    "<tr style='font-weight:800;'><td>保险类型</td><td>保险基数</td></tr>";
                     a+="<tr class='td3'><td colspan='2'>养老保险系数" +
                         "<input class='display_none' name='insurbaseId' value='"+data[i].insurbaseId+"'>"//
                         +"</td></tr><tr><td>个人支付</td><td><input name='yanglaoPerson' onkeyup='effect(this)' value='"+data[i].yanglaoPerson+"'>"//
@@ -86,7 +86,7 @@
                         +"</td></tr><tr class='td3'><td colspan='2'>生育保险基数"//
                         +"</td></tr><tr><td>单位支付</td><td><input name='shengyuUnits' onkeyup='effect(this)' value='"+data[i].shengyuUnits+"'>"//
                         +"</td></tr><tr><td colspan='2'><button onclick='TbInsuranceBaseUpdate(this)'class='btn btn-primary' type='button' value='"+data[i].paymentId+"'>保存</button>"
-                        +"</td></tr>"
+                        +"</td></tr>";
                 $("#tdquery").html(a+="</table></form>")
             }
         })

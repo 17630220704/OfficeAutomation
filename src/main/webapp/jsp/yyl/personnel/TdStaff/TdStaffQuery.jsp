@@ -266,8 +266,8 @@
 </div>
 </body>
 <script>
-    $(TdStaffQuery())
-    $(date1())
+    $(TdStaffQuery());
+    $(date1());
     function date1(){
             a = new Date();
             $(".date").val(a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate());
@@ -281,13 +281,13 @@
             success:function(data){
                 var a = "<table class='table table-striped' style='text-align: center;font-size: 12px'>" +
                     "<tr style='font-weight:800;'><td>姓名</td><td>部门</td><td>岗位</td><td>合同类型</td><td>签署公司</td>" +
-                    "<td>合同生效日期</td><td>合同到期日期</td><td colspan='3'>操作</td></tr>"
+                    "<td>合同生效日期</td><td>合同到期日期</td><td colspan='3'>操作</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
-                    var c = new Date(data[i].contractEndTime).valueOf()
-                    var d = new Date().valueOf()
-                    var e = "&nbsp;"
+                    var c = new Date(data[i].contractEndTime).valueOf();
+                    var d = new Date().valueOf();
+                    var e = "&nbsp;";
                         if(d>c){
-                            var e = "<b style='color: red;'>已到期</b>"
+                            var e = "<b style='color: red;'>已到期</b>";
                             var xu = "<button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>";
                             var san = "<button onclick='tdConfigDelete(this)'class='btn btn-primary' type='button' value='"+data[i].contractId+"'>删除</button>";
                         }else{
@@ -325,13 +325,13 @@
         for(i=0;i<15;i++){
             $(".xq"+i).html($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
-    })
+    });
     $('body').on('click','.xiugai',function () {
         for(i=0;i<17;i++){
             $(".xg"+i).val($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
 
-    })
+    });
     function tdConfigDelete(obj){
         $.ajax({
             url:"/TdStaffController/td_delete.do",
@@ -368,13 +368,13 @@
         var c = b.getFullYear()*365-a.getFullYear()*365+(b.getMonth()+1)*30-(a.getMonth()+1)*30+b.getDate()-a.getDate();
         var d;
         if(c>=365){
-             d = Math.round(c/365)+"年"
+             d = Math.round(c/365)+"年";
             $("#activePeriod1").val(d)
         }else if(365>c&&c>=30){
-            d = Math.round(c/30)+"月"
+            d = Math.round(c/30)+"月";
             $("#activePeriod1").val(d)
         }else if (30>c&&c>0){
-             d = c+"天"
+             d = c+"天";
             $("#activePeriod1").val(d)
         }
     }
@@ -384,13 +384,13 @@
         var c = b.getFullYear()*365-a.getFullYear()*365+(b.getMonth()+1)*30-(a.getMonth()+1)*30+b.getDate()-a.getDate();
         var d;
         if(c>=365){
-            d = Math.round(c/365)+"年"
+            d = Math.round(c/365)+"年";
             $("#activePeriod2").val(d)
         }else if(365>c&&c>=30){
-            d = Math.round(c/30)+"月"
+            d = Math.round(c/30)+"月";
             $("#activePeriod2").val(d)
         }else if (30>c&&c>0){
-            d = c+"天"
+            d = c+"天";
             $("#activePeriod2").val(d)
         }
     }
@@ -403,7 +403,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>选择</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>选择</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='diosn' onclick='choice2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -422,7 +422,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='choice2' onclick='shoh2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -437,7 +437,7 @@
                 dataType:"json",
                 success:function(data){
                     var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                        "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
+                        "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>";
                     for (var i = 0; i < data.length ; i++) {
                         a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
                             +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"
@@ -457,7 +457,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
                         +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"
@@ -467,7 +467,7 @@
         })
     }
     function han2(u,a){
-        $(".persName").val($(u).html())
+        $(".persName").val($(u).html());
         $(".persoId").val(a)
     }
 </script>

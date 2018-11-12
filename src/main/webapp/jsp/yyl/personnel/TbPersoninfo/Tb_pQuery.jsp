@@ -203,7 +203,7 @@
         a = new Date();
         var b = a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate();
         }
-    )
+    );
     function TbPersoninfoQuery(){
         $.ajax({
                 url:"/TbPersoninfoController/tpquery.do",
@@ -220,19 +220,19 @@
                 success:function(data){
                 var a = "<table class='table table-striped' style='text-align: center;font-size: 12px;'>"
                     +"<tr style='font-weight:800;'><td>姓名</td><td>职位</td><td>手机号</td><td>办公电话</td><td>生日</td><td>邮箱</td>" +
-                    "<td>现住址</td><td>备注</td><td colspan='3'>操作</td></tr>"
+                    "<td>现住址</td><td>备注</td><td colspan='3'>操作</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                         var c = Math.round(data[i].NowState);
                         var d = "";
-                        var f = ""
+                        var f = "";
                         if(c==0){
-                            d = "<b style='color: #20ff15;'>(在职)</b>"
+                            d = "<b style='color: #20ff15;'>(在职)</b>";
                             f = "<button class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#myModal' onclick='xiangqing1(this,"+data[i].PosiId+","+i+")' value='"+data[i].persoId+"'>详细信息</button>"
                         }else if(c==2){
-                            d = "<b style='color: #999;'>(待审批)</b>"
+                            d = "<b style='color: #999;'>(待审批)</b>";
                             f = "<button class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#myModal' onclick='xiangqing1(this,"+data[i].PosiId+","+i+")' value='"+data[i].persoId+"'>详细信息</button>"
                         }else if(c==1){
-                            d = "<b style='color: red;'>(离职)</b>"
+                            d = "<b style='color: red;'>(离职)</b>";
                             f = "<button class='btn btn-primary' style='cursor:pointer;' data-toggle='modal' data-target='#myModal' onclick='xiangqing2(this),"+i+"' value='"+data[i].persoId+"'>详细信息</button>"
                         }
                     a+="<tr><td class='display_none'>"+data[i].persoId//职员ID-主键
@@ -253,7 +253,7 @@
             }
         })
     }
-    $(TbPositionQuery())
+    $(TbPositionQuery());
     function TbPositionQuery(){
         $.ajax({
             url:"/TbPositionController/tbPquery.do",
@@ -261,7 +261,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<select id='posiId' name='posiId'>"+
-                    "<option value='0'>全部</option>"
+                    "<option value='0'>全部</option>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<option value='"+data[i].PosiId+"'>"+data[i].POSIName+"</option>"
                 }
@@ -277,7 +277,7 @@
         var a = "<button type='button' class='btn btn-primary' data-dismiss='modal'>关闭</button>"
             +"<input id='nowState1' name='nowState' value='2' class='display_none'>&nbsp;&nbsp;&nbsp;&nbsp;"
             +"<input name='posiId' value='"+y+"' class='display_none'>&nbsp;&nbsp;&nbsp;&nbsp;"
-            +"<button type='button' class='btn btn-default' onclick='tbPersoninfoUpdate()' data-dismiss='modal'  >申请离职</button>"
+            +"<button type='button' class='btn btn-default' onclick='tbPersoninfoUpdate()' data-dismiss='modal'  >申请离职</button>";
         $("#State").html(a);
     }
     function xiangqing2(u,o) {
@@ -285,7 +285,7 @@
         for(i=0;i<9;i++){
             $(".xq"+i).html($(u).parent().parent().parent().children().eq((parseInt(o)+1)).children().eq(i).html());
         }
-        var a = "<button type='button' class='btn btn-primary' data-dismiss='modal'>关闭</button>"
+        var a = "<button type='button' class='btn btn-primary' data-dismiss='modal'>关闭</button>";
         $("#State").html(a);
     }
     function tbPersoninfoUpdate() {
@@ -309,7 +309,7 @@
         var a = "<button type='button' class='btn btn-default' data-dismiss='modal'>关闭</button>"
             +"<input id='nowState1' name='nowState' value='"+$(u).val()+"' class='display_none'>&nbsp;&nbsp;&nbsp;&nbsp;"
             +"<input name='posiId' value='"+y+"' class='display_none'>&nbsp;&nbsp;&nbsp;&nbsp;"
-            +"<button type='button' class='btn btn-primary' onclick='tbPersoninfoUpdate8()' data-dismiss='modal'>保存</button>"
+            +"<button type='button' class='btn btn-primary' onclick='tbPersoninfoUpdate8()' data-dismiss='modal'>保存</button>";
         $("#State8").html(a);
     }
     function tbPersoninfoUpdate8(){
@@ -331,7 +331,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='diosn' onclick='choice2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -350,7 +350,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='choice2' onclick='shoh2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -365,7 +365,7 @@
                 dataType:"json",
                 success:function(data){
                     var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                        "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
+                        "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>";
                     for (var i = 0; i < data.length ; i++) {
                         a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
                             +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"
@@ -385,7 +385,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
                         +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"

@@ -11,16 +11,16 @@ import java.util.Map;
 
 public interface TbHirefileServiceDao {
     /*人事档案*/
-    public List<Map> findbyhire();
-    public int savebyhire(TbHirefile tbHirefile);
+    List<Map> findbyhire();
+    int savebyhire(TbHirefile tbHirefile);
     List<TbHirefile> findbyName(@Param("empName") String empName);
     /* 招聘需求*/
-    public List<Map> findbyneed();
-    public int savebyneed(TbRecruitmentneed tbRecruitmentneed);
+    List<Map> findbyneed();
+    int savebyneed(TbRecruitmentneed tbRecruitmentneed);
     /*招聘计划*/
-    public List<Map> findbyplan();
+    List<Map> findbyplan();
     /*招聘录用*/
-    public List<Map> findbyemploy();
+    List<Map> findbyemploy();
 
 /*    PageInfo<TbHirefile> findUserByPage(int page, int pageSize);*/
 }

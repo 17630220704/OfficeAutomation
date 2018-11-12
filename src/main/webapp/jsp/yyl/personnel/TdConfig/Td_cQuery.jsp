@@ -182,7 +182,7 @@
             success:function(data){
                 var a = "<table class='table table-striped' style='text-align: center;font-size: 12px;'><tr style='font-weight:800;'><td>编号</td><td>班次说明</td> " +
                     "<td>第一次签到</td><td>第一次签退</td><td>第二次签到</td><td>第二次签退</td><td>第三次签到</td><td>第三次签退</td>" +
-                    "<td colspan='2'>操作</td> </tr>"
+                    "<td colspan='2'>操作</td> </tr>";
                 for(var i=0;i<data.length;i++){
                     a+="<tr><td id='DUTY_TYPE"+i+"'>"+data[i].DUTY_TYPE
                     +"</td><td id='DUTY_NAME"+i+"'>"+data[i].DUTY_NAME
@@ -206,17 +206,17 @@
         })
     }
     function send(i) {
-        $("#dutyType").val($("#DUTY_TYPE"+i).html())
-        $("#dutyName").val($("#DUTY_NAME"+i).html())
-        $("#dutyTime1").val($("#DUTY_TIME1"+i).html())
-        $("#dutyTime2").val($("#DUTY_TIME2"+i).html())
-        $("#dutyTime3").val($("#DUTY_TIME3"+i).html())
-        $("#dutyTime4").val($("#DUTY_TIME4"+i).html())
-        $("#dutyTime5").val($("#DUTY_TIME5"+i).html())
-        $("#dutyTime6").val($("#DUTY_TIME6"+i).html())
-        $("#dutyBefore").val($("#DUTY_BEFORE"+i).html())
-        $("#dutyAfter").val($("#DUTY_AFTER"+i).html())
-        $("#timeLate").val($("#TIME_LATE"+i).html())
+        $("#dutyType").val($("#DUTY_TYPE"+i).html());
+        $("#dutyName").val($("#DUTY_NAME"+i).html());
+        $("#dutyTime1").val($("#DUTY_TIME1"+i).html());
+        $("#dutyTime2").val($("#DUTY_TIME2"+i).html());
+        $("#dutyTime3").val($("#DUTY_TIME3"+i).html());
+        $("#dutyTime4").val($("#DUTY_TIME4"+i).html());
+        $("#dutyTime5").val($("#DUTY_TIME5"+i).html());
+        $("#dutyTime6").val($("#DUTY_TIME6"+i).html());
+        $("#dutyBefore").val($("#DUTY_BEFORE"+i).html());
+        $("#dutyAfter").val($("#DUTY_AFTER"+i).html());
+        $("#timeLate").val($("#TIME_LATE"+i).html());
         $("#timeEarly").val($("#TIME_EARLY"+i).html())
     }
     function tdConfigUpdate() {

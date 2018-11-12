@@ -104,7 +104,7 @@
             a = new Date();
     var b = a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate();
     }
-    )
+    );
     function TbPersoninfoQuery(){
         $.ajax({
             url:"/Plan/selectThem",
@@ -126,7 +126,7 @@
                     "<td>招聘备注</td>" +
                     "<td>招聘提醒</td>" +
                     "<td>招聘状态</td>" +
-                    "<td colspan='3'>操作</td></tr>"
+                    "<td colspan='3'>操作</td></tr>";
                 for (i = 0; i < data.list.length ; i++) {
                     a+="<tr ><td>"+data.list[i].PlanID//编号
                         +"</td><td>"+data.list[i].planName//计划名称
@@ -151,9 +151,9 @@
             $(".xg"+i).val($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
 
-    })
+    });
     function TSetaffUpdate(){
-        alert($("#xiugai_from").serialize())
+        alert($("#xiugai_from").serialize());
         $.ajax({
             url:"/Plan/updatethem",
             type:"post",

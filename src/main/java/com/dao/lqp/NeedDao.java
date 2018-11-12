@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface NeedDao {
-    public List<Map> findall();
-    public List<Map<String,Object>> findbyname();
-    public int insert(TbRecruitmentneed tbRecruitmentneed);//增加数据
-    public int delete(TbRecruitmentneed tbRecruitmentneed);//删除数据
-    public int update(TbRecruitmentneed tbRecruitmentneed);//更新数据
+    List<Map> findall();
+    List<Map<String,Object>> findbyname();
+    int insert(TbRecruitmentneed tbRecruitmentneed);//增加数据
+    int delete(TbRecruitmentneed tbRecruitmentneed);//删除数据
+    int update(TbRecruitmentneed tbRecruitmentneed);//更新数据
 
     int deleteByneed(Long needId);
 

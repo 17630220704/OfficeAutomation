@@ -310,8 +310,8 @@
 </div>
 </body>
 <script>
-    $(TdTransferQuery())
-    $(date1())
+    $(TdTransferQuery());
+    $(date1());
     function date1(){
         a = new Date();
         $(".date").val(a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate());
@@ -323,7 +323,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table table-striped' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td>调动人员</td><td>调动类型</td><td>调动日期</td><td>生效日期</td><td colspan='3'>操作</td></tr>"
+                    "<tr style='font-weight:800;'><td>调动人员</td><td>调动类型</td><td>调动日期</td><td>生效日期</td><td colspan='3'>操作</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].TRANSFER_ID//ID自增
                         +"</td><td>"+data[i].PersonName//调动人员
@@ -405,7 +405,7 @@
             },
             dataType:"json",
             success:function(data){
-                $(".tranCompanyBefore").val(data[0].POSIName)
+                $(".tranCompanyBefore").val(data[0].POSIName);
                 $(".tranCompanyAfter").val(data[0].DeptName)
             }
         })
@@ -418,7 +418,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                     +"<td class='choice' onclick='choice1(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -437,7 +437,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='choice1' onclick='shoh(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -456,7 +456,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>单位</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>单位</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].PosiId+"</td>"
                         +"<td><button type='button' onclick='han(this,"+data[i].PosiId+")' value='"+$(u).html()+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].POSIName+"</button></td></tr>"
@@ -466,8 +466,8 @@
         })
     }
     function han(u,a){
-        $(".tranDeptBefore").val($(u).html())
-        $(".tranDeptAfter").val($(u).val())
+        $(".tranDeptBefore").val($(u).html());
+        $(".tranDeptAfter").val($(u).val());
         $(".posiId").val(a)
     }
     /*---------------------------*/
@@ -479,7 +479,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='diosn' onclick='choice2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -498,7 +498,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='choice2' onclick='shoh2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -513,7 +513,7 @@
                 dataType:"json",
                 success:function(data){
                     var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                        "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
+                        "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>";
                     for (var i = 0; i < data.length ; i++) {
                         a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
                             +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"
@@ -533,7 +533,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
                         +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"
@@ -543,8 +543,8 @@
         })
     }
     function han2(u,a){
-        $(".persName").val($(u).html())
-        $(".persoId").val(a)
+        $(".persName").val($(u).html());
+        $(".persoId").val(a);
         TbDeparmentquery();
     }
 </script>

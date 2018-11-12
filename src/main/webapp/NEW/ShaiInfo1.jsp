@@ -103,8 +103,8 @@
             a = new Date();
     var b = a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate();
     }
-    )
-    $(TbPersoninfoQuery())
+    );
+    $(TbPersoninfoQuery());
     function TbPersoninfoQuery(){
         $.ajax({
             url:"/employ/findbyShaixuan",
@@ -128,7 +128,7 @@
                     "<td>正式起薪时间</td>" +
                     "<td>筛选</td>" +
                     "<td>备注</td>" +
-                    "<td colspan='1'>操作</td></tr>"
+                    "<td colspan='1'>操作</td></tr>";
                 for (i = 0; i < data.length ; i++) {
                     a+="<tr ><td>"+data[i].EmployedID
                         +"</td><td>"+data[i].planName
@@ -152,9 +152,9 @@
             $(".xg"+i).val($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
 
-    })
+    });
     function TSetaffUpdate(){
-        alert($("#xiugai_from").serialize())
+        alert($("#xiugai_from").serialize());
         $.ajax({
             url:"/employ/updatbyShaixuan",
             type:"post",

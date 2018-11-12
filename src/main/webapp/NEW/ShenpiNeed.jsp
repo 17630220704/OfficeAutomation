@@ -100,7 +100,7 @@
 </div>
 </body>
 <script>
-    $(TbPersoninfoQuery())
+    $(TbPersoninfoQuery());
     function TbPersoninfoQuery(){
         $.ajax({
             url:"/aNeed/selectShenhe",
@@ -120,7 +120,7 @@
                     "<td>招聘需求</td>" +
                     "<td>提醒</td>" +
                     "<td>备注</td>" +
-                    "<td colspan='3'>操作</td></tr>"
+                    "<td colspan='3'>操作</td></tr>";
                 for (i = 0; i < data.list.length ; i++) {
                     a+="<tr ><td>"+data.list[i].needID
                         +"</td><td>"+data.list[i].DeptName
@@ -141,9 +141,9 @@
             $(".xg"+i).val($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
 
-    })
+    });
     function TSetaffUpdate(){
-        alert($("#xiugai_from").serialize())
+        alert($("#xiugai_from").serialize());
         $.ajax({
             url:"/employ/updatbyShaixuan",
             type:"post",

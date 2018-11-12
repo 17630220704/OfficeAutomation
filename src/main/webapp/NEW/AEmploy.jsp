@@ -179,7 +179,7 @@
 </div>
 </body>
 <script>
-    $(TdStaffQuery())
+    $(TdStaffQuery());
     function TdStaffQuery(){
         $.ajax({
             url:"/employ/selectAllemploy",
@@ -196,7 +196,7 @@
                     "<td>正式入职时间</td>" +
                     "<td>正式起薪时间</td>" +
                     "<td>备注</td>" +
-                    "<td colspan='3'>操作</td></tr>"
+                    "<td colspan='3'>操作</td></tr>";
                 for (i = 0; i < data.list.length ; i++) {
                     a+="<tr ><td>"+data.list[i].EmployedID
                         +"</td><td>"+data.list[i].planName
@@ -232,7 +232,7 @@
                 $("#select2").append(a);
             }
         })
-    })
+    });
     $(function(){
         $.ajax({
             url:"/employ/employnamep",
@@ -251,13 +251,13 @@
                 $("#select4").append(b);
             }
         })
-    })
+    });
     $('body').on('click','.xiangqing',function () {
         /*  alert( $(this).parent().parent().children().eq(1).html())*/
         for(i=0;i<9;i++){
             $(".xq"+i).html($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
-    })
+    });
     $('body').on('click','.xiugai',function () {
         for(i=0;i<9;i++){
             $(".xg"+i).val($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
@@ -267,7 +267,7 @@
         alert(html1)
         $("#select2 option[value='"+html1+"']").attr("selected","selected");*/
 
-    })
+    });
     function tdConfigDelete(obj){
         if(confirm("确定删除数据")) {
 
@@ -282,7 +282,7 @@
         }
     }
     function TSetaffAdd(){
-    alert($("#test_from").serialize())
+    alert($("#test_from").serialize());
         $.ajax({
             url:"/employ/insertemploy",
             type:"post",

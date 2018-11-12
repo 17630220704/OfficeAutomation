@@ -173,7 +173,7 @@
 </div><!-- /.modal-content -->
 </body>
 <script>
-    $(TdStaffQuery())
+    $(TdStaffQuery());
     function TdStaffQuery(){
         $.ajax({
             url:"/Plan/selectAll",
@@ -193,7 +193,7 @@
                     "<td>招聘小组</td>" +
                     "<td>招聘待面试成员</td>" +
                     "<td>招聘状态</td>" +
-                    "<td colspan='3'>操作</td></tr>"
+                    "<td colspan='3'>操作</td></tr>";
                 for (i = 0; i < data.list.length ; i++) {
                     a+="<tr ><td>"+data.list[i].PlanID//编号
                         +"</td><td>"+data.list[i].empName//人才
@@ -219,16 +219,16 @@
         for(i=0;i<12;i++){
             $(".xq"+i).html($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
-    })
+    });
     $('body').on('click','.xiugai',function () {
         for(i=0;i<12;i++){
             $(".xg"+i).val($(this).parent().parent().parent().children().eq((parseInt($(this).val())+1)).children().eq(i).html());
         }
 
 
-    })
+    });
     function TSetaffUpdate(){
-        alert($("#xiugai_from").serialize())
+        alert($("#xiugai_from").serialize());
         $.ajax({
             url:"/Plan/updatepeople1",
             type:"post",
@@ -251,10 +251,10 @@
                 /*content: 'index.jsp'//打开的内容 type为2*/
             });
         })
-    })
+    });
     $(".mtk3-gb").click(function(){
         layer.close(layer.index);
-    })
+    });
     $(".mtk3-qr").click(function(){
         var option = $("#to option").map(function(){
             return $(this).val();
@@ -267,7 +267,7 @@
         $(".userId").val(optionText);
         $(".userIds").val(option);
         layer.close(layer.index);
-    })
+    });
     /*！mtk3 模态框3的一些事件  */
 
 
@@ -306,9 +306,9 @@
             }
             $("#from1").append(a);
         }
-    })
+    });
     $("body").on("click",".la",function () {
-        alert($(this).val())
+        alert($(this).val());
         $.ajax({
             url:"/Plan/selecthirepeople1",
             type:"post",

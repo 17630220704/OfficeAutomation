@@ -95,7 +95,7 @@
 </div>
 </body>
 <script>
-    $(TpPaymentQuery())
+    $(TpPaymentQuery());
     function TpPaymentQuery(){
         $.ajax({
         url:"/TbPersoninfoBaseController/tp_bquery.do",
@@ -105,7 +105,7 @@
         var tpp = data.TpPaymentlist;//薪酬项目
         var tib = data.TbInsuranceBaselist;//保险基数
         var a = "";
-            var c = 0
+            var c = 0;
                 for (var i = 0; i < tpp.length; i++) {
                 a+="<tr><td>"+tpp[i].paymentName+"</td>"
                 +"<td><input id='sheet"+i+"' name='sheet"+i+"'></td></tr>"
@@ -121,7 +121,7 @@
                 +"</td><td><input name='gongshangUnits' class='form-control gongshangUnits' value='"+tib[0].gongshangUnits+"'>"//
                 +"</td><td><input name='shengyuUnits' class='form-control shengyuUnits' value='"+tib[0].shengyuUnits+"'>"//
                 +"<input id='tpp_length' value='"+tpp.length+"'>"
-                +"</td></tr>"
+                +"</td></tr>";
                 $("#TpPaymentQuery").append(a);
             }
         })
@@ -134,7 +134,7 @@
         })
     }
     function jisuan(u){
-        var basicSalary =  (parseInt(u.value)/100)//员工基础工资
+        var basicSalary =  (parseInt(u.value)/100);//员工基础工资
         var yanglaoPerson = parseInt($(".yanglaoPerson").val())*basicSalary;
         $("#yanglaoPerson").val(yanglaoPerson);
         var yanglaoUnits = parseInt($(".yanglaoUnits").val())*basicSalary;
@@ -176,7 +176,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px;'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='choice' onclick='choice1(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -195,7 +195,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='choice1' onclick='shoh(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -214,7 +214,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>单位</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>单位</td></tr>";
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].PosiId+"</td>"
                         +"<td><button type='button' onclick='han(this,"+data[i].PosiId+")' value='"+$(u).html()+"' class='btn btn-default' style='cursor:pointer;'>"+data[i].POSIName+"</button></td></tr>"
@@ -225,7 +225,7 @@
     }
     function han(u,a){
         $(u).css("display","none");
-        $("#posiId").append(a+",")
+        $("#posiId").append(a+",");
         $("#posiName").append($(u).html()+",")
     }
     function detle(){
