@@ -18,7 +18,9 @@
 		group by need.needID asc
 	</select>
 	<select id="findneedShenpi" resultType="map">
-		SELECT * from tb_recruitmentneed WHERE DeptId in
+		SELECT need.*,dept.* FROM tb_recruitmentneed as need LEFT JOIN tb_deparment as dept
+ON need.DeptId=dept.DeptId
+		WHERE need.DeptId in
 (SELECT DeptId FROM tb_user WHERE persoId in
 (SELECT persoId FROM tb_personinfo WHERE PersonName=#{shenpi}))
 	</select>

@@ -3,17 +3,11 @@ package com.services.lqp;
 
 
 import com.dao.lqp.PlanDao;
-import com.entity.lqp.PageBean;
-import com.entity.lqp.PageResult;
-import com.entity.lqp.QueryObject;
 import com.entity.lqp.TbRecruitmentplan;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service("planServiceImp")
 public class PlanServiceImp implements  PlanService {

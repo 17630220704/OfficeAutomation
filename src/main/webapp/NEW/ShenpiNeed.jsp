@@ -5,7 +5,7 @@
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <html>
 <head>
-    <title>录用筛选一</title>
+    <title>需求审批</title>
 
 </head>
 <style>
@@ -41,7 +41,7 @@
 <body>
 <a href="../Html.jsp">首页</a>
 <input type="text" id="myuser" value="aaa">
-<legend><center>招聘录用筛选</center></legend>
+<legend><center>招聘需求审批</center></legend>
 <div id="body">
     <form id="tj_tpquery">
         <table cellspacing="0"cellpadding="0" style="margin:0 auto;">
@@ -130,10 +130,7 @@
                         +"</td><td>"+data.list[i].needRequirements
                         +"</td><td>"+data.list[i].remind
                         +"</td><td>"+data.list[i].remark
-                        +"</td><td style='text-align: right'><button data-target='#myModal' data-toggle='modal' class='btn btn-primary xiangqing' value='"+i+"'  >详细信息</buuton>"
-                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"'  deptid1='"+data.list[i].DeptId+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>"
-                        +"</td><td style='text-align: left'><button onclick='tdConfigDelete(this)'class='btn btn-primary'  type='button' value='"+data.list[i].needID+"'>删除</button>"
-                        +"</td></tr>"
+                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"'  deptid1='"+data.list[i].DeptId+"' data-toggle='modal' data-target='#myModa3'>审批</buuton>" +"</td></tr>"
                 }
                 $("#tp_query").html(a+="</table>")
             }

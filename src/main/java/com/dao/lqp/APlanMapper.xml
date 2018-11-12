@@ -7,7 +7,7 @@
 		plan.empId=hire.empId group by plan.PlanID asc
 	</select>
    <select id="findplanbyname" resultType="map">
-		select hire.empId,hire.empName from tb_hirefile as hire
+		select hire.empId,hire.empName,hire.specialty from tb_hirefile as hire
 	</select>
 	<select id="findhirepeople" resultType="com.entity.lqp.TbHirefile">
 		select hire.* from tb_hirefile as hire

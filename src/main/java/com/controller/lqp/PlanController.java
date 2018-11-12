@@ -1,15 +1,11 @@
 package com.controller.lqp;
 
-import com.entity.lqp.PageBean;
-import com.entity.lqp.QueryObject;
 import com.entity.lqp.TbRecruitmentplan;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.services.lqp.PlanServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

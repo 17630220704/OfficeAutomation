@@ -22,5 +22,5 @@ public interface TbHirefileServiceDao {
     /*招聘录用*/
     public List<Map> findbyemploy();
 
-    PageInfo<TbHirefile> findUserByPage(int page, int pageSize);
+/*    PageInfo<TbHirefile> findUserByPage(int page, int pageSize);*/
 }

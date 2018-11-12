@@ -1,7 +1,5 @@
 package com.services.lqp;
 
-import com.entity.lqp.EmployeeQueryObject;
-import com.entity.lqp.PageResult;
 import com.entity.lqp.TbRecruitmentneed;
 
 import java.util.List;
@@ -22,5 +20,5 @@ public interface NeedServiceDao {
     List<TbRecruitmentneed> selectAll();
 
     int updateByneed(TbRecruitmentneed tbRecruitmentneed);
-    PageResult query(EmployeeQueryObject qo);
+/*    PageResult query(EmployeeQueryObject qo);*/
 }
