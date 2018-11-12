@@ -18,81 +18,135 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <!--异步查询出的数据  -->
-  	<table id="table"></table>
-  	<!--/异步查询出的数据  -->
-	<button class="tianjia1">添加</button>
-  	<!--添加数据  -->
-	<table id="table1" style="display: none;">
-		<tr>
-			<td>账号</td>
-			<td>密码</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td><input type="text" id="shopname" name="shopname" value=""></td>
-			<td><input type="text" id="shopprice" name="shopprice" value=""></td>
-			<td><input type="button" class="tianjia" value="添加"></td>
-		</tr>
-	</table> 
+  <a href="Html.jsp">首页</a>
+  <div class="container">
+	  <form role="form" class="form-inline">
+		  <div class="form-group">
+			  <label class="sr-only">用户名</label>
+			  <input type="text" class="form-control" placeholder="用户名/邮箱/手机号"/>
+		  </div>
+		  <div class="form-group">
+			  <label class="sr-only">密码</label>
+			  <input type="password" class="form-control" placeholder="输入6-14位英文和数字组合密码"/>
+		  </div>
+		  <div class="form-group">
+			  <label class="sr-only">生日</label>
+			  <input type="date" class="form-control" placeholder="出生年月"/>
+		  </div>
+		  <div class="form-group">
+			  <label class="sr-only">上传头像</label>
+			  <input type="file" class="form-control input-lg"/>
+			  <p class="help-block">选择您需要的头像文件</p>
+		  </div>
+	  </form>
+	  <form role="form" class="form-horizontal">
+		  <div class="form-group">
+			  <label class="col-sm-4 control-label">用户名</label>
+			  <div class="col-sm-8">
+				  <input type="text" class="form-control" placeholder="用户名/邮箱/手机号"/>
+			  </div>
+
+		  </div>
+		  <div class="form-group">
+			  <label class="col-sm-4 control-label">密码</label>
+			  <div class="col-sm-8">
+				  <input type="password" class="form-control" placeholder="输入6-14位英文和数字组合密码"/>
+			  </div>
+		  </div>
+		  <div class="form-group">
+			  <label class="col-sm-4 control-label">生日</label>
+			  <div class="col-sm-8">
+				  <input type="date" class="form-control" placeholder="出生年月"/>
+			  </div>
+		  </div>
+		  <div class="form-group">
+			  <div class="col-sm-offset-4 col-sm-8">
+				  <div class="checkbox">
+					  <label>
+						  <input type="checkbox"/>记住密码
+					  </label>
+				  </div>
+			  </div>
+		  </div>
+		  <div class="form-group">
+			  <div class="col-sm-offset-4 col-sm-8">
+				  <button class="btn btn-default">登录</button>
+			  </div>
+		  </div>
+	  </form>
+	  <form role="form" class="form-horizontal">
+		  <div class="form-group">
+			  <label>喜欢的球队</label>
+			  <div class="checkbox">
+				  <label>
+					  <input type="checkbox"/>广州恒大
+				  </label>
+				  <label>
+					  <input type="checkbox"/>上海上港
+				  </label>
+				  <label>
+					  <input type="checkbox"/>北京国安
+				  </label>
+			  </div>
+		  </div>
+		  <div class="form-group">
+			  <label>性别</label>
+			  <div class="radio">
+				  <label>
+					  <input type="radio" checked name="gender"/>男
+				  </label>
+				  <label>
+					  <input type="radio" name="gender"/>女
+				  </label>
+			  </div>
+		  </div>
+		  <div class="form-group">
+			  <label>所属城市</label>
+			  <select class="form-control" multiple>
+				  <option>北京</option>
+				  <option>上海</option>
+				  <option>广州</option>
+			  </select>
+		  </div>
+		  <div class="form-group">
+			  <label class="sr-only"></label>
+			  <textarea class="form-control" rows="5" placeholder="请文明用语"></textarea>
+		  </div>
+		  <p class="form-control-static">请按照邮箱格式输入：hello@163.com</p>
+		  <div class="form-group">
+			  <label>密码</label>
+			  <input class="form-control" type="password"  disabled/>
+		  </div>
+		  <div class="form-group">
+			  <label>昵称</label>
+			  <input class="form-control" type="text" placeholder="胖虎" readonly/>
+		  </div>
+		  <div class="form-group has-error has-feedback">
+			  <label>用户名</label>
+			  <input class="form-control" type="text" />
+			  <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+		  </div>
+		  <div class="form-group has-success has-feedback">
+			  <label>用户名</label>
+			  <input class="form-control" type="text" />
+			  <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+		  </div>
+		  <div class="form-group has-warning has-feedback">
+			  <label>用户名</label>
+			  <input class="form-control" type="text" />
+			  <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+		  </div>
+	  </form>
+  </div>
+
   </body>
-  <script type="text/javascript">
+
   
- 	$(".tianjia1").click(function(){
- 		$("#table1").css("display","block");
- 	})
-  
-  //查询函数
-function a(){
-  	$.ajax({
-  			url:"a1/select",
-  			data:"",
-  			type:"post",
-  			dataType:"json",
-			success:function(data){
-				$("#table").html("");
-				var a ="";
-					a+="<tr><td>id</td>"
-					a+="<td>账号</td>"
-					a+="<td>密码</td></tr>"
-				for(i=0;i<data.list.length;i++){
-					var b = data.list[i]
-					a+="<tr class='id'><td>"+b.shopno+"</td>"
-					a+="<td>"+b.shopname+"</td>"
-					a+="<td>"+b.shopprice+"</td>"				
-				}
-				$("#table").append(a);
-			}  			
-  		})
-  }
-  	//执行查询函数
-  	$(a());
-  	//添加提交按钮函数
-  	$(".tianjia").click(function(){
-  		var shopname=$("#shopname").val();
-  		var shopprice=$("#shopprice").val();
-  		$.ajax({
-  			url:"a1/insert",
-  			data:{
-  				"shopname":shopname,
-  				"shopprice":shopprice
-  			},
-  			type:"post",
-  			dataType:"json",
-			success:function(data){
-			if(data.a==1){
-				$("#table1").css("display","none");
-				alert("成功");
-				a();
-			}else{
-				alert("失败");
-			}
-			}  			
-  		})
-  	})
-  	  </script>
+
 </html>

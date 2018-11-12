@@ -140,15 +140,15 @@
 
     </dependency>
 
-    <!-- JSP相关 -->
+  <!--  &lt;!&ndash; JSP相关 &ndash;&gt;
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <version>${javaee-api.version}</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency>-->
 
-    <!-- <dependency>
+    <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>${servlet-api.version}</version>
@@ -170,8 +170,39 @@
         <artifactId>pager-taglib</artifactId>
         <version>2.0</version>
         <scope>provided</scope>
-    </dependency> -->
+    </dependency>
 
+    <!-- mybatis pager分页 -->
+
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>4.1.0</version>
+    </dependency>
+    <dependency>
+    <groupId>com.github.jsqlparser</groupId>
+    <artifactId>jsqlparser</artifactId>
+    <version>0.9.4</version>
+    </dependency>
+    <!-- pagehelper分页插件 -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.2</version>
+    </dependency>
+    <!-- lombok插件 -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.6</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- druid连接池 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.0.26</version>
+    </dependency>
 
     <!-- 文件上传组件 -->
     <dependency>
@@ -259,6 +290,7 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
+
       </plugins>
     </pluginManagement>
   </build>
