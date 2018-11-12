@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.yyl.TpPaymentDao">
+    <select id="TpPaymentQuery" resultType="Map">
+        select tpp.*
+        from tp_payment tpp
+    </select>
+    <select id="TpPaymentCountQuery" resultType="int">
+        select count(tpp.paymentId)
+        from tp_payment tpp
+    </select>
+    <insert id="TpPaymentAdd" parameterType="com.entity.yyl.TpPayment">
+        insert into tp_payment(paymentName,paymentType,paymentState)
+         values(#{paymentName},#{paymentType},#{paymentState})
+    </insert>
+    <update id="TpPaymentUpdate" parameterType="com.entity.yyl.TpPayment">
+		update tp_payment set paymentName=#{paymentName},paymentType=#{paymentType},paymentState=#{paymentState}
+		where paymentId = #{paymentId}
+	</update>
+    <delete id="TpPaymentDelete" parameterType="com.entity.yyl.TpPayment">
+		delete from tp_payment where paymentId = #{paymentId}
+	</delete>
+</mapper>

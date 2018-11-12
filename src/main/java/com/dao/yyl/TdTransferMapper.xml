@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.yyl.TdTransferDao">
+    <select id="TdTransferQuery" resultType="Map" parameterType="com.entity.yyl.TdTransfer">
+        select tt.*,tp.PersonName
+        from td_transfer tt,tb_personinfo tp
+        where tt.persoId=tp.persoId
+    </select>
+    <insert id="TdTransferAdd" parameterType="com.entity.yyl.TdTransfer">
+        insert into td_transfer(persoId,TRANSFER_DATE,TRANSFER_EFFECTIVE_DATE,TRANSFER_TYPE,TRAN_COMPANY_BEFORE,TRAN_DEPT_BEFORE,TRAN_COMPANY_AFTER,TRAN_DEPT_AFTER,TRAN_REASON,RESPONSIBLE_PERSON,ATTACHMENT_NAME,REMARK,UPDATE_TIME)
+         values(#{persoId},#{transferDate},#{transferEffectiveDate},#{transferType},#{tranCompanyBefore},#{tranDeptBefore},#{tranCompanyAfter},#{tranDeptAfter},#{tranReason},#{responsiblePerson},#{attachmentName},#{remark},#{updateTime})
+    </insert>
+    <update id="TdTransferUpdate" parameterType="com.entity.yyl.TdTransfer">
+		update td_transfer set persoId=#{persoId},TRANSFER_DATE=#{transferDate},TRANSFER_EFFECTIVE_DATE=#{transferEffectiveDate},
+		TRANSFER_TYPE=#{transferType},TRAN_COMPANY_BEFORE=#{tranCompanyBefore},TRAN_DEPT_BEFORE=#{tranDeptBefore},TRAN_COMPANY_AFTER=#{tranCompanyAfter},
+		TRAN_DEPT_AFTER=#{tranDeptAfter},TRAN_REASON=#{tranReason},RESPONSIBLE_PERSON=#{responsiblePerson},ATTACHMENT_NAME=#{attachmentName},
+		REMARK=#{remark},UPDATE_TIME=#{updateTime} where TRANSFER_ID = #{transferId}
+	</update>
+    <delete id="TdTransferDatity" parameterType="com.entity.yyl.TdTransfer">
+		delete from td_transfer where TRANSFER_ID = #{transferId}
+	</delete>
+</mapper>
