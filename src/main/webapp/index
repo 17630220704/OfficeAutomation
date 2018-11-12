@@ -1,12 +1,14 @@
 <--! 人事 -->
-人事调动：   yyl/personnel/TdTransfer/Tt_Query.jsp
-合同查询：   yyl/personnel/TdStaff/TdStaffQuery.jsp
-离职审批：   yyl/personnel/TbPersoninfo/tb_pApprove.jsp
-人事查询：   yyl/personnel/TbPersoninfo/Tb_pQuery.jsp
-黑名单：     yyl/personnel/TbLacklist/td_lQuery.jsp
+人事调动：   jsp/yyl/personnel/TdTransfer/Tt_Query.jsp
+合同查询：   jsp/yyl/personnel/TdStaff/TdStaffQuery.jsp
+离职审批：   jsp/yyl/personnel/TbPersoninfo/tb_pApprove.jsp
+人事查询：   jsp/yyl/personnel/TbPersoninfo/Tb_pQuery.jsp
+黑名单：     jsp/yyl/personnel/TbLacklist/td_lQuery.jsp
 
-查询排班类型：   yyl/personnel/TdConfig/Td_cQuery.jsp
+查询排班类型：   jsp/yyl/personnel/TdConfig/Td_cQuery.jsp
 
 <--! 薪资 -->
-薪酬项目：   yyl/pay/TpPayment/Tp_pQuery.jsp
-工资条：     yyl/pay/TpSalarySheet/Tp_sQuery.jsp
+薪酬项目：   jsp/yyl/pay/TpPayment/Tp_pQuery.jsp
+工资条：     jsp/yyl/pay/TpSalarySheet/Tp_sQuery.jsp
+保险基数：     jsp/yyl/pay/TbInsuranceBase/tib_Query.jsp
+员工薪资批量设置：     jsp/yyl/pay/TbPersoninfoBase/tpb_Query.jsp

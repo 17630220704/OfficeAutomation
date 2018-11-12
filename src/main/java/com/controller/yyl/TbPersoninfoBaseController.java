@@ -21,9 +21,9 @@ public class TbPersoninfoBaseController {
     private TbPersoninfoBaseServiceImp tpbdao;
     @ResponseBody
     @RequestMapping(value="tp_bquery.do")
-    public List TbPersoninfoBaseQuery(TbPersoninfoBase tpb){
-        List<Map> list = tpbdao.TbPersoninfoBaseQuery(tpb);
-        return list;
+    public Map<String,Object> TbPersoninfoBaseQuery(TbPersoninfoBase tpb){
+        Map<String,Object> map = tpbdao.TbPersoninfoBaseQuery(tpb);
+        return map;
     }
     @RequestMapping(value="tp_badd.do")
     public void TbPersoninfoBaseAdd(TbPersoninfoBase tpb){

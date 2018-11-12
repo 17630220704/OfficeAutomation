@@ -9,9 +9,9 @@
 <html>
 <head>
     <title>合同查询</title>
-    <link rel="stylesheet" href="../../../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <script src="../../../resources/jquery-3.1.1.min.js"></script>
-    <script src="../../../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="/resources/jquery-3.1.1.min.js"></script>
+    <script src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <style>
     .display_none{

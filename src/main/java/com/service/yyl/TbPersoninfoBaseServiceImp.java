@@ -1,9 +1,6 @@
 package com.service.yyl;
 
-import com.dao.yyl.TbInsuranceBaseDao;
-import com.dao.yyl.TbPersoninfoBaseDao;
-import com.dao.yyl.TbPersoninfoDao;
-import com.dao.yyl.TpSalarySheetDao;
+import com.dao.yyl.*;
 import com.entity.yyl.TbInsuranceBase;
 import com.entity.yyl.TbPersoninfo;
 import com.entity.yyl.TbPersoninfoBase;
@@ -11,6 +8,7 @@ import com.entity.yyl.TpSalarySheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +20,22 @@ public class TbPersoninfoBaseServiceImp implements TbPersoninfoBaseService{
     private TpSalarySheetDao tsdao;//工资条
     @Autowired
     private TbPersoninfoDao tbpersoninfodao;//职员
+    @Autowired
+    private TpPaymentDao tppdao;
+    @Autowired
+    private TbInsuranceBaseDao tibdao;
     @Override
-    public List<Map> TbPersoninfoBaseQuery(TbPersoninfoBase tpb) {
-        return tpbdao.TbPersoninfoBaseQuery(tpb);
+    public Map<String,Object> TbPersoninfoBaseQuery(TbPersoninfoBase tpb) {
+        Map<String,Object> map = new HashMap();
+        List<Map> TbInsuranceBaselist = tibdao.TbInsuranceBaseQuery();//保险基数
+        List<Map> TpPaymentlist = tppdao.TpPaymentQuery();//薪酬项目
+        List<Map> TbPersoninfoBaselist = tpbdao.TbPersoninfoBaseQuery(tpb);//薪酬项目
+        int a = tppdao.TpPaymentCountQuery();//薪酬项目数
+        map.put("TbInsuranceBaselist",TbInsuranceBaselist);
+        map.put("TpPaymentlist",TpPaymentlist);
+        map.put("TbPersoninfoBaselist",TbPersoninfoBaselist);
+        map.put("a",a);
+        return map;
     }
 
     @Override

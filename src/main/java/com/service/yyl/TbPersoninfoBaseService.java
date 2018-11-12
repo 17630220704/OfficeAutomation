@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface TbPersoninfoBaseService {
-    List<Map> TbPersoninfoBaseQuery(TbPersoninfoBase tpb);
+    Map<String,Object> TbPersoninfoBaseQuery(TbPersoninfoBase tpb);
     void TbPersoninfoBaseAdd(TbPersoninfoBase tpb);
     void TbPersoninfoBaseUpdate(TbPersoninfo tp, TbPersoninfoBase tpb, TpSalarySheet ts, String posiId1);
     void TbPersoninfoBaseDelete(TbPersoninfoBase tpb);
