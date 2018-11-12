@@ -33,4 +33,16 @@ public class TbDeparmentController {
         List<Map> list = tpdao.TbDeparmentpersonfoQuery2(tp);
         return list;
     }
+    @ResponseBody
+    @RequestMapping(value="tbSPquery.do")
+    public List<Map>  TbDeparmentpersonfo_StaffQuery(TbDeparment tp){
+        List<Map> list = tpdao.TbDeparmentpersonfo_StaffQuery(tp);
+        return list;
+    }
+    @ResponseBody
+    @RequestMapping(value="tbSPquery2.do")
+    public List<Map>  TbDeparmentpersonfo_StaffQuery2(TbDeparment tp){
+        List<Map> list = tpdao.TbDeparmentpersonfo_StaffQuery2(tp);
+        return list;
+    }
 }

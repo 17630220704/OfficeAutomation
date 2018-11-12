@@ -117,9 +117,18 @@
                             </tr>
                             <tr>
                                 <td class="td1">合同签约公司：</td>
-                                <td class="td2" colspan="2"><input type="text" class="form-control" name="contractEnterpries" placeholder="请输入公司名"></td>
+                                <td class="td2" colspan="2">
+                                    <select class="form-control" name="contractEnterpries">
+                                        <option value="蓝天集团">蓝天集团</option>
+                                    </select>
+                                </td>
                                 <td class="td1">合同类型：</td>
-                                <td class="td2"><input type="text" class="form-control" name="conTractType" placeholder="合同类型"></td>
+                                <td class="td2">
+                                    <select class="form-control" name="conTractType">
+                                        <option value="固定合同">固定合同</option>
+                                        <option value="临时合同">临时合同</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td1">合同签订日期：</td>
@@ -237,7 +246,7 @@
                 <div style="height: 400px;width: 100%">
                     <div id="bumen_left1" class="div">
                         <table class='table table-striped' style='text-align: center;font-size: 12px'>
-                            <tr style='font-weight:800;'><td>部门</td></tr>
+                            <tr style='font-weight:800;'><td>选择</td></tr>
                         </table>
                     </div>
                     <div id="danwei_body1" class="div">
@@ -279,6 +288,11 @@
                     var e = "&nbsp;"
                         if(d>c){
                             var e = "<b style='color: red;'>已到期</b>"
+                            var xu = "<button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>";
+                            var san = "<button onclick='tdConfigDelete(this)'class='btn btn-primary' type='button' value='"+data[i].contractId+"'>删除</button>";
+                        }else{
+                            var xu = "";
+                            var san = "";
                         }
                     a+="<tr><td>"+data[i].PersonName//姓名
                         +"</td><td>"+data[i].DeptName//部门
@@ -299,8 +313,8 @@
                         +"</td><td class='display_none'>"+data[i].adjunct//附件
                         +"</td><td class='display_none'>"+data[i].contractId//ID
                         +"</td><td style='text-align: right'><button class='btn btn-primary xiangqing' value='"+i+"' data-toggle='modal' data-target='#myModal'>详细信息</buuton>"
-                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>"
-                        +"</td><td style='text-align: left'><button onclick='tdConfigDelete(this)'class='btn btn-primary' type='button' value='"+data[i].contractId+"'>删除</button>"
+                        +"</td><td>"+xu
+                        +"</td><td style='text-align: left'>"+san
                         +"</td></tr>"
                 }
                 $("#tdquery").html(a+="</table>")
@@ -389,7 +403,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>选择</td></tr>"
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='diosn' onclick='choice2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -417,7 +431,7 @@
             }
         }).always(function(){
             $.ajax({
-                url:"/TbDeparmentController/tbDPquery.do",
+                url:"/TbDeparmentController/tbSPquery.do",
                 type:"post",
                 data:{deptNumber : y},
                 dataType:"json",
@@ -437,7 +451,7 @@
         $(".choice2").css("background-color","#fff");
         $(u).css("background-color","#9acfea");
         $.ajax({
-            url:"/TbDeparmentController/tbDPquery2.do",
+            url:"/TbDeparmentController/tbSPquery2.do",
             type:"post",
             data:{deptId : d},
             dataType:"json",
