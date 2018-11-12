@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-@Service("tdConfigServiceImp")
+@Service
 public class TdConfigServiceImp implements TdConfigService {
 
     @Autowired
@@ -25,7 +25,7 @@ public class TdConfigServiceImp implements TdConfigService {
 
     @Override
     public void tdConfigUpdate(TdConfig tc) {
-
+        tdConfigDao.tdConfigUpdate(tc);
     }
 
     @Override

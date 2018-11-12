@@ -2,23 +2,24 @@ package com.dao.yyl;
 
 
 import com.entity.yyl.TdConfig;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public interface TdConfigDao {
 
-    public List<Map> tdConfigQuery();
+     List<Map> tdConfigQuery();
+    /**
+     *添加排班类型
+     */
+     void tdConfigAdd(TdConfig tc);
     /**
      * 修改排班类型
      */
-    public void tdConfigAdd(TdConfig tc);
-    /**
-     * 添加排班类型
-     */
-    public void tdConfigUpdate(TdConfig tc);
+     void tdConfigUpdate(TdConfig tc);
     /**
      * 删除排班类型
      */
-    public void tdConfigDelete(int tc_id);
+     void tdConfigDelete(int tc_id);
 }

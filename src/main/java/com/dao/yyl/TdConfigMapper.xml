@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.yyl.TdConfigDao">
-    <select id="tdConfigQuery" resultType="Map" >
+    <select id="tdConfigQuery" resultType="Map" parameterType="com.entity.yyl.TdConfig">
         select tc.* from td_config tc
     </select>
     <insert id="tdConfigAdd" parameterType="com.entity.yyl.TdConfig">
-		insert into td_config(dutyName,dutyTime1,dutyTime2,dutyTime3,dutyTime4,dutyTime5,dutyTime6,dutyBefore,dutyAfter,timeLate,timeEarly)
+		insert into td_config(DUTY_NAME,DUTY_TIME1,DUTY_TIME2,DUTY_TIME3,DUTY_TIME4,DUTY_TIME5,DUTY_TIME6,DUTY_BEFORE,DUTY_AFTER,TIME_LATE,TIME_EARLY)
 		values(#{dutyName},#{dutyTime1},#{dutyTime2},#{dutyTime3},#{dutyTime4},#{dutyTime5},#{dutyTime6},#{dutyBefore},#{dutyAfter},#{timeLate},#{timeEarly})
 	</insert>
     <update id="tdConfigUpdate" parameterType="com.entity.yyl.TdConfig">
-		update td_config set dutyName=#{dutyName},dutyTime1=#{dutyTime1},dutyTime2=#{dutyTime2},dutyTime3=#{dutyTime3},dutyTime4=#{dutyTime4},dutyTime5=#{dutyTime5},
-		dutyTime6=#{dutyTime6},dutyBefore=#{dutyBefore},dutyAfter=#{dutyAfter},timeLate=#{timeLate},timeEarly=#{timeEarly} where td_c.dutyType = #{dutyType}
+		update td_config set DUTY_NAME=#{dutyName},DUTY_TIME1=#{dutyTime1},DUTY_TIME2=#{dutyTime2},DUTY_TIME3=#{dutyTime3},DUTY_TIME4=#{dutyTime4},DUTY_TIME5=#{dutyTime5},
+		DUTY_TIME6=#{dutyTime6},DUTY_BEFORE=#{dutyBefore},DUTY_AFTER=#{dutyAfter},TIME_LATE=#{timeLate},TIME_EARLY=#{timeEarly} where DUTY_TYPE = #{dutyType}
 	</update>
     <delete id="tdConfigDelete" parameterType="int">
-		delete from td_config where dutyType = #{tc_id}
+		delete from td_config where DUTY_TYPE = #{tc_id}
 	</delete>
 </mapper>
