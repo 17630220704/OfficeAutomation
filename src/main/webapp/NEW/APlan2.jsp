@@ -190,8 +190,8 @@
                     "<td>结束时间</td>" +
                     "<td>预算费用</td>" +
                     "<td>招聘说明</td>" +
-                    "<td>招聘备注</td>" +
-                    "<td>招聘提醒</td>" +
+                    "<td>招聘小组</td>" +
+                    "<td>招聘待面试成员</td>" +
                     "<td>招聘状态</td>" +
                     "<td colspan='3'>操作</td></tr>"
                 for (i = 0; i < data.list.length ; i++) {
@@ -293,7 +293,8 @@
         $("#to option").remove();
     });
     $.ajax({
-        url:"/Plan/selecthirepeople",
+
+        url:"/Plan/selectPlan",
         data:"",
         type:"post",
         dataType:"json",
@@ -301,7 +302,7 @@
             $("#from1").html("");
             var a ="";
             for(lu=0;lu<data.length;lu++){
-                a+="<option class='la' value='"+data[lu].empID+"'>"+data[lu].speciality+"</option>"
+                a+="<option class='la' value='"+data[lu].empId+"'>"+data[lu].specialty+"</option>"
             }
             $("#from1").append(a);
         }
@@ -319,7 +320,7 @@
                 var option1 = "";
                 for (i=0;i<all.list.length;i++){
                     var obj = all.list;
-                    option1 += "<option value='"+obj[i].empID+"'>"+obj[i].empName+"</option>";
+                    option1 += "<option value='"+obj[i].empId+"'>"+obj[i].empName+"</option>";
                 }
                 $("#from").html(option1);
             }

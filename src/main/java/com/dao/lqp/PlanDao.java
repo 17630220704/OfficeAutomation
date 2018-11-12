@@ -1,11 +1,9 @@
 package com.dao.lqp;
 
-import com.entity.lqp.PageBean;
-import com.entity.lqp.QueryObject;
 import com.entity.lqp.TbRecruitmentplan;
 
 import java.util.List;
-import java.util.Map;
+
 public interface PlanDao {
 
         int addTbRecruitmentplan(TbRecruitmentplan tbRecruitmentplan);
@@ -32,10 +30,10 @@ public interface PlanDao {
 
         int updateByPlan(TbRecruitmentplan tbRecruitmentplan);
 
-        //分页查询：查总数
+/*        //分页查询：查总数
         int queryPlanForCount(QueryObject qo);
 
         //分页查询：查数据
-        List<TbRecruitmentplan> queryPlanForList(QueryObject qo);
+        List<TbRecruitmentplan> queryPlanForList(QueryObject qo);*/
 
 }

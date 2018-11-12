@@ -197,12 +197,6 @@
       <version>1.16.6</version>
       <scope>provided</scope>
     </dependency>
-    <!-- druid连接池 -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid</artifactId>
-      <version>1.0.26</version>
-    </dependency>
 
     <!-- 文件上传组件 -->
     <dependency>

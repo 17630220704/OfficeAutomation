@@ -190,8 +190,8 @@
                     "<td>结束时间</td>" +
                     "<td>预算费用</td>" +
                     "<td>招聘说明</td>" +
-                    "<td>招聘备注</td>" +
-                    "<td>招聘提醒</td>" +
+                    "<td>招聘小组成员</td>" +
+                    "<td>招聘待面试人员</td>" +
                     "<td>招聘状态</td>" +
                     "<td colspan='3'>操作</td></tr>"
                 for (i = 0; i < data.list.length ; i++) {

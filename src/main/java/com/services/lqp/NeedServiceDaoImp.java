@@ -1,8 +1,6 @@
 package com.services.lqp;
 
 import com.dao.lqp.NeedDao;
-import com.entity.lqp.EmployeeQueryObject;
-import com.entity.lqp.PageResult;
 import com.entity.lqp.TbRecruitmentneed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,7 +61,7 @@ public class NeedServiceDaoImp implements  NeedServiceDao {
         return dao.updateByneed(tbRecruitmentneed);
     }
 
-    @Override
+   /* @Override
     public PageResult query(EmployeeQueryObject qo) {
         int totalCount =  dao.queryneedForCount(qo);
 
@@ -73,5 +71,5 @@ public class NeedServiceDaoImp implements  NeedServiceDao {
 
         List<TbRecruitmentneed> list = dao.queryneedForList(qo);
         return new PageResult(list, totalCount, qo.getCurrentPage(), qo.getPageSize());
-    }
+    }*/
 }

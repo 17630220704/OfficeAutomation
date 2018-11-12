@@ -139,7 +139,7 @@
                         +"</td><td>"+data.list[i].NoteRemind//招聘提醒
                         +"</td><td>"+data.list[i].approvalStatus//招聘状态
 
-                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>"
+                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>审批</buuton>"
                         +"</td></tr>"
                 }
                 $("#tp_query").html(a+="</table>")

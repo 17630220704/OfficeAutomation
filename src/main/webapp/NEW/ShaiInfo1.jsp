@@ -140,7 +140,7 @@
                         +"</td><td>"+data[i].officialSalary
                         +"</td><td>"+data[i].Shaixuan
                         +"</td><td>"+data[i].remark
-                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>"
+                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>筛选</buuton>"
                         +"</td></tr>"
                 }
                 $("#tp_query").html(a+="</table>")

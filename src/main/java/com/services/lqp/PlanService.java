@@ -1,12 +1,8 @@
 package com.services.lqp;
 
-import com.entity.lqp.PageBean;
-import com.entity.lqp.PageResult;
-import com.entity.lqp.QueryObject;
 import com.entity.lqp.TbRecruitmentplan;
 
 import java.util.List;
-import java.util.Map;
 
 public interface PlanService {
     int addTbRecruitmentplan(TbRecruitmentplan tbRecruitmentplan);

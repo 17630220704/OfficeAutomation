@@ -97,7 +97,7 @@ public Map<String,Object> savebyneed(TbRecruitmentneed tbRecruitmentneed){
       map.put("list",list);
       return map;
   }
-  /*分页*/
+/*  *//*分页*//*
   @RequestMapping(value="/user/list",method= RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> findAllByPage(int page,int pageSize){
@@ -109,5 +109,5 @@ public Map<String,Object> savebyneed(TbRecruitmentneed tbRecruitmentneed){
 		resultMap.put("rows", pager.getList());
 		return resultMap;
 
-	}
+	}*/
 }

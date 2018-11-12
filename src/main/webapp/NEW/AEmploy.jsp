@@ -72,7 +72,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<button class="btn btn-primary" data-toggle="modal" data-target="#myModa2">新建合同</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModa2">录入</button>
 <%--<form id="tj_tdquery"><input type="text" name="persoId"><button onclick="TdStaffQuery()">查询</button></form>--%>
 <%--查询合同--%>
 <div id="tdquery"></div>
@@ -207,7 +207,7 @@
                         +"</td><td>"+data.list[i].officialSalary
                         +"</td><td>"+data.list[i].remark
                         +"</td><td style='text-align: right'><button data-target='#myModal' data-toggle='modal' class='btn btn-primary xiangqing' value='"+i+"'  >详细信息</buuton>"
-                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>"
+                        +"</td><td><button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>整改</buuton>"
                         +"</td><td style='text-align: left'><button onclick='tdConfigDelete(this)'class='btn btn-primary'  deptid1='"+data.list[i].DeptId+"' type='button' value='"+data.list[i].EmployedID+"'>删除</button>"
                         +"</td></tr>"
                 }

@@ -31,17 +31,29 @@
 </style>
 </head>
 <body>
+<h3>layui 查询</h3>
 <a href="Hire/Fenye.jsp">人才库查询</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/fenyeInfo.jsp">职员查询</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/fenyeNeed.jsp">需求查询</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/fenyePlan.jsp">计划查询</a><br/><p></p>
-<a href="NEW/AHire.jsp">人才库操作</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/ANeed.jsp">招聘需求操作</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/APlan.jsp">招聘计划操作</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/AEmploy.jsp">招聘录用操作</a><br/><p></p>
-<a href="NEW/NEWJSP.jsp">招聘jihua审批</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/ShaiInfo1.jsp">招聘筛选</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="NEW/APersoninfo.jsp">录入职工</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="NEW/fenyeInfo.jsp"><button>职员查询</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="NEW/fenyeNeed.jsp"><button>需求查询</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="NEW/fenyePlan.jsp"><button>计划查询</button></a><br/><p></p>
+<h3>操作</h3>
+<h4>人才库</h4>
+<a href="NEW/AHire.jsp"><button>人才库操作</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<h4>需求</h4>
+<a href="NEW/ANeed.jsp"><button>招聘需求操作</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="NEW/ShenpiNeed.jsp"><button>招聘需求审批</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<h4>计划</h4>
+<a href="NEW/APlan.jsp"><button>招聘计划操作</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="NEW/APlan1.jsp"><button>招聘计划招聘小组录入</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="NEW/APlan2.jsp"><button>招聘计划待面试人员</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="NEW/NEWJSP.jsp"><button>招聘计划审批</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<h4>录用</h4>
+<a href="NEW/AEmploy.jsp"><button>招聘录用操作</button></a><br/><p></p>
+
+<a href="NEW/ShaiInfo1.jsp"><button>招聘筛选</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<h4>人事档案</h4>
+<a href="NEW/APersoninfo.jsp"><button>录入职工</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<h3>测试</h3>
 <a href="index.jsp">测试</a>
 
 <div align="center" class="container">

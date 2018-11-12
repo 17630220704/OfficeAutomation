@@ -1,6 +1,5 @@
 package com.dao.lqp;
 
-import com.entity.lqp.EmployeeQueryObject;
 import com.entity.lqp.TbRecruitmentneed;
 
 import java.util.List;
@@ -23,9 +22,9 @@ public interface NeedDao {
 
     int updateByneed(TbRecruitmentneed tbRecruitmentneed);
 
-    //分页查询：查总数
+  /*  //分页查询：查总数
     int queryneedForCount(EmployeeQueryObject qo);
 
     //分页查询：查数据
-    List<TbRecruitmentneed> queryneedForList(EmployeeQueryObject qo);
+    List<TbRecruitmentneed> queryneedForList(EmployeeQueryObject qo);*/
 }
