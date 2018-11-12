@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.knowledge.knowdao">
+
+     <select id="query" resultType="map" >
+       SELECT c.coid as coid,c.coname as coname,c.costate as costate,c.covalue as covalue,t.personname as personname FROM conferenceroom c,tb_personinfo t WHERE c.persoid=t.persoid
+    </select>
+    <delete id="delete" parameterType="int"  >
+     delete from conferenceroom where coid =#{0}
+    </delete>
+    <update id="update" parameterType="com.entity.knowledge.conferenceroom">
+   update conferenceroom set coname=#{coname},costate=#{costate},covalue=#{covalue},persoId=#{tb_personInfo.persoId} where coid=#{coid}
+    </update>
+    <select id="save" parameterType="com.entity.knowledge.conferenceroom" >
+       insert into conferenceroom(coid,coname,costate,covalue,persoId) values(#{coid},#{coname},#{costate},#{covalue},#{tb_personInfo.persoId})
+    </select>
+    <select id="query1" resultType="map">
+        SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and m.persoid=#{id}  and  m.mestate= "待审核"
+    </select>
+    <select id="query3" resultType="com.entity.knowledge.meeting">
+        select * from meeting where meid=#{id}
+    </select>
+    <update id="ch1" parameterType="int">
+        update meeting SET mestate="已取消" WHERE meid=#{id}
+    </update>
+    <update id="cha" parameterType="String">
+        UPDATE time SET timorning=0 WHERE tidate =#{date}
+    </update>
+    <update id="chb" parameterType="String">
+        UPDATE time SET tiupper=0 WHERE tidate =#{date}
+    </update>
+    <update id="chc" parameterType="String">
+        UPDATE time SET tilower=0 WHERE tidate =#{date}
+    </update>
+    <update id="chd" parameterType="String">
+        UPDATE time SET tinight=0 WHERE tidate =#{date}
+    </update>
+    <select id="gly" resultType="map">
+       SELECT persoid as persoid,personname as personname FROM tb_personinfo
+    </select>
+    <select id="grhy" parameterType="int" resultType="map">
+        SELECT m.meremarks as mebz,t.personname as pername, m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and  t.persoid =#{id}
+    </select>
+</mapper>

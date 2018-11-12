@@ -36,12 +36,28 @@ public class duty_manageController {
     }
     @ResponseBody
     @RequestMapping(value = "/savescheduledate.do")
-    public Map savescheduledate(@RequestParam("sdAmstartdate") String sdAmstartdate)throws ParseException {
+    public Map savescheduledate(
+            @RequestParam("sdAmstartdate") String sdAmstartdate
+            ,@RequestParam("sdAmenddate") String sdAmenddate
+            ,@RequestParam("sdPmstartdate") String sdPmstartdate
+            ,@RequestParam("sdPmenddate") String sdPmenddate
+            ,@RequestParam("sdNmstartdate") String sdNmstartdate
+            ,@RequestParam("sdNmenddate") String sdNmenddate
+    )throws ParseException {
         TbScheduleDate tbScheduleDate = new TbScheduleDate();
         SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");//小写的mm表示的是分钟
-        Date sdAmstartdatetime=sdf.parse(sdAmstartdate);
-        Time time = new Time(sdAmstartdatetime.getTime());
-        tbScheduleDate.setSdAmstartdate(time);
+        Time sdAmstartdatetime = new Time(sdf.parse(sdAmstartdate).getTime());
+        Time sdAmenddatetime = new Time(sdf.parse(sdAmenddate).getTime());
+        Time sdPmstartdatetime = new Time(sdf.parse(sdPmstartdate).getTime());
+        Time sdPmenddatetime = new Time(sdf.parse(sdPmenddate).getTime());
+        Time sdNmstartdatetime = new Time(sdf.parse(sdNmstartdate).getTime());
+        Time sdNmenddatetime = new Time(sdf.parse(sdNmenddate).getTime());
+        tbScheduleDate.setSdAmstartdate(sdAmstartdatetime);
+        tbScheduleDate.setSdAmenddate(sdAmenddatetime);
+        tbScheduleDate.setSdPmstartdate(sdPmstartdatetime);
+        tbScheduleDate.setSdPmenddate(sdPmenddatetime);
+        tbScheduleDate.setSdNmstartdate(sdNmstartdatetime);
+        tbScheduleDate.setSdNmenddate(sdNmenddatetime);
         System.out.println(tbScheduleDate);
         Map map = new HashMap();
         //scheduleManageServicedao.savescheduledate(tbScheduleDate);

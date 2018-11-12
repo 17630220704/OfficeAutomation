@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.PlanDao">
+    <!--<insert id="addTbRecruitmentplan" parameterType="com.entity.lqp.TbRecruitmentplan">
+        INSERT INTO tb_recruitmentplan(planId,planName) VALUE (#{planId},#{planName})
+    </insert>
+
+    <delete id="deleteTbRecruitmentplanById" parameterType="long">
+        DELETE FROM tb_recruitmentplan WHERE planId=#{planId}
+    </delete>
+
+    <update id="updateTbRecruitmentplan" parameterType="com.entity.lqp.TbRecruitmentplan">
+        UPDATE tb_recruitmentplan
+        SET planName = #{planName}
+        WHERE  planId = #{planId}
+    </update>
+
+    <select id="TbRecruitmentplanById" resultType="com.entity.lqp.TbRecruitmentplan" parameterType="long">
+        SELECT planId,planName
+        FROM tb_recruitmentplan
+        WHERE planId=#{planId}
+    </select>
+    <select id="queryAllTbRecruitmentplan" resultType="map">
+        SELECT planId,planName
+        FROM  tb_recruitmentplan
+    </select>-->
+<!--分页查询-->
+    <select id="findAllPlan" resultType="com.entity.lqp.TbRecruitmentplan">
+         SELECT plan.* FROM  tb_recruitmentplan plan
+    </select>
+
+   <!-- //NEW crud-->
+    <delete id="deleteByPlan" >
+    delete from tb_recruitmentplan where planId = #{planId}
+  </delete>
+    <insert id="insertPlan" keyProperty="planId" useGeneratedKeys="true">/*keyProperty="id" useGeneratedKeys="true"*/
+    insert into tb_recruitmentplan (planName, dictionaryId)
+    values (#{planName}, #{dictionaryId})
+  </insert>
+    <update id="updateByPlan">
+    update tb_recruitmentplan
+    set planName = #{planName},
+      dictionaryId = #{dictionaryId}
+    where planId = #{planId}
+  </update>
+    <select id="selectByPlan" resultType="com.entity.lqp.TbRecruitmentplan">
+    select planId, planName, dictionaryId
+    from tb_recruitmentplan
+    where planId = #{planId}
+  </select>
+    <select id="selectPlanAll"  resultType="com.entity.lqp.TbRecruitmentplan">
+    select planId, planName, dictionaryId
+    from tb_recruitmentplan
+  </select>
+
+
+    <!--查总数-->
+    <select id="queryPlanForCount" resultType="int">
+    select count(e.planId) from tb_recruitmentplan e
+  </select>
+    <!--查数据-->
+    <select id="queryPlanForList"  resultType="com.entity.lqp.TbRecruitmentplan">
+    select planId, planName, dictionaryId from tb_recruitmentplan
+    limit #{startIndex}, #{pageSize}
+  </select>
+<!--MySQL用limit来限制每次查询数据的数量，利用limit，就可以实现分页。
+
+实际上，第三方插件也是利用这点来实现分页。-->
+</mapper>
