@@ -4,7 +4,6 @@ import com.entity.yyl.TbLacklist;
 import com.entity.yyl.TbPersoninfo;
 import com.service.yyl.TbLacklistServiceImp;
 import com.service.yyl.TbPersoninfoServiceImp;
-import com.service.yyl.TdConfigServiceImp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
