@@ -8,6 +8,7 @@ import com.entity.yyl.TpSalarySheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,17 +25,21 @@ public class TpSalarySheetServiceImp implements TpSalarySheetService{
     private TbPersoninfoBaseDao tpbdao;
     @Override
     public Map<String,Object> TpSalarySheetQuery(String persoId1) {
-        String persoId = persoId1.substring(0,persoId1.length()-1);
+        String[] persoId = persoId1.split(",");
         System.out.println(persoId);
         Map<String,Object> map = new HashMap();
         TpSalarySheet ts1 = new TpSalarySheet();
         TbPersoninfoBase tpb1 = new TbPersoninfoBase();
-            List<Map> TpSalarySheet = tsdao.TpSalarySheetQuery1(persoId);//工资条
-            List<Map> TbPersoninfoBase = tpbdao.TbPersoninfoBaseQuery1(persoId);//员工保险
-        System.out.println(TpSalarySheet);
-        System.out.println(TbPersoninfoBase);
-        List<Map> TpSalarySheetlist = tsdao.TpSalarySheetQuery(ts1);//工资条
-        List<Map> TbPersoninfoBaselist = tpbdao.TbPersoninfoBaseQuery(tpb1);//员工保险
+        List TpSalarySheetlist = new ArrayList();
+        List TbPersoninfoBaselist = new ArrayList();
+        for (int i = 0; i < persoId.length; i++) {
+            List<Map> TpSalarySheet = tsdao.TpSalarySheetQuery1(persoId[i]);//工资条
+            List<Map> TbPersoninfoBase = tpbdao.TbPersoninfoBaseQuery1(persoId[i]);//员工保险
+            TpSalarySheetlist.add(TpSalarySheet);
+            TbPersoninfoBaselist.add(TbPersoninfoBase);
+        }
+        //List<Map> TpSalarySheetlist = tsdao.TpSalarySheetQuery(ts1);//工资条
+        //List<Map> TbPersoninfoBaselist = tpbdao.TbPersoninfoBaseQuery(tpb1);//员工保险
         List<Map> TbInsuranceBaselist = tibdao.TbInsuranceBaseQuery();//保险基数
         List<Map> TpPaymentlist = tppdao.TpPaymentQuery();//薪酬项目
         int a = tppdao.TpPaymentCountQuery();//薪酬项目数

@@ -44,11 +44,11 @@
     <button class='btn btn-primary' onclick="TpSalarySheetUpdate()">保存</button>
 </div>
 <div>
-    <div style="width: 600px;text-align: center;">
-        <div style="height: 200px;width: 100%;">
+    <div style="width: 100%;text-align: center;padding-left: 30%;">
+        <div style="height: 200px;width: 40%;">
             <div id="bumen_left1" class="div">
                 <table class='table table-striped' style='text-align: center;font-size: 12px'>
-                    <tr style='font-weight:800;'><td>部门</td></tr>
+                    <tr style='font-weight:800;'><td>选择</td></tr>
                 </table>
             </div>
             <div id="danwei_body1" class="div">
@@ -69,15 +69,16 @@
 </div>
 </body>
 <script>
-    var persoId = 0;
-    $(TpSalarySheetQuery(persoId))
+    /*var persoId = 0;
+    var id = 0;
+    $(TpSalarySheetQuery(persoId,id))*/
     $(date1())
     $(diosn())
     function date1(){
         a = new Date();
         $(".date").val(a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate());
     }
-    function TpSalarySheetQuery(persoId){
+    function TpSalarySheetQuery(persoId,id){
         $.ajax({
             url:"/TpSalarySheetController/td_squery.do",
             type:"post",
@@ -113,35 +114,37 @@
                         +"<td>个人养老</td><td>单位养老</td><td>个人医疗</td><td>单位医疗</td><td>个人失业</td><td>单位失业</td>" +
                         "<td>个人住房</td><td>单位住房</td><td>单位工伤</td><td>单位生育</td><td>险后</td>"
                     a+=b+"</tr>";
-                for (var i = 0; i < tps.length ; i++) {
-                    var c = 0 ;//险后
-                    a+="<tr><td class='display_none'><input name='sheetId1' value='"+tps[i].sheetId+"'><input name='persoId1' value='"+tps[i].persoId+"'>"
-                        +"</td><td>"+tps[i].PersonName
-                            for(var j = 0;j < data.a ; j++){
-                                a+="</td><td><input class='form-control sheet"+j+"' name='sheet"+j+"' value='"+eval("tps[i].sheet"+j)+"'>"
-                                c+=parseInt(eval("tps[i].sheet"+j));
-                            }
-                            var basicSalary =  (tpb[i].basicSalary/100)//员工基础工资
-                    a+="<input class='display_none' name='persbaseId' value='"+tpb[i].persbaseId+"'>"//员工保险ID
-                        +"<input class='display_none' id='c"+i+"' value='"+c+"'>"//项目薪资
-                        +"</td><td><input name='perSalary' class='form-control perSalary' onkeyup='effect(this,"+i+","+c+")' value='"+tpb[i].basicSalary+"'>"//工资基数
-                        +"</td><td><input name='yanglaoPerson'  class='form-control yanglaoPerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yanglaoPerson*basicSalary)+"'>"//
-                        +"</td><td><input name='yanglaoUnits' class='form-control yanglaoUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yanglaoUnits*basicSalary)+"'>"//
-                        +"</td><td><input name='yiliaoPerson' class='form-control yiliaoPerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yiliaoPerson*basicSalary)+"'>"//
-                        +"</td><td><input name='yiliaoUnits' class='form-control yiliaoUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yiliaoUnits*basicSalary)+"'>"//
-                        +"</td><td><input name='shiyePerson' class='form-control shiyePerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].shiyePerson*basicSalary)+"'>"//
-                        +"</td><td><input name='shiyeUnits' class='form-control shiyeUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].shiyeUnits*basicSalary)+"'>"//
-                        +"</td><td><input name='zhufangPerson' class='form-control zhufangPerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].zhufangPerson*basicSalary)+"'>"//
-                        +"</td><td><input name='zhufangUnits' class='form-control zhufangUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].zhufangUnits*basicSalary)+"'>"//
-                        +"</td><td><input name='gongshangUnits' class='form-control gongshangUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].gongshangUnits*basicSalary)+"'>"//
-                        +"</td><td><input name='shengyuUnits' class='form-control shengyuUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].shengyuUnits*basicSalary)+"'>"//
-                        var riskBack = tpb[i].basicSalary-(tib[0].yanglaoPerson*basicSalary+tib[0].yiliaoPerson*basicSalary+tib[0].shiyePerson*basicSalary+tib[0].zhufangPerson*basicSalary);
-                    a+="</td><td><input name='riskBack' id='riskBack"+i+"' class='form-control' value='"+(riskBack+c)+"'>"//
-                    a+="</td></tr><tr class='display_none'><td id='yanglaoPerson"+i+"'>" +tib[0].yanglaoPerson
-                        +"</td><td id='yiliaoPerson"+i+"'>" +tib[0].yiliaoPerson
-                        +"</td><td id='shiyePerson"+i+"'>" +tib[0].shiyePerson
-                        +"</td><td id='zhufangPerson"+i+"'>" +tib[0].zhufangPerson
-                        +"</td></tr>"
+                for (var i = 0; i < id; i++) {
+                    if(tps[i]!=""){
+                        var c = 0 ;//险后
+                        a+="<tr><td class='display_none'><input name='sheetId1' value='"+tps[i][0].sheetId+"'><input name='persoId1' value='"+tps[i][0].persoId+"'>"
+                            +"</td><td>"+tps[i][0].PersonName
+                        for(var j = 0;j < data.a ; j++){
+                            a+="</td><td><input class='form-control sheet"+j+"' name='sheet"+j+"' value='"+eval("tps[i][0].sheet"+j)+"'>"
+                            c+=parseInt(eval("tps[i][0].sheet"+j));
+                        }
+                        var basicSalary =  (tpb[i][0].basicSalary/100)//员工基础工资
+                        a+="<input class='display_none' name='persbaseId' value='"+tpb[i][0].persbaseId+"'>"//员工保险ID
+                            +"<input class='display_none' id='c"+i+"' value='"+c+"'>"//项目薪资
+                            +"</td><td><input name='perSalary' class='form-control perSalary' onkeyup='effect(this,"+i+","+c+")' value='"+tpb[i][0].basicSalary+"'>"//工资基数
+                            +"</td><td><input name='yanglaoPerson'  class='form-control yanglaoPerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yanglaoPerson*basicSalary)+"'>"//
+                            +"</td><td><input name='yanglaoUnits' class='form-control yanglaoUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yanglaoUnits*basicSalary)+"'>"//
+                            +"</td><td><input name='yiliaoPerson' class='form-control yiliaoPerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yiliaoPerson*basicSalary)+"'>"//
+                            +"</td><td><input name='yiliaoUnits' class='form-control yiliaoUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].yiliaoUnits*basicSalary)+"'>"//
+                            +"</td><td><input name='shiyePerson' class='form-control shiyePerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].shiyePerson*basicSalary)+"'>"//
+                            +"</td><td><input name='shiyeUnits' class='form-control shiyeUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].shiyeUnits*basicSalary)+"'>"//
+                            +"</td><td><input name='zhufangPerson' class='form-control zhufangPerson yanglaoPerson"+i+"' value='"+intToFloat(tib[0].zhufangPerson*basicSalary)+"'>"//
+                            +"</td><td><input name='zhufangUnits' class='form-control zhufangUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].zhufangUnits*basicSalary)+"'>"//
+                            +"</td><td><input name='gongshangUnits' class='form-control gongshangUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].gongshangUnits*basicSalary)+"'>"//
+                            +"</td><td><input name='shengyuUnits' class='form-control shengyuUnits yanglaoPerson"+i+"' value='"+intToFloat(tib[0].shengyuUnits*basicSalary)+"'>"//
+                        var riskBack = tpb[i][0].basicSalary-(tib[0].yanglaoPerson*basicSalary+tib[0].yiliaoPerson*basicSalary+tib[0].shiyePerson*basicSalary+tib[0].zhufangPerson*basicSalary);
+                        a+="</td><td><input name='riskBack' id='riskBack"+i+"' class='form-control' value='"+(riskBack+c)+"'>"//
+                        a+="</td></tr><tr class='display_none'><td id='yanglaoPerson"+i+"'>" +tib[0].yanglaoPerson
+                            +"</td><td id='yiliaoPerson"+i+"'>" +tib[0].yiliaoPerson
+                            +"</td><td id='shiyePerson"+i+"'>" +tib[0].shiyePerson
+                            +"</td><td id='zhufangPerson"+i+"'>" +tib[0].zhufangPerson
+                            +"</td></tr>"
+                    }
                 }
                 $("#tpsquery").html(a+="</table></form>")
             }
@@ -190,30 +193,6 @@
         $("#riskBack"+i).val(riskBack+parseInt(u));
 
     }
-    /*
-    * function jisuan(u){
-        var basicSalary =  (parseInt(u.value)/100)//员工基础工资
-        var yanglaoPerson = parseInt($(".yanglaoPerson").val())*basicSalary;
-        $("#yanglaoPerson").val(yanglaoPerson);
-        var yanglaoUnits = parseInt($(".yanglaoUnits").val())*basicSalary;
-        $("#yanglaoUnits").val(yanglaoUnits);
-        var yiliaoPerson = parseInt($(".yiliaoPerson").val())*basicSalary;
-        $("#yiliaoPerson").val(yiliaoPerson);
-        var yiliaoUnits = parseInt($(".yiliaoUnits").val())*basicSalary;
-        $("#yiliaoUnits").val(yiliaoUnits);
-        var shiyePerson = parseInt($(".shiyePerson").val())*basicSalary;
-        $("#shiyePerson").val(shiyePerson);
-        var shiyeUnits = parseInt($(".shiyeUnits").val())*basicSalary;
-        $("#shiyeUnits").val(shiyeUnits);
-        var zhufangPerson = parseInt($(".zhufangPerson").val())*basicSalary;
-        $("#zhufangPerson").val(zhufangPerson);
-        var zhufangUnits = parseInt($(".zhufangUnits").val())*basicSalary;
-        $("#zhufangUnits").val(zhufangUnits);
-        var gongshangUnits = parseInt($(".gongshangUnits").val())*basicSalary;
-        $("#gongshangUnits").val(gongshangUnits);
-        var shengyuUnits = parseInt($(".shengyuUnits").val())*basicSalary;
-        $("#shengyuUnits").val(shengyuUnits);
-    * */
     function Salary(o,s){$(".perSalary").val($(o).val());for (var i = 0; i < s; i++) {effect(o,i,$("#c"+i).val());}}
     function yanglaoP(o){$(".yanglaoPerson").val($(o).val())}
     function yanglaoU(o){$(".yanglaoUnits").val($(o).val())}
@@ -234,7 +213,7 @@
             dataType:"json",
             success:function(data){
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
-                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>部门</td></tr>"
+                    "<tr style='font-weight:800;'><td style='background-color: #efefef;'>选择</td></tr>"
                 for (var i = 0; i < data.length ; i++) {
                     a+="<tr><td class='display_none'>"+data[i].DeptId+"</td>"
                         +"<td class='diosn' onclick='choice2(this,"+data[i].DeptId+")'style='cursor:pointer;'>"+data[i].DeptName+"</td></tr>"
@@ -268,14 +247,18 @@
                 dataType:"json",
                 success:function(data){
                     var persoId = "";
+                    var id = 0;
                     var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
                         "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
                     for (var i = 0; i < data.length ; i++) {
-                        a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
-                            +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"
-                        persoId+=data[i].persoId+","
+                        if(data[i].NowState!=1) {
+                            a += "<tr><td class='display_none'>" + data[i].persoId + "</td>"
+                                + "<td><button type='button' onclick='han2(this," + data[i].persoId + ")' value='" + 1 + "' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>" + data[i].PersonName + "</button></td></tr>"
+                            persoId += data[i].persoId + ","
+                            id++
+                        }
                     }
-                    TpSalarySheetQuery(persoId);
+                    TpSalarySheetQuery(persoId,id);
                     $("#danwei_reght1").html(a+="</tablel>")
                 }
             })
@@ -291,14 +274,18 @@
             dataType:"json",
             success:function(data){
                 var persoId="";
+                var id = 0;
                 var a = "<table class='table' style='text-align: center;font-size: 12px'>" +
                     "<tr style='font-weight:800;'><td style='background-color: #efefef;'>人员</td></tr>"
                 for (var i = 0; i < data.length ; i++) {
+                    if(data[i].NowState!=1){
                     a+="<tr><td class='display_none'>"+data[i].persoId+"</td>"
                         +"<td><button type='button' onclick='han2(this,"+data[i].persoId+")' value='"+1+"' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>"+data[i].PersonName+"</button></td></tr>"
-                    persoId+=data[i].persoId+","
+                    persoId+=data[i].persoId+",";
+                    id++
+                    }
                 }
-                TpSalarySheetQuery(persoId);
+                TpSalarySheetQuery(persoId,id);
                 $("#danwei_reght1").html(a+="</tablel>")
             }
         })
