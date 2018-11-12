@@ -1,7 +1,6 @@
 package com.service.yyl;
 
 import com.dao.yyl.TdConfigDao;
-import com.dao.yyl.TdScheduleDao;
 import com.entity.yyl.TdConfig;
 import com.entity.yyl.TdSchedule;
 import org.springframework.beans.factory.annotation.Autowired;
