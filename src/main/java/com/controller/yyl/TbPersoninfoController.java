@@ -2,7 +2,6 @@ package com.controller.yyl;
 
 import com.entity.yyl.TbLacklist;
 import com.entity.yyl.TbPersoninfo;
-import com.entity.yyl.TdConfig;
 import com.service.yyl.TbLacklistServiceImp;
 import com.service.yyl.TbPersoninfoServiceImp;
 import com.service.yyl.TdConfigServiceImp;
