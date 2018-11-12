@@ -78,7 +78,6 @@
         $(".date").val(a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate());
     }
     function TpSalarySheetQuery(persoId){
-        alert(persoId);
         $.ajax({
             url:"/TpSalarySheetController/td_squery.do",
             type:"post",

@@ -7,10 +7,10 @@
         from tp_salary_sheet ts,tb_personinfo tp
         where tp.NowState!=1 and ts.persoId = tp.persoId
     </select>
-    <select id="TpSalarySheetQuery1" resultType="Map" parameterType="com.entity.yyl.TpSalarySheet">
+    <select id="TpSalarySheetQuery1" resultType="Map" parameterType="String">
         select ts.*,tp.PersonName,tp.NowState
         from tp_salary_sheet ts,tb_personinfo tp
-        where tp.NowState!=1 and ts.persoId = #{persoId} and tp.persoId=#{persoId}
+        where tp.NowState!=1 and ts.persoId = tp.persoId in(#{persoId})
     </select>
     <insert id="TpSalarySheetAdd" parameterType="com.entity.yyl.TpSalarySheet">
         insert into tp_salary_sheet(persoId)

@@ -9,7 +9,7 @@ import java.util.Map;
 @Repository
 public interface TbPersoninfoBaseDao {
     List<Map> TbPersoninfoBaseQuery(TbPersoninfoBase tpb);
-    List<Map> TbPersoninfoBaseQuery1(TbPersoninfoBase tpb);
+    List<Map> TbPersoninfoBaseQuery1(String persoId);
     void TbPersoninfoBaseAdd(TbPersoninfoBase tpb);
     void TbPersoninfoBaseUpdate(TbPersoninfoBase tpb);
     void TbPersoninfoBaseUpdateBatch(TbPersoninfoBase tpb);

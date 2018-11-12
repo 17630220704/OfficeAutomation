@@ -24,22 +24,15 @@ public class TpSalarySheetServiceImp implements TpSalarySheetService{
     private TbPersoninfoBaseDao tpbdao;
     @Override
     public Map<String,Object> TpSalarySheetQuery(String persoId1) {
-        String[] persoId = persoId1.split(",");
+        String persoId = persoId1.substring(0,persoId1.length()-1);
+        System.out.println(persoId);
         Map<String,Object> map = new HashMap();
         TpSalarySheet ts1 = new TpSalarySheet();
         TbPersoninfoBase tpb1 = new TbPersoninfoBase();
-        for (int i = 0; i < persoId.length; i++) {
-            TpSalarySheet ts = new TpSalarySheet();
-            TbPersoninfoBase tpb = new TbPersoninfoBase();
-            int a = Integer.parseInt(persoId[i]);
-            System.out.println(a);
-            ts.setPersoId(a);
-            tpb.setPersoId(a);
-            List<Map> TpSalarySheet = tsdao.TpSalarySheetQuery1(ts);//工资条
-            List<Map> TbPersoninfoBase = tpbdao.TbPersoninfoBaseQuery1(tpb);//员工保险
-            System.out.println(TpSalarySheet);
-            System.out.println(TbPersoninfoBase);
-        }
+            List<Map> TpSalarySheet = tsdao.TpSalarySheetQuery1(persoId);//工资条
+            List<Map> TbPersoninfoBase = tpbdao.TbPersoninfoBaseQuery1(persoId);//员工保险
+        System.out.println(TpSalarySheet);
+        System.out.println(TbPersoninfoBase);
         List<Map> TpSalarySheetlist = tsdao.TpSalarySheetQuery(ts1);//工资条
         List<Map> TbPersoninfoBaselist = tpbdao.TbPersoninfoBaseQuery(tpb1);//员工保险
         List<Map> TbInsuranceBaselist = tibdao.TbInsuranceBaseQuery();//保险基数

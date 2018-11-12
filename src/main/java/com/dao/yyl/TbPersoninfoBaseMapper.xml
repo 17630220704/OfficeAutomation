@@ -6,9 +6,9 @@
         select tpb.*,tp.PersonName,tps.basicSalary,tp.NowState from tb_personinfo_base tpb,tb_personinfo tp,tb_position tbp,tb_post_salary tps
         where tp.PosiId = tbp.PosiId and tbp.postID = tps.postID and tp.NowState!=1 and tpb.persoId = tp.persoId
     </select>
-	<select id="TbPersoninfoBaseQuery1" resultType="Map" parameterType="com.entity.yyl.TbPersoninfoBase">
+	<select id="TbPersoninfoBaseQuery1" resultType="Map" parameterType="String">
         select tpb.*,tp.PersonName,tps.basicSalary,tp.NowState from tb_personinfo_base tpb,tb_personinfo tp,tb_position tbp,tb_post_salary tps
-        where tp.PosiId = tbp.PosiId and tbp.postID = tps.postID and tp.NowState!=1 and tpb.persoId = #{persoId} and tp.persoId=#{persoId}
+        where tp.PosiId = tbp.PosiId and tbp.postID = tps.postID and tp.NowState!=1 and tpb.persoId = tp.persoId in(#{persoId})
     </select>
     <insert id="TbPersoninfoBaseAdd" parameterType="com.entity.yyl.TbPersoninfoBase">
 		insert into tb_personinfo_base(persoIdyanglaoPerson,yanglaoUnits,yiliaoPerson,yiliaoUnits,shiyePerson,shiyeUnits,
