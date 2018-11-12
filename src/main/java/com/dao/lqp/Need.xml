@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.NeedDao">
+
+	<select id="findall" resultType="map">
+		SELECT need.*,dept.* FROM tb_recruitmentneed need,tb_deparment dept  where
+		need.deptId=dept.deptId group by need.needID asc
+	</select>
+	<select id="findbyname" resultType="map">
+		select dept.DeptId,dept.DeptName from tb_deparment as dept
+	</select>
+	<insert id="insert" parameterType="com.entity.lqp.TbRecruitmentneed">
+		insert into tb_recruitmentneed(jods,needDate,needNumber,DeptId) values(#{jods},#{needDate},#{needNumber},#{deptId})
+	</insert>
+
+	<delete id="delete" parameterType="com.entity.lqp.TbRecruitmentneed">
+		delete from tb_recruitmentneed where needID = #{needId}
+	</delete>
+
+	<update id="update" parameterType="com.entity.lqp.TbRecruitmentneed">
+		update tb_recruitmentneed set jods=#{jods},needDate=#{needDate},needNumber=#{needNumber},DeptId=#{deptId} where needID = #{needId}
+	</update>
+
+<!--new-->
+	<delete id="deleteByneed">
+    delete from tb_recruitmentneed
+    where needId = #{needId}
+  </delete>
+	<insert id="insertneed" keyProperty="needId" useGeneratedKeys="true">
+    insert into tb_recruitmentneed (jods, needDate, needNumber)
+    values (#{jods}, #{needDate}, #{needNumber})
+  </insert>
+	<update id="updateByneed">
+    update tb_recruitmentneed
+    set jods = #{jods},
+      needDate = #{needDate},
+      needNumber = #{needNumber},
+    where needId = #{needId}
+  </update>
+	<select id="selectByneed" >
+     select
+    e.jods, e.needDate, e.needNumber, e.email, e.age, e.admin,
+    d.id d_id, d.name d_name, d.sn d_sn
+    from tb_recruitmentneed e LEFT JOIN department d on e.dept_id = d.id
+    where e.id = #{id}
+  </select>
+	<select id="selectAll" >
+    select  *
+    from tb_recruitmentneed
+  </select>
+
+	<!--where 条件-->
+	<sql id="base_where">
+
+		<where>
+			<if test="jods != null">
+				and (e.needNumber like concat("%",#{jods} ,"%") or e.email like concat("%",#{jods} ,"%"))
+			</if>
+
+			<if test="deptId > 0">
+				and e.dept_id = #{deptId}
+			</if>
+		</where>
+
+	</sql>
+
+	<!--查总数-->
+	<select id="queryForCount" resultType="int">
+		select count(e.id) from tb_recruitmentneed e
+		<include refid="base_where"/>
+	</select>
+	<!--查数据   会自动把上面的代码贴过来-->
+	<!--<select id="queryForList" >
+		select
+		e.id, e.name, e.password, e.email, e.age, e.admin,
+		d.id d_id, d.name d_name, d.sn d_sn
+		from tb_recruitmentneed e LEFT JOIN department d on e.dept_id = d.id
+
+		<include refid="base_where"/>
+
+		limit #{startIndex}, #{pageSize}
+	</select>-->
+</mapper>
