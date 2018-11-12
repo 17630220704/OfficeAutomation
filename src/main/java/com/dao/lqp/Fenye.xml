@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.Fenye">
+<!--hire-->
+		<select id="queryAllDataFromTable" resultType="com.entity.lqp.TbHirefile">
+			select hire.* from  tb_hirefile as hire
+            <where>
+			<if test='keyWord!="" or keyWord!=null'>
+				 and hire.empName LIKE '%${keyWord}%'
+			</if>
+
+			limit #{page},#{limit}
+        </where>
+		</select>
+		<select id="queryAllCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+			select count(*) from tb_hirefile
+    <where>
+        <if test='_parameter != "" and _parameter != null'>
+            empId LIKE '%${_parameter}%'
+        </if>
+    </where>
+		</select>
+<!--	info-->
+	<select id="queryAllinfo" resultType="map">
+		SELECT info.*,positi.* FROM tb_personinfo info,tb_position positi
+		where info.posiId=positi.posiId
+
+			<if test='keyWord1!="" or keyWord1!=null'>
+				and info.personName LIKE '%${keyWord1}%'
+			</if>
+		group by info.persoId asc
+			limit #{page},#{limit}
+
+	</select>
+	<select id="queryinfoCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from tb_personinfo
+		<where>
+			<if test='_parameter != "" and _parameter != null'>
+				persoId LIKE '%${_parameter}%'
+			</if>
+		</where>
+	</select>
+<!--	plan-->
+	<select id="queryAllplan" resultType="map">
+		SELECT plan.*,hire.* FROM tb_recruitmentplan plan,tb_hirefile hire  where
+		plan.empId=hire.empId
+
+			<if test='keyWord2!="" or keyWord2!=null'>
+				and plan.planName LIKE '%${keyWord2}%'
+			</if>
+			group by plan.planId asc
+			limit #{page},#{limit}
+
+	</select>
+	<select id="queryplanCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from tb_recruitmentplan
+		<where>
+			<if test='_parameter != "" and _parameter != null'>
+				PlanID LIKE '%${_parameter}%'
+			</if>
+		</where>
+	</select>
+	<!--need-->
+	<select id="queryAllneed" resultType="map">
+		SELECT need.*,dept.*,dept.deptName FROM tb_recruitmentneed need,tb_deparment dept  where
+		need.deptId=dept.deptId
+        <if test='keyWord3!="" or keyWord3!=null'>
+            and need.jods LIKE '%${keyWord3}%'
+        </if>
+        group by need.needID asc
+        limit #{page},#{limit}
+
+	</select>
+	<select id="queryneedCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from tb_recruitmentneed
+		<where>
+			<if test='_parameter != "" and _parameter != null'>
+				needID LIKE '%${_parameter}%'
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

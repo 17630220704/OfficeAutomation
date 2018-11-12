@@ -138,8 +138,22 @@
                             /*var fromdate = $("#addscheduledate").serializeObject();
                             fromdate = JSON.stringify(fromdate);*/
                             var sdAmstartdate = $(".sdAmstartdate").val();
+                            var sdAmenddate = $(".sdAmenddate").val();
+                            var sdPmstartdate = $(".sdPmstartdate").val();
+                            var sdPmenddate = $(".sdPmenddate").val();
+                            var sdNmstartdate = $(".sdNmstartdate").val();
+                            var sdNmenddate = $(".sdNmenddate").val();
                             alert(sdAmstartdate);
-                            $.post("/savescheduledate.do",{'sdAmstartdate':sdAmstartdate}).done(function (date) {
+                            $.post("/savescheduledate.do",
+                                {
+                                    'sdAmstartdate':sdAmstartdate
+                                    ,'sdAmenddate':sdAmenddate
+                                    ,'sdPmstartdate':sdPmstartdate
+                                    ,'sdPmenddate':sdPmenddate
+                                    ,'sdNmstartdate':sdNmstartdate
+                                    ,'sdNmenddate':sdNmenddate
+                                })
+                                .done(function (date) {
                                 layer.msg(date.result);
                             });
                             layer.close(openadd);

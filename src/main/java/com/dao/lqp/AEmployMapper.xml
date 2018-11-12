@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.AEmploy">
+    <select id="findemployall" resultType="map">
+		SELECT employ.*,plan.*,hire.*,dept.* FROM tb_recruitmentemployed employ,tb_RecruitmentPlan plan,tb_HireFile hire,tb_deparment dept  where
+		employ.planId=plan.planId and plan.empId=hire.empId and employ.deptId=dept.deptId group by employ.employedId asc
+	</select>
+   <select id="findemploybyname" resultType="map">
+		select dept.DeptId,dept.DeptName from tb_deparment as dept
+	</select>
+    <select id="findemploybynamep" resultType="map">
+		select planp.planId,planp.planName from tb_RecruitmentPlan as planp
+	</select>
+	<select id="findShaixuan" resultType="map">
+		SELECT employ.*,plan.*,hire.*,dept.* FROM tb_recruitmentemployed employ,tb_RecruitmentPlan plan,tb_HireFile hire,tb_deparment dept  where
+		employ.planId=plan.planId and plan.empId=hire.empId and employ.deptId=dept.deptId
+
+			<if test="shaixuan!=null and shaixuan!=''">
+				and  employ.Shaixuan like  "%"#{shaixuan}"%"
+			</if>
+			<if test="headid!=null and headid!=''">
+				and  employ.headid like  "%"#{headid}"%"
+			</if>
+			group by employ.employedId asc
+
+	</select>
+    <insert id="insertemploy" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		insert into tb_recruitmentemployed(PlanID,DeptId,headid,HireDate,workEndTime,officialSalary,remark)
+		 values(#{planId},#{deptId},#{headid},#{hireDate},#{workEndTime},#{officialSalary},#{remark})
+	</insert>
+
+    <delete id="deleteemploy" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		delete from tb_recruitmentemployed where EmployedID = #{employedId}
+	</delete>
+
+    <update id="updateemploy" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		update tb_recruitmentemployed set PlanID=#{planId},DeptId=#{deptId},headid=#{headid},HireDate=#{hireDate},workEndTime=#{workEndTime},officialSalary=#{officialSalary},remark=#{remark}
+		where EmployedID = #{employedId}
+	</update>
+	<update id="updateShaixuan" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		update tb_recruitmentemployed set Shaixuan=#{shaixuan}
+		where EmployedID = #{employedId}
+	</update>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.knowledge.Meetdao">
+    <select id="query" resultType="map" >
+        select c.coid as coid,c.coname as coname,t.personname as personname from  conferenceroom c ,tb_personinfo t  where c.persoid=t.persoid and c.costate="正常"
+    </select>
+    <select id="save" parameterType="com.entity.knowledge.meeting" >
+       insert into meeting(mename,mevalue,menumber,medate,mestate,coid,persoId,metime,meremarks)
+       values(#{mename},#{mevalue},#{menumber},#{medate},#{mestate},#{conferenceroom.coid},#{tb_PersonInfo.persoId},#{metime},#{meremarks})
+    </select>
+    <select id="query1" resultType="map" parameterType="int">
+SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid AND m.mestate="待审核" and c.persoid=#{id}
+    </select>
+    <select id="query2" resultType="map">
+   SELECT  m.meid as meid,m.mename as mename,m.mevalue
+ as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as
+mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t
+ WHERE m.coid = c.coid AND m.persoid = t.persoid AND m.meid=#{a}
+    </select>
+    <select id="query3" resultType="com.entity.knowledge.time" parameterType="com.entity.knowledge.time">
+        select t.tiid,t.coid as coid,t.tidate,t.tilower,t.timorning,t.tinight,t.tiupper from time t where t.coid=#{conferenceroom.coid} and t.tidate=#{tidate}
+    </select>
+    <select id="save1" parameterType="com.entity.knowledge.time">
+       INSERT INTO time(coid,timorning,tiupper,tilower,tinight,tidate)VALUES(#{conferenceroom.coid},0,0,0,0,#{tidate})
+    </select>
+    <select id="querytimorning" resultType="com.entity.knowledge.time"  parameterType="com.entity.knowledge.time">
+      select * from time where timorning=0 and coid=#{conferenceroom.coid} and tidate=#{tidate}
+    </select>
+    <select id="querytiupper" resultType="com.entity.knowledge.time"  parameterType="com.entity.knowledge.time">
+      select * from time where tiupper=0 and coid=#{conferenceroom.coid} and tidate=#{tidate}
+    </select>
+    <select id="querytilower" resultType="com.entity.knowledge.time"  parameterType="com.entity.knowledge.time">
+      select * from time where tilower=0 and coid=#{conferenceroom.coid} and tidate=#{tidate}
+    </select>
+    <select id="querytinight" resultType="com.entity.knowledge.time"  parameterType="com.entity.knowledge.time">
+      select * from time where tinight=0 and coid=#{conferenceroom.coid} and tidate=#{tidate}
+    </select>
+    <select id="query4" resultType="com.entity.knowledge.meeting" parameterType="int">
+      select * from meeting where meid=#{meid}
+    </select>
+    <update id="updatetimorning" parameterType="int">
+        UPDATE time SET timorning=1 WHERE tiid =#{tiid}
+    </update>
+    <update id="updatetiupper" parameterType="int">
+        UPDATE time SET tiupper=1 WHERE tiid =#{tiid}
+    </update>
+    <update id="updatetilower" parameterType="int">
+        UPDATE time SET tilower=1 WHERE tiid =#{tiid}
+    </update>
+    <update id="updatetinight" parameterType="int">
+        UPDATE time SET tinight=1 WHERE tiid =#{tiid}
+    </update>
+    <update id="updateid" parameterType="int">
+        UPDATE meeting SET mestate="已批准",meremarks="无" WHERE meid=#{meid}
+    </update>
+    <update id="updateth" parameterType="int">
+        UPDATE meeting SET mestate="已退回" WHERE meid=#{meid}
+    </update>
+    <select id="query5" resultType="map">
+      SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid
+    </select>
+    <select id="queryme1" resultType="map">
+      SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and m.mestate=#{lx}
+    </select>
+    <select id="queryme2" resultType="map" parameterType="com.entity.knowledge.meeting">
+             SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and  STR_TO_DATE(medate,'%Y-%m-%d') BETWEEN STR_TO_DATE(#{medate},'%Y-%m-%d')AND STR_TO_DATE(#{mestate},'%Y-%m-%d')
+    </select>
+    <select id="queryme3" resultType="map">
+   SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and t.personname like  concat('%',#{name},'%')
+    </select>
+    <update id="updatestate" >
+        UPDATE meeting SET mestate ="已结束"  WHERE CURDATE() >medate AND mestate="已批准"
+    </update>
+    <update id="updatebz" parameterType="com.entity.knowledge.meeting">
+       UPDATE meeting SET meremarks = #{meremarks} WHERE  meid = #{meid}
+    </update>
+
+</mapper>
