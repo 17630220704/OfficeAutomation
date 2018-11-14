@@ -28,7 +28,7 @@ public class permitLoginController {
     @RequestMapping(value = "/permitLogin.do")
     public Map permitLogin(TbUser user){            //登陆
         Map<String,Object> map = new HashMap<String,Object>();
-        int login_result = 3;   // 0正常   1账号密码错   2 被加入黑名单    3系统繁忙
+        int login_result = 3;   // 0正常   1账号密码错   2 被加入黑名单    3系统繁忙 4账号锁定
         map= permitLoginServicedao.getlogin(user);
         login_result = Integer.parseInt(map.get("loginresult").toString());
         if (login_result==0){

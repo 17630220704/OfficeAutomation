@@ -9,17 +9,11 @@ public class TbScheduleDate {
 
   private long sdId;
   private String sdName;
-  @DateTimeFormat(pattern = "HH:mm")
   private Time sdAmstartdate;
-  @DateTimeFormat(pattern = "HH:mm")
   private Time sdAmenddate;
-  @DateTimeFormat(pattern = "HH:mm")
   private Time sdPmstartdate;
-  @DateTimeFormat(pattern = "HH:mm")
   private Time sdPmenddate;
-  @DateTimeFormat(pattern = "HH:mm")
   private Time sdNmstartdate;
-  @DateTimeFormat(pattern = "HH:mm")
   private Time sdNmenddate;
 
 

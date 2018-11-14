@@ -58,7 +58,6 @@
             DeptId = #{deptid},
             u_loginName = #{uloginname},
             u_loginPassword = #{uloginpassword},
-            u_locking = #{ulocking}
         </set>
         where u_id = #{uid}
     </update>

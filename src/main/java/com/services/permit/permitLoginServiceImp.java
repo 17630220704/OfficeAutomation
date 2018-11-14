@@ -26,6 +26,7 @@ public class permitLoginServiceImp implements permitLoginService {
         int loginresult = 0;//登陆结果
         int lackresult = 1; //黑名单结果
         int userid = 0; //用户id
+        int u_locking = 1;//用户锁定结果
         String username = null;//用户名
         //登陆验证
         List<Map> loginlist =  permitLogindao.getlogin(tbUser);
@@ -34,14 +35,18 @@ public class permitLoginServiceImp implements permitLoginService {
         if (loginresult>0){
             username = loginlist.get(0).get("PersonName").toString();
             userid = Integer.parseInt(loginlist.get(0).get("u_id").toString());
+            u_locking = Integer.parseInt(loginlist.get(0).get("u_locking").toString());
             List<Map> Lacklist =  permitLogindao.LoginLacklist(userid);
             lackresult = Lacklist.size();
-            if (lackresult==0){
+            if (lackresult==0&&u_locking==0){
                 session.setAttribute("username",username);
                 session.setAttribute("userid",userid);
                 map.put("loginresult",0);//登陆成功
                 map.put("userid",userid);
                 //System.out.println("登陆成功的map："+map);
+            }else if (u_locking==1){
+                map.put("loginresult",4);//账号被锁定
+                // System.out.println("账号被锁定的map："+map);
             }else {
                 map.put("loginresult",2);//被加入黑名单
                 // System.out.println("被加入黑名单的map："+map);

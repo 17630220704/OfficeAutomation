@@ -6,7 +6,75 @@
         select tsd.* from tb_schedule_date tsd;
     </select>
     <insert id="savescheduledate" parameterType="com.entity.schedule.TbScheduleDate">
-        insert into tb_schedule_date(sd_name,sd_amstartdate,sd_amstartdate,sd_pmstartdate,sd_pmenddate,sd_nmstartdate,sd_nmenddate)
-        value (#{sdName},#{sdAmstartdate},#{sdAmenddate},#{sdPmstartdate},#{sdPmenddate},#{sdNmstartdate},#{sdNmenddate})
+        insert into tb_schedule_date
+        (sd_name,sd_amstartdate,sd_amenddate,sd_pmstartdate,sd_pmenddate,sd_nmstartdate,sd_nmenddate)
+        value (#{sdName},#{sdAmstartdate},#{sdAmenddate},#{sdPmstartdate},#{sdPmenddate},#{sdNmstartdate},#{sdNmenddate});
+    </insert>
+    <delete id="deletescheduledate" >
+          delete from tb_schedule_date where sd_id = #{sdid};
+    </delete>
+    <update id="updatescheduledate" parameterType="com.entity.schedule.TbScheduleDate">
+        update tb_schedule_date
+        <set>
+            sd_name = #{sdName},
+            sd_amstartdate = #{sdAmstartdate},
+            sd_amenddate = #{sdAmenddate},
+            sd_pmstartdate = #{sdPmstartdate},
+            sd_pmenddate = #{sdPmenddate},
+            sd_nmstartdate = #{sdNmstartdate},
+            sd_nmenddate = #{sdNmenddate}
+        </set>
+        <where>
+            sd_id = #{sdId}
+        </where>
+    </update>
+    <select id="listschedule" resultType="map">
+     select ts.scheduleId
+    ,ifnull(GROUP_CONCAT(tp.PersonName),'暂无人员') as PersonName
+    ,ts.scheduleName
+    ,ts.scheduleState
+    ,(select sd_name from tb_schedule_date where sd_id=ts.scheduleType)as scheduleType
+    ,DATE_FORMAT(ts.Date_start,'%Y-%m-%d') as Date_start,DATE_FORMAT(ts.Date_end,'%Y-%m-%d') as Date_end
+    ,ts.monday,ts.tuesday,ts.wednesday,ts.thursday,ts.friday,ts.saturday,ts.sunday
+from td_schedule ts left join tb_schedule_date tsd on ts.scheduleType=tsd.sd_id
+                    left join tb_personinfo_schedule schedule2 on ts.scheduleId = schedule2.scheduleId
+                    left join tb_personinfo tp on schedule2.persoId = tp.persoId group by ts.scheduleId;
+    </select>
+    <select id="scheduleType" resultType="map">
+        select tsd.sd_id,tsd.sd_name from tb_schedule_date tsd;
+    </select>
+    <update id="updateschedule" parameterType="com.entity.schedule.upschedule">
+        update  td_schedule
+        <set>
+            scheduleName = #{scheduleName},
+            scheduleType = #{scheduleType},
+            Date_start = #{dateStart},
+            Date_end = #{dateEnd},
+            monday = #{monday},
+            tuesday = #{tuesday},
+            wednesday = #{wednesday},
+            thursday = #{thursday},
+            friday = #{friday},
+            saturday = #{saturday},
+            sunday = #{sunday}
+        </set>
+        where scheduleid = #{scheduleId}
+    </update>
+    <select id="listpersoninfo" resultType="map">
+       select  tp.persoId as value,tp.PersonName as name  from tb_personinfo tp
+    </select>
+    <insert id="saveschedule" parameterType="com.entity.schedule.TdSchedule" useGeneratedKeys="true" keyProperty="scheduleId">
+        insert into td_schedule(scheduleName, scheduleType, scheduleState, Date_start, Date_end, monday, tuesday, wednesday, thursday, friday, saturday, sunday)
+        value (#{scheduleName},#{scheduleType},#{scheduleState},#{dateStart},#{dateEnd},#{monday},#{tuesday},#{wednesday},#{thursday},#{friday},#{saturday},#{sunday})
+        <selectKey resultType="java.lang.Integer" order="AFTER"
+                   keyProperty="scheduleId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+</insert>
+    <select id="getscheduletypedate" resultType="map">
+        select tsd.* from tb_schedule_date tsd where tsd.sd_id=#{sdid}
+    </select>
+    <insert id="savepersoninfo_schedule" >
+        insert into tb_personinfo_schedule(persoId,scheduleId) value (#{personid},#{sdid})
     </insert>
 </mapper>

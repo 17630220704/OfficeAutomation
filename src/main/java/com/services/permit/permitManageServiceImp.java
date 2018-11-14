@@ -154,24 +154,27 @@ public class permitManageServiceImp implements permitManageService {
     @Override
     @Transactional
     public String updatelocking(int uid, int ulocking) {
-        System.out.println("uid="+uid+"      ulocking="+ulocking);
-        if (ulocking == 1){
-            System.out.println("开始解锁");
-            Integer result = permitManagedao.updatelocking(uid,0);
-            if (result==1){
-                return "解锁成功";
-            }
-            if (result!=1){
-                return "解锁失败";
-            }
-        }else if(ulocking ==0){
-            System.out.println("开始锁定");
-            Integer result = permitManagedao.updatelocking(uid,1);
-            if (result==1){
-                return "锁定成功";
-            }
-            if (result!=1){
-                return "锁定失败";
+        if (uid==1){
+            return "管理账户不可锁定";
+        }else {
+            if (ulocking == 1){
+                System.out.println("开始解锁");
+                Integer result = permitManagedao.updatelocking(uid,0);
+                if (result==1){
+                    return "解锁成功";
+                }
+                if (result!=1){
+                    return "解锁失败";
+                }
+            }else if(ulocking ==0){
+                System.out.println("开始锁定");
+                Integer result = permitManagedao.updatelocking(uid,1);
+                if (result==1){
+                    return "锁定成功";
+                }
+                if (result!=1){
+                    return "锁定失败";
+                }
             }
         }
         return "操作失败";

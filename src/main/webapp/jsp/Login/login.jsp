@@ -10,12 +10,11 @@
 <html>
 <head>
     <title>登陆</title>
-    <script type="text/javascript" src="/resources/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/resources/jquery.serialize.js"></script>
-    <script src="/resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <link href="/resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/resources/bootstrap-3.3.7/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet"/>
-    <link href="/resources/bootstrap-3.3.7/demo/demo.css" rel="stylesheet"/>
+    <script type="text/javascript" src="../../resources/js_sunxin/jquery-3.1.1.min.js"></script>
+    <script src="../../resources/js_sunxin/assets/js/core/bootstrap.min.js"></script>
+    <link href="../../resources/js_sunxin/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../resources/js_sunxin/assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet"/>
+    <link href="../../resources/js_sunxin/assets/demo/demo.css" rel="stylesheet"/>
     <style>
         .col-center-block {
             float: none;
@@ -69,6 +68,8 @@
                 alert("您已被加入黑名单，请联系管理员");
             }else if (results==3) {
                 alert("系统繁忙");
+            }else if (results==4){
+                alert("您的账号已经被锁定，请联系管理员");
             }
         });
     }

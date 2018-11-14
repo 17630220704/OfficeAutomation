@@ -12,12 +12,11 @@
     <title>排班时间设置</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/resources/bootstrap-4.1.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/permit-trees/layui-v2.4.4/layui/css/layui.css">
-    <script src="/resources/jquery-3.1.1.min.js"></script>
-    <script src="/resources/permit-trees/layui-v2.4.4/layui/layui.js"></script>
-    <script src="/resources/permit-trees/layui-v2.4.4/layui/extends/authtree.js"></script>
-    <script src="/resources/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js_sunxin/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/resources/js_sunxin/layui-v2.4.5/layui/css/layui.css">
+    <link rel="stylesheet" href="/resources/js_sunxin/bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <script src="/resources/js_sunxin/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+    <script src="/resources/js_sunxin/permit-trees/layui-v2.4.4/layui/extends/authtree.js"></script>
 </head>
 <body style="min-height: 600px;">
 <div class="showscheduledate">
@@ -33,48 +32,44 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">班次名称：</label>
                 <div class="layui-input-inline">
+                    <input type="hidden" name="sdId" class="layui-input sdId" >
                     <input type="text" name="sdName" class="layui-input sdName">
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">上午签到时间：</label>
+                    <label class="layui-form-label">上午时间：</label>
                     <div class="layui-input-inline">
-                        <input type="time" class="layui-input layer-date sdAmstartdate"  value="08:00" name="sdAmstartdate">
+                        <input type="time" class="layui-input sdAmstartdate"  value="08:00" name="sdAmstartdate">
                     </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">上午签离时间：</label>
+                    <div class="layui-form-mid">-</div>
                     <div class="layui-input-inline">
-                        <input type="time" class="layui-input layer-date" value="12:00" name="sdAmenddate">
-                    </div>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">下午签到时间：</label>
-                    <div class="layui-input-inline">
-                        <input type="time" name="sdPmstartdate" value="01:00"  class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">下午签离时间：</label>
-                    <div class="layui-input-inline">
-                        <input type="time" name="sdPmenddate" value="05:00"  class="layui-input">
+                        <input type="time" class="layui-input sdAmenddate" value="12:00" name="sdAmenddate">
                     </div>
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">晚上签到时间：</label>
+                    <label class="layui-form-label">下午时间：</label>
                     <div class="layui-input-inline">
-                        <input type="time" name="sdNmstartdate" value="00:00"  class="layui-input">
+                        <input type="time" name="sdPmstartdate" value="01:00"  class="layui-input sdPmstartdate">
+                    </div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline">
+                        <input type="time" name="sdPmenddate" value="05:00"  class="layui-input sdPmenddate">
                     </div>
                 </div>
+            </div>
+            <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">晚上签离时间：</label>
+                    <label class="layui-form-label">晚上时间：</label>
                     <div class="layui-input-inline">
-                        <input type="time" name="sdNmenddate" value="00:00"  class="layui-input">
+                        <input type="time" name="sdNmstartdate" value="00:00"  class="layui-input sdNmstartdate">
+                    </div>
+                    <div class="layui-form-mid">-</div>
+
+                    <div class="layui-input-inline">
+                        <input type="time" name="sdNmenddate" value="00:00"  class="layui-input sdNmenddate">
                     </div>
                 </div>
             </div>
@@ -82,23 +77,7 @@
     </div>
 </div>
 </body>
-<script>
-    $.fn.serializeObject = function() {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function() {
-            if (o[this.name]) {
-                if (!o[this.name].push) {
-                    o[this.name] = [ o[this.name] ];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    }
-</script>
+<script src="/resources/js_sunxin/layui-v2.4.5/layui/layui.js"></script>
 <script>
     layui.use('table', function(){
         var table = layui.table;
@@ -135,18 +114,17 @@
                         ,area:["900px","auto"]
                         ,btn: ['提交']
                         ,yes: function(layero, index){
-                            /*var fromdate = $("#addscheduledate").serializeObject();
-                            fromdate = JSON.stringify(fromdate);*/
+                            var sdName = $(".sdName").val();
                             var sdAmstartdate = $(".sdAmstartdate").val();
                             var sdAmenddate = $(".sdAmenddate").val();
                             var sdPmstartdate = $(".sdPmstartdate").val();
                             var sdPmenddate = $(".sdPmenddate").val();
                             var sdNmstartdate = $(".sdNmstartdate").val();
                             var sdNmenddate = $(".sdNmenddate").val();
-                            alert(sdAmstartdate);
                             $.post("/savescheduledate.do",
                                 {
-                                    'sdAmstartdate':sdAmstartdate
+                                    'sdName':sdName
+                                    ,'sdAmstartdate':sdAmstartdate
                                     ,'sdAmenddate':sdAmenddate
                                     ,'sdPmstartdate':sdPmstartdate
                                     ,'sdPmenddate':sdPmenddate
@@ -154,7 +132,8 @@
                                     ,'sdNmenddate':sdNmenddate
                                 })
                                 .done(function (date) {
-                                layer.msg(date.result);
+                                layer.msg(date.result,{time:500});
+                                table.reload("listscheduledate",{url:'/listscheduledate.do'});
                             });
                             layer.close(openadd);
                         },
@@ -167,7 +146,46 @@
                     } else if (data.length > 1) {
                         layer.msg('只能同时编辑一个');
                     } else {
-                        layer.alert('编辑 [id]：' + checkStatus.data[0].sd_id);
+                        $(".sdId").val(data[0].sd_id);
+                        $(".sdName").val(data[0].sd_name);
+                        $(".sdAmstartdate").val(data[0].sd_amstartdate);
+                        $(".sdAmenddate").val(data[0].sd_amenddate);
+                        $(".sdPmstartdate").val(data[0].sd_pmstartdate);
+                        $(".sdPmenddate").val(data[0].sd_pmenddate);
+                        $(".sdNmstartdate").val(data[0].sd_nmstartdate);
+                        $(".sdNmenddate").val(data[0].sd_nmenddate);
+                        var openupdate = layer.open({
+                            type: 1
+                            ,area:["900px","auto"]
+                            ,btn: ['更新']
+                            ,yes: function(layero, index){
+                                var sdId = $(".sdId").val();
+                                var sdName = $(".sdName").val();
+                                var sdAmstartdate = $(".sdAmstartdate").val();
+                                var sdAmenddate = $(".sdAmenddate").val();
+                                var sdPmstartdate = $(".sdPmstartdate").val();
+                                var sdPmenddate = $(".sdPmenddate").val();
+                                var sdNmstartdate = $(".sdNmstartdate").val();
+                                var sdNmenddate = $(".sdNmenddate").val();
+                                $.post("/updatescheduledate.do",
+                                    {
+                                        'sdId':sdId
+                                        ,'sdName':sdName
+                                        ,'sdAmstartdate':sdAmstartdate
+                                        ,'sdAmenddate':sdAmenddate
+                                        ,'sdPmstartdate':sdPmstartdate
+                                        ,'sdPmenddate':sdPmenddate
+                                        ,'sdNmstartdate':sdNmstartdate
+                                        ,'sdNmenddate':sdNmenddate
+                                    })
+                                    .done(function (date) {
+                                        layer.msg(date.result,{time:500});
+                                        table.reload("listscheduledate",{url:'/listscheduledate.do'});
+                                    });
+                                layer.close(openupdate);
+                            },
+                            content: $("#add_date")
+                        });
                     }
                     break;
                 case 'delete':
@@ -190,12 +208,56 @@
                 layer.msg('查看操作');
             } else if(layEvent === 'del'){
                 layer.confirm('真的删除行么', function(index){
-                    obj.del(); //删除对应行（tr）的DOM结构
-                    layer.close(index);
-                    //向服务端发送删除指令
+                    var sdid = data.sd_id;
+                    $.post("/deletescheduledate.do",{'sdid':sdid}).done(function (date) {
+                        layer.msg(date.result,{time:600});
+                        if(date.result=='删除成功'){
+                            obj.del(); //删除对应行（tr）的DOM结构
+                            layer.close(index);
+                        }
+                    });
                 });
             } else if(layEvent === 'edit'){
-                layer.msg('编辑操作');
+                 $(".sdId").val(data.sd_id);
+                 $(".sdName").val(data.sd_name);
+                 $(".sdAmstartdate").val(data.sd_amstartdate);
+                 $(".sdAmenddate").val(data.sd_amenddate);
+                 $(".sdPmstartdate").val(data.sd_pmstartdate);
+                 $(".sdPmenddate").val(data.sd_pmenddate);
+                 $(".sdNmstartdate").val(data.sd_nmstartdate);
+                 $(".sdNmenddate").val(data.sd_nmenddate);
+                var openupdate = layer.open({
+                    type: 1
+                    ,area:["900px","auto"]
+                    ,btn: ['更新']
+                    ,yes: function(layero, index){
+                        var sdId = $(".sdId").val();
+                        var sdName = $(".sdName").val();
+                        var sdAmstartdate = $(".sdAmstartdate").val();
+                        var sdAmenddate = $(".sdAmenddate").val();
+                        var sdPmstartdate = $(".sdPmstartdate").val();
+                        var sdPmenddate = $(".sdPmenddate").val();
+                        var sdNmstartdate = $(".sdNmstartdate").val();
+                        var sdNmenddate = $(".sdNmenddate").val();
+                        $.post("/updatescheduledate.do",
+                            {
+                                'sdId':sdId
+                                ,'sdName':sdName
+                                ,'sdAmstartdate':sdAmstartdate
+                                ,'sdAmenddate':sdAmenddate
+                                ,'sdPmstartdate':sdPmstartdate
+                                ,'sdPmenddate':sdPmenddate
+                                ,'sdNmstartdate':sdNmstartdate
+                                ,'sdNmenddate':sdNmenddate
+                            })
+                            .done(function (date) {
+                                layer.msg(date.result,{time:500});
+                                table.reload("listscheduledate",{url:'/listscheduledate.do'});
+                            });
+                        layer.close(openupdate);
+                    },
+                    content: $("#add_date")
+                });
             }
         });
     });

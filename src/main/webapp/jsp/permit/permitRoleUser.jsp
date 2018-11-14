@@ -10,12 +10,13 @@
 <html>
 <head>
     <title>角色用户</title>
-    <link rel="stylesheet" href="/resources/permit-trees/layui-v2.4.4/layui/css/layui.css">
-    <link rel="stylesheet" href="/resources/bootstrap-4.1.3-dist/css/bootstrap.min.css">
-    <script src="/resources/jquery-3.1.1.min.js"></script>
-    <script src="/resources/permit-trees/layui-v2.4.4/layui/layui.js"></script>
-    <script src="/resources/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
-    <script src="/resources/permit-trees/layui-v2.4.4/layui/extends/authtree.js"></script>
+    <script type="text/javascript" src="../../resources/js_sunxin/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/resources/js_sunxin/layui-v2.4.5/layui/css/layui.css">
+    <script src="/resources/js_sunxin/permit-trees/layui-v2.4.4/layui/layui.js"></script>
+    <link rel="stylesheet" href="/resources/js_sunxin/bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="/resources/js_sunxin/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+    <script src="/resources/js_sunxin/permit-trees/layui-v2.4.4/layui/extends/authtree.js"></script>
 </head>
 <body style="height: 100%;min-height: 800px;">
 <div style="padding-left: 10%;">
@@ -64,12 +65,6 @@
                         <div class="layui-input-block">
                             <select name="rid" lay-filter="aihao" class="uprole">
                             </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">是否锁定登陆</label>
-                        <div class="layui-input-block">
-                            <input name="ulocking" type="checkbox" lay-skin="switch" lay-text="锁定|解锁" class="upu_locking" value="1">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -156,8 +151,6 @@
                 /* layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);*/
                 var chkval = this.value;
                 var datalockingu_id = this.className;
-                alert(datalockingu_id);
-                alert(chkval);
                 if(chkval==1){
                     $.post("/updatelocking.do",{'uid':datalockingu_id,'ulocking':chkval}).done(function (date) {
                         layer.msg(date.result,{time:800});

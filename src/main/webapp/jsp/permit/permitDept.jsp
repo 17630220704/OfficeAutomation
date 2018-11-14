@@ -10,12 +10,12 @@
 <html>
 <head>
     <title>部门管理</title>
-    <link rel="stylesheet" href="/resources/bootstrap-4.1.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/permit-trees/layui-v2.4.4/layui/css/layui.css">
-    <script src="/resources/jquery-3.1.1.min.js"></script>
-    <script src="/resources/permit-trees/layui-v2.4.4/layui/layui.js"></script>
-    <script src="/resources/permit-trees/layui-v2.4.4/layui/extends/authtree.js"></script>
-    <script src="/resources/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../resources/js_sunxin/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/resources/js_sunxin/permit-trees/layui-v2.4.4/layui/css/layui.css">
+    <script src="/resources/js_sunxin/permit-trees/layui-v2.4.4/layui/layui.js"></script>
+    <link rel="stylesheet" href="/resources/js_sunxin/bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="/resources/js_sunxin/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="layui-row" style="height: 900px;">
