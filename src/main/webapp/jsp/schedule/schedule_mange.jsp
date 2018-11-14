@@ -32,14 +32,11 @@
         <li class="breadcrumb-item">
             <a class="" href="/jsp/schedule/schedule.jsp" target="permit">排班设置</a>
         </li>
-        <li class="breadcrumb-item">
+        <%--<li class="breadcrumb-item">
             <a class="" href="javascript:void(0);" target="permit">考勤</a>
-        </li>
+        </li>--%>
         <li class="breadcrumb-item">
             <a class="" href="/jsp/schedule/schedule_date.jsp" target="permit">排班时间设置</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a class="" href="javascript:void(0);" target="permit">部门管理</a>
         </li>
     </ul>
 </div>

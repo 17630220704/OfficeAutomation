@@ -17,10 +17,10 @@
 <div class="wrapper" style="height: 100%">
     <div class="sidebar" data-color="orange">
         <div class="logo">
-            <a href="#" class="simple-text logo-mini">
+            <a href="javascritp:void(0);" class="simple-text logo-mini">
                 CT
             </a>
-            <a href="#" class="simple-text logo-normal">
+            <a href="javascritp:void(0);" class="simple-text logo-normal">
                 Creative Tim
             </a>
         </div>
@@ -34,23 +34,10 @@
         <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="javascript:void(0)">左侧</a>
+                   <%-- <a class="navbar-brand" href="javascript:void(0)">左侧</a>--%>
                 </div>
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                    <form>
-                        <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <span class="input-group-addon">
-                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                </span>
-                        </div>
-                    </form>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0);">
-                                <i class="now-ui-icons media-2_sound-wave"></i>
-                            </a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="now-ui-icons users_single-02"></i>
@@ -59,14 +46,6 @@
                                 <a class="dropdown-item" href="javascript:void(0);">${username}</a>
                                 <a class="dropdown-item Signout" href="javascript:void(0);" >退出登陆</a>
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0);">
-                                <i class="now-ui-icons location_world"></i>
-                                <p>
-                                    <span class="d-lg-none d-md-block"></span>
-                                </p>
-                            </a>
                         </li>
                     </ul>
                 </div>
