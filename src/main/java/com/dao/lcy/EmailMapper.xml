@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.dao.lcy.EmailDao">
+    <resultMap type="com.entity.lcy.Email" id="getEmail">
+        <id property="emailId" column="emailId"></id>
+        <id property="emailBoxid" column="emailBoxid"></id>
+        <id property="bodyId" column="BODY_ID"></id>
+        <id property="posiId" column="posiId"></id>
+        <id property="readFlag" column="READ_FLAG"></id>
+        <id property="deleteFlag" column="deleteFlag"></id>
+        <id property="receipt" column="receipt"></id>
+        <id property="isF" column="IS_F"></id>
+        <id property="isR" column="IS_R"></id>
+        <id property="sign" column="sign"></id><!-- 保留主键 -->
+        <association property="m2" column="bodyId" javaType="com.entity.lcy.Mailboxinfo2">
+            <id property="bodyId" column="BODY_ID"></id>
+            <id property="persoId" column="persoId"></id>
+            <id property="toId2" column="TO_ID2"></id>
+            <id property="subject" column="subject"></id>
+            <id property="size" column="size"></id>
+            <id property="content" column="content"></id>
+            <id property="sendTime" column="SEND_TIME"></id>
+            <id property="attachmentId" column="ATTACHMENT_ID"></id>
+            <id property="attachmentName" column="ATTACHMENT_NAME"></id>
+
+        </association>
+    </resultMap>
+
+    <insert id="mailAdd" useGeneratedKeys="true" keyProperty="bodyId" parameterType="com.entity.lcy.Mailboxinfo2">
+   insert into mailboxinfo2(persoId,TO_ID2,toidname,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME)VALUES(
+#{persoId},#{toId2},#{toidname},#{subject},#{size},#{content},#{sendTime},#{attachmentId},#{attachmentName}
+)
+</insert>
+    <select id="emailQuery" resultType="com.entity.lcy.TbPersoninfo">
+        select * from Tb_Personinfo
+    </select>
+    <insert id="mailAdd1" parameterType="com.entity.lcy.Email">
+        insert into Email(EmailBoxid,BODY_ID,PosiId,READ_FLAG,DELETE_FLAG,RECEIPT,IS_F,IS_R,SIGN)values (
+ #{emailBoxid},#{bodyId},#{posiId},#{readFlag},#{deleteFlag},#{receipt},#{isF},#{isR},#{sign}
+        )
+    </insert>
+
+    <insert id="mailAddBox" useGeneratedKeys="true" keyProperty="bodyId" parameterType="com.entity.lcy.Mailboxinfo2">
+   insert into mailboxinfo2(persoId,TO_ID2,toidname,SUBJECT,SIZE,CONTENT,SEND_TIME,ATTACHMENT_ID,ATTACHMENT_NAME)VALUES(
+#{persoId},#{toId2},#{toidname},#{subject},#{size},#{content},#{sendTime},#{attachmentId},#{attachmentName}
+)
+</insert>
+    <insert id="mailAddBox1" parameterType="com.entity.lcy.Email">
+        insert into Email(EmailBoxid,BODY_ID,PosiId,READ_FLAG,DELETE_FLAG,RECEIPT,IS_F,IS_R,SIGN)values (
+ #{emailBoxid},#{bodyId},#{posiId},#{readFlag},#{deleteFlag},#{receipt},#{isF},#{isR},#{sign}
+        )
+    </insert>
+    <select id="mailQuery" resultMap="getEmail" parameterType="map">
+        select
+        e.EmailId,e.EmailBoxid,e.PosiId,e.READ_FLAG,e.DELETE_FLAG,e.RECEIPT,e.IS_F,e.IS_R,e.SIGN,m.BODY_ID,m.persoId,m.TO_ID2,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME
+        from mailboxinfo2 m right join email e on e.BODY_ID = m.BODY_ID
+        <where>
+            <if test="posiId!=null and posiId!=''">
+                and e.posiId = #{posiId}
+            </if>
+            <if test="emailBoxid !=null and emailBoxid!=''">
+                and e.emailBoxid = #{emailBoxid}
+            </if>
+        </where>
+    </select>
+    <select id="mailXq" resultType="Map">
+	    select m.BODY_ID,m.persoId,m.TO_ID2,m.toidname,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME,t.PersonName from Mailboxinfo2 m left join Tb_Personinfo t on m.persoId = t.persoId where BODY_ID = #{bodyId}
+	</select>
+    <update id="mailUpdate" parameterType="com.entity.lcy.Email">
+        update Email
+        <set>
+            <if test="emailBoxid!=null">emailBoxid=#{emailBoxid},</if>
+            <if test="deleteFlag!=null">DELETE_FLAG=#{deleteFlag}</if>
+        </set>
+        where emailId = #{emailId}
+    </update>
+    <select id="app" resultType="com.entity.lcy.Email">
+        select * from Email where BODY_ID = #{bodyId} and PosiId = #{posiId}
+    </select>
+    <update id="mailUpdelete" parameterType="com.entity.lcy.Email">
+        update Email
+        <set>
+            <if test="readFlag!=null">READ_FLAG=#{readFlag}</if>
+        </set>
+        where emailId = #{emailId}
+    </update>
+    <select id="LjQuery" resultMap="getEmail" parameterType="map">
+        select
+        e.EmailId,e.EmailBoxid,e.PosiId,e.READ_FLAG,e.DELETE_FLAG,e.RECEIPT,e.IS_F,e.IS_R,e.SIGN,m.BODY_ID,m.persoId,m.TO_ID2,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME
+        from mailboxinfo2 m right join email e on e.BODY_ID = m.BODY_ID
+        <where>
+            <if test="posiId!=null and posiId!=''">
+                and e.posiId = #{posiId}
+            </if>
+            <if test="emailBoxid !=null and emailBoxid!=''">
+                and e.emailBoxid = #{emailBoxid}
+            </if>
+        </where>
+    </select>
+    <select id="LjXq" resultType="Map">
+select m.BODY_ID,m.persoId,m.TO_ID2,m.toidname,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME,t.PersonName from Mailboxinfo2 m left join Tb_Personinfo t on m.persoId = t.persoId where BODY_ID = #{bodyId}
+	</select>
+    <delete id="LjUpdate" parameterType="int">
+        delete from email where emailId = #{emailId}
+    </delete>
+
+    <select id="YfsXq" resultType="Map">
+        select m.BODY_ID,m.persoId,m.TO_ID2,m.toidname,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME,t.PersonName from Mailboxinfo2 m left join Tb_Personinfo t on m.persoId = t.persoId where BODY_ID = #{bodyId}
+    </select>
+    <select id="CGQuery" resultMap="getEmail" parameterType="map">
+        select
+        e.EmailId,e.EmailBoxid,e.PosiId,e.READ_FLAG,e.DELETE_FLAG,e.RECEIPT,e.IS_F,e.IS_R,e.SIGN,m.BODY_ID,m.persoId,m.TO_ID2,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND_TIME,m.ATTACHMENT_ID,m.ATTACHMENT_NAME
+        from mailboxinfo2 m right join email e on e.BODY_ID = m.BODY_ID
+        <where>
+            <if test="posiId!=null and posiId!=''">
+                and e.posiId = #{posiId}
+            </if>
+
+            <if test="emailBoxid !=null and emailBoxid!=''">
+                and e.emailBoxid = #{emailBoxid}
+            </if>
+        </where>
+    </select>
+    <select id="CGqueryList" resultType="Map">
+        select m.* from Mailboxinfo2 m right join email e on e.BODY_ID = m.BODY_ID where m.persoId = #{persoId} and e.EmailBoxid = #{EmailBoxid} and e.PosiId = #{PosiId}
+    </select>
+    <delete id="CGdEdelete" parameterType="int">
+     delete from email where emailId = #{emailId}
+    </delete>
+    <delete id="CGdMdelete" parameterType="int">
+     delete from Mailboxinfo2 where BODY_ID = #{bodyId}
+    </delete>
+    <select id="CGQueryine" resultType="com.entity.lcy.Email">
+        select * from Email where BODY_ID = #{bodyId}
+    </select>
+    <select id="CGQueryt" resultType="Map">
+        select * from Mailboxinfo2 where BODY_ID = #{bodyId}
+    </select>
+    <update id="CGAddUP" parameterType="com.entity.lcy.Mailboxinfo2">
+        update Mailboxinfo2
+        <set>
+            <if test="persoId!=null">persoId=#{persoId},</if>
+            <if test="toId2!=null">TO_ID2=#{toId2},</if>
+            <if test="toidname!=null">toidname=#{toidname},</if>
+            <if test="subject!=null">SUBJECT=#{subject},</if>
+            <if test="size!=null">SIZE=#{size},</if>
+            <if test="content!=null">CONTENT=#{content},</if>
+            <if test="sendTime!=null">SEND_TIME=#{sendTime},</if>
+            <if test="attachmentId!=null">ATTACHMENT_ID=#{attachmentId},</if>
+            <if test="attachmentName!=null">ATTACHMENT_NAME=#{attachmentName}</if>
+        </set>
+        where BODY_ID = #{bodyId}
+    </update>
+    <select id="CGQu" resultType="com.entity.lcy.Email">
+        select * from Email where BODY_ID = #{bodyId}
+    </select>
+    <update id="CGUPdatee" parameterType="int">
+        update Email
+        <set>
+            <if test="EmailBoxid!=null">EmailBoxid=#{EmailBoxid}</if>
+        </set>
+        where EmailId = #{EmailId}
+    </update>
+    <update id="CGAddUP1" parameterType="com.entity.lcy.Mailboxinfo2">
+        update Mailboxinfo2
+        <set>
+            <if test="persoId!=null">persoId=#{persoId},</if>
+            <if test="toId2!=null">TO_ID2=#{toId2},</if>
+            <if test="toidname!=null">toidname=#{toidname},</if>
+            <if test="subject!=null">SUBJECT=#{subject},</if>
+            <if test="size!=null">SIZE=#{size},</if>
+            <if test="content!=null">CONTENT=#{content},</if>
+            <if test="sendTime!=null">SEND_TIME=#{sendTime},</if>
+            <if test="attachmentId!=null">ATTACHMENT_ID=#{attachmentId},</if>
+            <if test="attachmentName!=null">ATTACHMENT_NAME=#{attachmentName}</if>
+        </set>
+        where BODY_ID = #{bodyId}
+    </update>
+    <select id="Tbuser" resultType="Map">
+        select u_id,r_id,DeptId,DeptId,persoId,u_loginName,u_loginPassword,u_online,u_locking,u_deadline from tb_user where persoId = #{persoId}
+    </select>
+    <update id="TbuserUP">
+        update tb_user
+        <set>
+            <if test="uloginPassword!=null">u_loginPassword=#{uloginPassword}</if>
+        </set>
+        where u_id =#{uId}
+    </update>
+    <select id="TbuserXq" resultType="Map">
+        select persoId,PosiId,contractId,PersonName,personBirth,personPicture,telephone,officePhone,Email,NowAddress,remark,NowState from tb_PersonInfo where persoId = #{persoId}
+    </select>
+    <update id="Tbuserupp" parameterType="com.entity.lcy.TbPersoninfo">
+        update tb_PersonInfo
+        <set>
+            <if test="personName!=null">PersonName=#{personName},</if>
+            <if test="personBirth!=null">personBirth=#{personBirth},</if>
+            <if test="telephone!=null">telephone=#{telephone},</if>
+            <if test="officePhone!=null">officePhone=#{officePhone},</if>
+            <if test="email!=null">Email=#{email},</if>
+            <if test="nowAddress!=null">NowAddress=#{nowAddress},</if>
+            <if test="remark!=null">remark=#{remark}</if>
+        </set>
+        where persoId = #{persoId}
+    </update>
+    <select id="queryAllDataFromTable" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on
+        m.BODY_ID = e.BODY_ID
+        <where>
+            <if test='keyWord!="" or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+        order by m.BODY_ID DESC
+        limit #{page},#{limit}
+    </select>
+    <select id="queryAllCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(m.BODY_ID) from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        <where>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+    </select>
+    <select id="YfsQuery" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,t.PersonName from Mailboxinfo2 m left join tb_PersonInfo t on
+        m.persoId = t.persoId
+        <where>
+            <if test='keyWord!=""or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and m.persoId= #{persoId}
+            </if>
+        </where>
+        order by m.BODY_ID DESC
+        limit #{page},#{limit}
+    </select>
+    <select id="YfsQueryCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from Mailboxinfo2
+        <where>
+            <if test="persoId!=null and persoId!=''">
+                and persoId= #{persoId}
+            </if>
+        </where>
+    </select>
+    <select id="dustbin" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on
+        m.BODY_ID = e.BODY_ID
+        <where>
+            <if test='keyWord!="" or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+        order by m.BODY_ID DESC
+        limit #{page},#{limit}
+    </select>
+    <select id="dustbinCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(m.BODY_ID) from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        <where>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+    </select>
+    <select id="rough" resultType="Map">
+        select m.BODY_ID,m.persoId,m.SUBJECT,m.SEND_TIME,e.EmailId,e.READ_FLAG from Mailboxinfo2 m left join Email e on
+        m.BODY_ID = e.BODY_ID
+        <where>
+            <if test='keyWord!="" or keyWord!=null'>
+                and m.SUBJECT like '%${keyWord}%'
+            </if>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+        order by m.BODY_ID DESC
+        limit #{page},#{limit}
+    </select>
+    <select id="roughCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(m.BODY_ID) from Mailboxinfo2 m left join Email e on m.BODY_ID = e.BODY_ID
+        <where>
+            <if test="persoId!=null and persoId!=''">
+                and e.PosiId= #{persoId}
+            </if>
+            <if test="EmailBoxid!=null and EmailBoxid!=''">
+                and e.EmailBoxid= #{EmailBoxid}
+            </if>
+        </where>
+    </select>
+    <select id="Tbuserpass" resultType="Map">
+        select * from tb_user where u_id = #{uId}
+    </select>
+</mapper>

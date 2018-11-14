@@ -78,4 +78,9 @@ public class knowserimpl implements knowser{
     public List<meeting> grhy(int id) {
         return dao.grhy(id);
     }
+
+    @Override
+    public List<meeting> query11( meeting me) {
+        return dao.query11(me);
+    }
 }

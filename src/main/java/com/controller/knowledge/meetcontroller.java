@@ -153,10 +153,12 @@ public class meetcontroller {
 
     @RequestMapping("/query1")
     @ResponseBody
-    public Map<String, Object> query1(@RequestParam(required = false, defaultValue = "8") int PageSize , @RequestParam(required = false, defaultValue = "1") int startPage) {
+    public Map<String, Object> query1(HttpServletRequest session,@RequestParam(required = false, defaultValue = "8") int PageSize , @RequestParam(required = false, defaultValue = "1") int startPage) {
         Map<String, Object> map = new HashMap<String, Object>();
+        session.getSession().setAttribute("userid",1);
+        int b = (int) session.getSession().getAttribute("userid");
         PageHelper.startPage(startPage, PageSize);
-        List<meeting> list = ser.query1(1);
+        List<meeting> list = ser.query1(b);
         PageInfo<meeting> pi = new PageInfo<>(list);
         map.put("pi",pi);
         map.put("me", list);
@@ -172,7 +174,7 @@ public class meetcontroller {
     }
     @RequestMapping("/query3")
     @ResponseBody
-    public Map<String, Object> query3(time ti) throws ParseException {
+    public Map<String, Object> query3(time ti) {
        Map<String, Object> map = new HashMap<String, Object>();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         int result=df.format(new Date()).compareTo(ti.getTidate());
@@ -206,7 +208,9 @@ public class meetcontroller {
     @ResponseBody
     public  Map<String, Object> query4(int meid,int coid) {
         Map<String, Object> map = new HashMap<String, Object>();
+        System.out.println(meid +"sss"+coid);
         List<meeting> list= ser.query4(meid);
+        System.out.println(list.get(0).getMeid());
         time ti = new time();
         ti.setTidate(list.get(0).getMedate());
         conferenceroom co = new conferenceroom();

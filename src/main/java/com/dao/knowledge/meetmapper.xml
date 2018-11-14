@@ -12,7 +12,7 @@
     </select>
     <select id="query1" resultType="map" parameterType="int">
 SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
-FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid AND m.mestate="待审核" and c.persoid=#{id}
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid AND m.mestate="待审核" and c.persoid=#{id}  ORDER BY m.meid DESC
     </select>
     <select id="query2" resultType="map">
    SELECT  m.meid as meid,m.mename as mename,m.mevalue
@@ -62,19 +62,19 @@ FROM meeting m ,conferenceroom c,tb_personinfo t
     </update>
     <select id="query5" resultType="map">
       SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
-FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid   ORDER BY m.meid DESC
     </select>
     <select id="queryme1" resultType="map">
       SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
-FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and m.mestate=#{lx}
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and m.mestate=#{lx}   ORDER BY m.meid DESC
     </select>
     <select id="queryme2" resultType="map" parameterType="com.entity.knowledge.meeting">
              SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
-FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and  STR_TO_DATE(medate,'%Y-%m-%d') BETWEEN STR_TO_DATE(#{medate},'%Y-%m-%d')AND STR_TO_DATE(#{mestate},'%Y-%m-%d')
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and  STR_TO_DATE(medate,'%Y-%m-%d') BETWEEN STR_TO_DATE(#{medate},'%Y-%m-%d')AND STR_TO_DATE(#{mestate},'%Y-%m-%d') ORDER BY m.meid DESC
     </select>
     <select id="queryme3" resultType="map">
    SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
-FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and t.personname like  concat('%',#{name},'%')
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and t.personname like  concat('%',#{name},'%')  ORDER BY m.meid DESC
     </select>
     <update id="updatestate" >
         UPDATE meeting SET mestate ="已结束"  WHERE CURDATE() >medate AND mestate="已批准"

@@ -7,19 +7,20 @@ import com.entity.knowledge.tb_PersonInfo;
 
 import java.util.List;
 public interface knowdao {
-    public List<conferenceroom> query();
-    public void delete(int a);
-    public void update(conferenceroom co);
-    public void save(conferenceroom co);
-    public List<meeting> query1(int id);
-    public List<meeting> query3(int id);
-    public void ch1(int id);
-    public void cha(String date);
-    public void chb(String date);
-    public void chc(String date);
-    public void chd(String date);
-    public List<tb_PersonInfo>  gly();
-    public List<meeting> grhy(int id);
+    List<conferenceroom> query();
+    void delete(int a);
+    void update(conferenceroom co);
+    void save(conferenceroom co);
+    List<meeting> query1(int id);
+    List<meeting> query3(int id);
+    void ch1(int id);
+    void cha(String date);
+    void chb(String date);
+    void chc(String date);
+    void chd(String date);
+    List<tb_PersonInfo>  gly();
+    List<meeting> grhy(int id);
+    List<meeting> query11(meeting me);
 
 
 }

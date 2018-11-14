@@ -18,13 +18,13 @@
     </select>
     <select id="query1" resultType="map">
         SELECT m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
-FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and m.persoid=#{id}  and  m.mestate= "待审核"
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and m.persoid=#{id}  and  m.mestate= "待审核" ORDER BY m.meid DESC
     </select>
     <select id="query3" resultType="com.entity.knowledge.meeting">
-        select * from meeting where meid=#{id}
+        select * from meeting where meid=#{id}  ORDER BY meid DESC
     </select>
     <update id="ch1" parameterType="int">
-        update meeting SET mestate="已取消" WHERE meid=#{id}
+        update meeting SET mestate="已取消" WHERE meid=#{id} ORDER BY meid DESC
     </update>
     <update id="cha" parameterType="String">
         UPDATE time SET timorning=0 WHERE tidate =#{date}
@@ -39,10 +39,14 @@ FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.per
         UPDATE time SET tinight=0 WHERE tidate =#{date}
     </update>
     <select id="gly" resultType="map">
-       SELECT persoid as persoid,personname as personname FROM tb_personinfo
+         SELECT persoid as persoid,personname as personname FROM tb_personinfo WHERE NowState=0
     </select>
     <select id="grhy" parameterType="int" resultType="map">
         SELECT m.meremarks as mebz,t.personname as pername, m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,t.PersonName as PersonName
-FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and  t.persoid =#{id}
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and  t.persoid =#{id} and t. NowState=0  ORDER BY m.meid DESC
+    </select>
+    <select id="query11" parameterType="com.entity.knowledge.meeting" resultType="map">
+ SELECT t.personname as pername,m.coid as coid , m.metime as metime, m.meid as meid,m.mename as mename,m.mevalue as mevalue,m.menumber as menumber,m.medate as medate,m.mestate as mestate,c.coname as coname,m.meremarks as mebz,t.PersonName as PersonName
+FROM meeting m ,conferenceroom c,tb_personinfo t WHERE m.coid = c.coid AND m.persoid = t.persoid and  STR_TO_DATE(medate,'%Y-%m-%d') BETWEEN STR_TO_DATE(#{medate},'%Y-%m-%d')AND STR_TO_DATE(#{mestate},'%Y-%m-%d') and m.persoId = #{meid} ORDER BY m.meid DESC
     </select>
 </mapper>

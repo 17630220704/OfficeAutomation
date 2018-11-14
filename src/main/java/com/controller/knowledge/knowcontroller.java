@@ -123,5 +123,22 @@ public class knowcontroller {
         map.put("me", list);
         return map;
     }
+    @RequestMapping("/query11")
+    @ResponseBody
+    public Map<String, Object> query9( HttpServletRequest session,String date,String date1,@RequestParam(required = false, defaultValue = "8") int PageSize ,@RequestParam(required = false, defaultValue = "1") int startPage) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        PageHelper.startPage(startPage, PageSize);
+        session.getSession().setAttribute("userid",1);
+        int b = (int) session.getSession().getAttribute("userid");
+        meeting me = new meeting();
+        me.setMedate(date);
+        me.setMeid(b);
+        me.setMestate(date1);
+        List<meeting> list = ser.query11(me);
+        PageInfo<meeting> pi = new PageInfo<>(list);
+        map.put("pi",pi);
+        map.put("meet11",list);
+        return map;
+    }
 
 }
