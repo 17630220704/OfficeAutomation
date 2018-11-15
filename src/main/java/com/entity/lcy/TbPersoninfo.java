@@ -5,9 +5,9 @@ public class TbPersoninfo {
 
   private long persoId;
   private long posiId;
-  private long contractId;
+  private long employedId;
   private String personName;
-  private java.sql.Date personBirth;
+  private String personBirth;
   private String personPicture;
   private String telephone;
   private String officePhone;
@@ -35,12 +35,12 @@ public class TbPersoninfo {
   }
 
 
-  public long getContractId() {
-    return contractId;
+  public long getEmployedId() {
+    return employedId;
   }
 
-  public void setContractId(long contractId) {
-    this.contractId = contractId;
+  public void setEmployedId(long employedId) {
+    this.employedId = employedId;
   }
 
 
@@ -53,11 +53,11 @@ public class TbPersoninfo {
   }
 
 
-  public java.sql.Date getPersonBirth() {
+  public String getPersonBirth() {
     return personBirth;
   }
 
-  public void setPersonBirth(java.sql.Date personBirth) {
+  public void setPersonBirth(String personBirth) {
     this.personBirth = personBirth;
   }
 
@@ -115,24 +115,6 @@ public class TbPersoninfo {
     this.remark = remark;
   }
 
-
-  @Override
-  public String toString() {
-    return "TbPersoninfo{" +
-            "persoId=" + persoId +
-            ", posiId=" + posiId +
-            ", contractId=" + contractId +
-            ", personName='" + personName + '\'' +
-            ", personBirth=" + personBirth +
-            ", personPicture='" + personPicture + '\'' +
-            ", telephone='" + telephone + '\'' +
-            ", officePhone='" + officePhone + '\'' +
-            ", email='" + email + '\'' +
-            ", nowAddress='" + nowAddress + '\'' +
-            ", remark='" + remark + '\'' +
-            ", nowState=" + nowState +
-            '}';
-  }
 
   public long getNowState() {
     return nowState;

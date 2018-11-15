@@ -38,5 +38,8 @@ public interface permitManage {
     Integer updateUser(upRoleUser upru);
     //登陆锁定&&解锁
     Integer updatelocking(@Param("uid") int uid, @Param("ulocking") int ulocking);
+    //删除用户角色
+    Integer delRoleUser(@Param("uid") int uid);
+
 
 }

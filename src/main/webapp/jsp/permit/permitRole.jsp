@@ -167,9 +167,6 @@
                     setTimeout(function () {
                      getRole();
                     },500);
-                },
-                error:function (xhr,status) {
-                    layer.msg("设置失败！"+"错误编号:"+xhr.status+"错误原因："+status);
                 }
             });
             return false;
@@ -185,11 +182,15 @@
         $("body").on("click",".deletepermit",function () {
             var rid = $(this).attr("id");
             layer.confirm('删除前请清楚权限与角色', function(){
-                $.post("/deleteRole.do",{'rid':rid}).done(function (date) {
-                    layer.msg(date.result,{time:500},function () {
-                        getRole();
+                if(rid==1){
+                   layer.msg("禁止删除管理员权限",{time:1000});
+                }else {
+                    $.post("/deleteRole.do",{'rid':rid}).done(function (date) {
+                        layer.msg(date.result,{time:500},function () {
+                            getRole();
+                        });
                     });
-                });
+                }
             });
 
         });

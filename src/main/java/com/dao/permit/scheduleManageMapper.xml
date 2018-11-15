@@ -70,11 +70,27 @@ from td_schedule ts left join tb_schedule_date tsd on ts.scheduleType=tsd.sd_id
                    keyProperty="scheduleId">
             SELECT LAST_INSERT_ID()
         </selectKey>
-</insert>
+    </insert>
     <select id="getscheduletypedate" resultType="map">
         select tsd.* from tb_schedule_date tsd where tsd.sd_id=#{sdid}
     </select>
     <insert id="savepersoninfo_schedule" >
         insert into tb_personinfo_schedule(persoId,scheduleId) value (#{personid},#{sdid})
     </insert>
+    <delete id="deletescheduel" >
+        delete from td_schedule  where scheduleId = #{scheduleId}
+    </delete>
+    <delete id="deletepersoninfo_schedule" >
+        delete from tb_personinfo_schedule  where scheduleId = #{scheduleId}
+    </delete>
+    <update id="updatescheduelState">
+        update td_schedule
+        <set>
+            scheduleState = #{scheduelState}
+        </set>
+        where scheduleId = #{scheduleId}
+    </update>
+    <select id="getpersoninfo_schedule" resultType="map">
+        select tps.* from tb_personinfo_schedule tps where tps.scheduleId=#{scheduleId}
+    </select>
 </mapper>

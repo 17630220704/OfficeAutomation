@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.yyl.TbPayrollprocessDao">
+    <select id="TbPayrollprocessQuery" resultType="Map">
+        select tpl.*,tp.PersonName from tb_payrollprocess tpl,tb_personinfo tp where tp.persoId = tpl.operator order by tpl.processId desc
+    </select>
+    <insert id="TbPayrollprocessAdd" parameterType="com.entity.yyl.TbPayrollprocess">
+		insert into tb_payrollprocess(startdate,abortdate,year,month,remark,state,operator,seet)
+		values(#{startdate},#{abortdate},#{year},#{month},#{remark},#{state},#{operator},replace(#{seet},' ',''))
+	</insert>
+    <update id="TbPayrollprocessUpdate" parameterType="com.entity.yyl.TbPayrollprocess">
+		update tb_payrollprocess
+			<trim prefix="set" suffixOverrides=",">
+				<if test="startdate!=null and startdate!=''">
+					startdate=#{startdate},
+				</if>
+				<if test="abortdate!=null and abortdate!=''">
+					abortdate=#{abortdate},
+				</if>
+				<if test="year!=null and year!=''">
+					year=#{year},
+				</if>
+				<if test="month!=null and month!=''">
+					month=#{month},
+				</if>
+				<if test="remark!=null and remark!=''">
+					remark=#{remark},
+				</if>
+				<if test="state!=null and state!='' or state==0">
+					state=#{state},
+				</if>
+				<if test="operator!=null and operator!=''">
+					operator=#{operator},
+				</if>
+				<if test="seet!=null and seet!=''">
+					seet = #{seet},
+				</if>
+			</trim>
+		where processId = #{processId}
+	</update>
+    <delete id="TbPayrollprocessDetle" parameterType="com.entity.yyl.TbPayrollprocess">
+		delete from tb_payrollprocess where seet = #{seet}
+	</delete>
+</mapper>

@@ -96,6 +96,7 @@ public class permitManageServiceImp implements permitManageService {
     }
 
     @Override
+    @Transactional
     public boolean deleteDept(int deptid) {
         Integer result = permitManagedao.deleteDept(deptid);
         if (result==1){
@@ -108,6 +109,7 @@ public class permitManageServiceImp implements permitManageService {
     }
 
     @Override
+    @Transactional
     public boolean updateDept(int DeptId,String DeptType,String DeptName) {
         Integer result = permitManagedao.updateDept(DeptId,DeptType,DeptName);
         if (result==1){
@@ -120,6 +122,7 @@ public class permitManageServiceImp implements permitManageService {
     }
 
     @Override
+    @Transactional
     public boolean saveDept(int DeptNumber, String DeptName) {
         Integer result = permitManagedao.saveDept(DeptNumber,DeptName);
         if (result==1){
@@ -178,5 +181,12 @@ public class permitManageServiceImp implements permitManageService {
             }
         }
         return "操作失败";
+    }
+
+    @Override
+    @Transactional
+    public Integer delRoleUser(int uid) {
+        Integer result = permitManagedao.delRoleUser(uid);
+        return result;
     }
 }

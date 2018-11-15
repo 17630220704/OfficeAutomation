@@ -61,7 +61,7 @@
 </html>
 <script>
     function query2() {
-        var persoId = $("#persoId").val();
+        var persoId = ${userid};
         $.ajax({
             url: "/Tbuser",
             data: {

@@ -93,6 +93,7 @@
                 done: function (res, curr, count) {
                     $("[data-field='BODY_ID']").css('display', 'none');
                     $("[data-field='EmailId']").css('display', 'none');
+                    $("[data-field='READ_FLAG']").css('display', 'none');
                     $("[data-field='READ_FLAG']").children().each(function () {
                         if ($(this).text() == '0') {
                             $(this).text("未读").addClass("layui-badge layui-bg-orange");

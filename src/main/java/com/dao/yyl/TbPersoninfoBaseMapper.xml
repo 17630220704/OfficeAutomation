@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.yyl.TbPersoninfoBaseDao">
+    <select id="TbPersoninfoBaseQuery" resultType="Map" parameterType="com.entity.yyl.TbPersoninfoBase">
+        select tpb.*,tp.PersonName,tps.basicSalary,tp.NowState from tb_personinfo_base tpb,tb_personinfo tp,tb_position tbp,tb_post_salary tps
+        where tp.PosiId = tbp.PosiId and tbp.postID = tps.postID and tp.NowState!=1 and tpb.persoId = tp.persoId
+        <if test="month!=null and month!=''">
+            and month = #{month}
+        </if>
+    </select>
+	<select id="TbPersoninfoBaseQuery1" resultType="Map" parameterType="com.entity.yyl.TbPersoninfoBase">
+        select tpb.*,tp.PersonName,tps.basicSalary,tp.NowState from tb_personinfo_base tpb,tb_personinfo tp,tb_position tbp,tb_post_salary tps
+        where tp.PosiId = tbp.PosiId and tbp.postID = tps.postID and tp.NowState!=1
+        <if test="persoId!=null and persoId!='' and persoId!=0">
+            and tpb.persoId = #{persoId} and tp.persoId = #{persoId}
+        </if>
+         <if test="month!=null and month!=''">
+             and month = #{month}
+         </if>
+    </select>
+    <insert id="TbPersoninfoBaseAdd" parameterType="com.entity.yyl.TbPersoninfoBase">
+		insert into tb_personinfo_base(persoId,month,yanglaoPerson,yanglaoUnits,yiliaoPerson,yiliaoUnits,shiyePerson,shiyeUnits,
+							   zhufangPerson,zhufangUnits,gongshangUnits,shengyuUnits)
+		values(#{persoId},#{month},#{yanglaoPerson},#{yanglaoUnits},#{yiliaoPerson},#{yiliaoUnits},#{shiyePerson},#{shiyeUnits},
+			   #{zhufangPerson},#{zhufangUnits},#{gongshangUnits},#{shengyuUnits})
+	</insert>
+    <update id="TbPersoninfoBaseUpdate" parameterType="com.entity.yyl.TbPersoninfoBase">
+		update tb_personinfo_base set perSalary=#{perSalary},yanglaoPerson=#{yanglaoPerson},yanglaoUnits=#{yanglaoUnits},
+		yiliaoPerson=#{yiliaoPerson},yiliaoUnits=#{yiliaoUnits},shiyePerson=#{shiyePerson},shiyeUnits=#{shiyeUnits},
+		zhufangPerson=#{zhufangPerson},zhufangUnits=#{zhufangUnits},gongshangUnits=#{gongshangUnits},shengyuUnits=#{shengyuUnits},riskBack=#{riskBack}
+		where persbaseId = #{persbaseId}
+	</update>
+	<update id="TbPersoninfoBaseUpdateBatch" parameterType="com.entity.yyl.TbPersoninfoBase">
+		update tb_personinfo_base set perSalary=#{perSalary},yanglaoPerson=#{yanglaoPerson},yanglaoUnits=#{yanglaoUnits},
+		yiliaoPerson=#{yiliaoPerson},yiliaoUnits=#{yiliaoUnits},shiyePerson=#{shiyePerson},shiyeUnits=#{shiyeUnits},
+		zhufangPerson=#{zhufangPerson},zhufangUnits=#{zhufangUnits},gongshangUnits=#{gongshangUnits},shengyuUnits=#{shengyuUnits},riskBack=#{riskBack}
+		where persoId = #{persoId}
+	</update>
+    <update id="TbPersoninfomonthBaseUpdate" parameterType="com.entity.yyl.TbPersoninfoBase">
+		update tb_personinfo_base set month=#{month}
+		where month = #{month}
+	</update>
+    <delete id="TbInsuranceBaseDelete" parameterType="com.entity.yyl.TbPersoninfoBase">
+		delete from tb_personinfo_base where month = #{month}
+	</delete>
+</mapper>

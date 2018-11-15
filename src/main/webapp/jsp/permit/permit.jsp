@@ -17,10 +17,10 @@
 <div class="wrapper" style="height: 100%">
     <div class="sidebar" data-color="orange">
         <div class="logo">
-            <a href="javascritp:void(0);" class="simple-text logo-mini">
+            <a href="#" class="simple-text logo-mini">
                 CT
             </a>
-            <a href="javascritp:void(0);" class="simple-text logo-normal">
+            <a href="#" class="simple-text logo-normal">
                 Creative Tim
             </a>
         </div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.yyl.TpSalarySheetDao">
+    <select id="TpSalarySheetQuery" resultType="Map" parameterType="com.entity.yyl.TpSalarySheet">
+        select ts.*,tp.PersonName,tp.NowState
+        from tp_salary_sheet ts,tb_personinfo tp
+        where tp.NowState!=1 and ts.persoId = tp.persoId
+        <if test="month!=null and month!=''">
+            and month = #{month}
+        </if>
+    </select>
+    <select id="TpSalarySheetQuery1" resultType="Map" parameterType="com.entity.yyl.TpSalarySheet">
+        select ts.*,tp.PersonName,tp.NowState
+        from tp_salary_sheet ts,tb_personinfo tp
+        where tp.NowState!=1
+        <if test="persoId!=null and persoId!='' and persoId!=0">
+            and ts.persoId = #{persoId} and tp.persoId = #{persoId}
+        </if>
+        <if test="month!=null and month!=''">
+            and month = #{month}
+        </if>
+    </select>
+    <insert id="TpSalarySheetAdd" parameterType="com.entity.yyl.TpSalarySheet">
+        insert into tp_salary_sheet(persoId,month)
+        values(#{persoId},#{month})
+    </insert>
+    <update id="TpSalarySheetUpdate" parameterType="com.entity.yyl.TpSalarySheet">
+		update tp_salary_sheet set persoId=#{persoId},
+		sheet0=#{sheet0},sheet1=#{sheet1},sheet2=#{sheet2},sheet3=#{sheet3},sheet4=#{sheet4},sheet5=#{sheet5}
+		,sheet6=#{sheet6},sheet7=#{sheet7},sheet8=#{sheet8},sheet9=#{sheet9},sheet10=#{sheet10}
+        where sheetId = #{sheetId}
+	</update>
+    <update id="TpSalarySheetUpdateBatch" parameterType="com.entity.yyl.TpSalarySheet">
+		update tp_salary_sheet set
+		sheet0=#{sheet0},sheet1=#{sheet1},sheet2=#{sheet2},sheet3=#{sheet3},sheet4=#{sheet4},sheet5=#{sheet5}
+		,sheet6=#{sheet6},sheet7=#{sheet7},sheet8=#{sheet8},sheet9=#{sheet9},sheet10=#{sheet10}
+        where persoId=#{persoId}
+	</update>
+    <update id="TpSalarySheetmonthUpdate" parameterType="com.entity.yyl.TpSalarySheet">
+		update tp_salary_sheet set month=#{month}
+        where month = #{month}
+	</update>
+    <delete id="TpSalarySheetDelete" parameterType="com.entity.yyl.TpSalarySheet">
+		delete from tp_salary_sheet where month = #{month}
+	</delete>
+</mapper>

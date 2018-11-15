@@ -4,7 +4,6 @@ import com.dao.lcy.EmailDao;
 import com.entity.lcy.Email;
 import com.entity.lcy.Mailboxinfo2;
 import com.entity.lcy.TbPersoninfo;
-import com.services.lcy.servicesEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

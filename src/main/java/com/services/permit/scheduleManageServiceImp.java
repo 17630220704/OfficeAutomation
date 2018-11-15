@@ -120,18 +120,37 @@ public class scheduleManageServiceImp implements scheduleManageService {
     }
 
     @Override
+    @Transactional
     public String updateschedule(upschedule upschedule) {
+        String personname = upschedule.getPersonName();
         if (upschedule.getScheduleState()==null){
             upschedule.setScheduleState("0");
         }
-        System.out.println(upschedule);
-        Integer result = scheduleManagedao.updateschedule(upschedule);
-        if (result==1){
-            return "更新成功";
+        Integer saveresult = 0;
+        Integer depsresult = 0;
+        System.out.println("personname:   "+personname);
+        if(personname!=null&&personname!=""){
+            depsresult= scheduleManagedao.deletepersoninfo_schedule(upschedule.getScheduleId());
         }
-        if (result==null){
-            return "更新失败";
+        if(depsresult >0 || personname==null||personname==""){
+            System.out.println("开始重新添加排班人员");
+//            获取id集合并拆分
+            if(upschedule.getPersoId()!= null&&upschedule.getPersoId()!=""){
+                String[] arr =upschedule.getPersoId().split(",");
+                for(int i=0;i<arr.length;i++){
+                    int persoid = Integer.valueOf(arr[i]);
+                   saveresult= scheduleManagedao.savepersoninfo_schedule(persoid,upschedule.getScheduleId());
+                }
+            }
+            Integer result = scheduleManagedao.updateschedule(upschedule);
+            if (result== 1){
+                return "更新成功";
+            }
+            if (result==null){
+                return "更新失败";
+            }
         }
+
         return "更新失败";
     }
 
@@ -185,5 +204,29 @@ public class scheduleManageServiceImp implements scheduleManageService {
             return "添加失败";
         }
         return "添加失败";
+    }
+
+    @Override
+    @Transactional
+    public String deletescheduel(int scheduleId) {
+        Integer result2 = scheduleManagedao.deletepersoninfo_schedule(scheduleId);
+        Integer result = scheduleManagedao.deletescheduel(scheduleId);
+        if (result==1){
+            return "删除成功";
+        }
+        return "删除失败";
+    }
+
+    @Override
+    @Transactional
+    public Integer updatescheduelState(int scheduleId, String scheduelState) {
+        Integer result = scheduleManagedao.updatescheduelState(scheduleId,scheduelState);
+        return result;
+    }
+
+    @Override
+    public List<Map<String, Object>> getpersoninfo_schedule(int scheduleId) {
+        List<Map<String,Object>> list = scheduleManagedao.getpersoninfo_schedule(scheduleId);
+        return list;
     }
 }

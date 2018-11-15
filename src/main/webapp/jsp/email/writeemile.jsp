@@ -43,7 +43,7 @@
                 <td style="width: 15%">收件人：</td>
                 <td style="width: 85%">
                     <input type="text" class="form-control" style="Float:left;display: none" id="toId1">
-                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId2">
+                    <input type="text" class="form-control" style="width: 70%; Float:left" id="toId2" readonly="readonly">
                     <button class="btn btn-primary btn-lg btn-xs" data-toggle="modal" data-target="#myModal"
                             id="Eselect">
                         添加
@@ -175,7 +175,6 @@
             var attachmentId = 1;
             var attachmentName = 1;
             var size = 100;
-            alert(content);
             $.ajax({
                 url: "/mailAdd",
                 type: "post",

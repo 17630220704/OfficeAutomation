@@ -32,5 +32,13 @@ public interface scheduleManage {
     //人员排班设置
     Integer savepersoninfo_schedule(@Param("personid") int personid, @Param("sdid") int sdid);
     //删除排班
-
+    Integer deletescheduel(@Param("scheduleId") int scheduleId);
+    //根据scheduleId删除人员排班
+    Integer deletepersoninfo_schedule(@Param("scheduleId") int scheduleId);
+    //修改是否启用该排班
+    Integer updatescheduelState(@Param("scheduleId") int scheduleId, @Param("scheduelState") String scheduelState);
+    //根据id查询排班人员
+    List<Map<String,Object>> getpersoninfo_schedule(@Param("scheduleId") int scheduleId);
+    //更新排班人员
+    Integer uppersoninfo_schedule_save(@Param("persoId") int persoId, @Param("scheduleId") int scheduleId);
 }

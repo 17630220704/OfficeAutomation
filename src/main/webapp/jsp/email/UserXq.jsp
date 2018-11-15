@@ -147,10 +147,9 @@
                 dataType: "json",
                 success: function (data) {
                     alert(data.message);
+                    window.location.reload();
                 }
-            }).always(function () {
-                $(query2());
-            });
+            })
         });
     });
 

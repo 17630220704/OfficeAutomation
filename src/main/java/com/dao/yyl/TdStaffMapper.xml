@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.yyl.TdStaffDao">
+    <select id="TdStaffQuery" resultType="Map">
+        select ts.*,tp.PersonName,tp2.POSIName,tb.DeptName
+        from td_staff ts,tb_personinfo tp,tb_position tp2,tb_deparment tb
+        where ts.persoId=tp.persoId and tp.PosiId=tp2.PosiId and tp2.DeptId=tb.DeptId order by ts.contractId desc
+    </select>
+    <insert id="TdStaffAdd" parameterType="com.entity.yyl.TdStaff">
+        insert into td_staff(persoId,staffContractNo,conTractType,makeContract,probationEffectiveDate,activePeriod,contractEndTime,remark,addTime,remindUser,contractEnterpries,adjunct)
+         values(#{persoId},#{staffContractNo},#{conTractType},#{makeContract},#{probationEffectiveDate},#{activePeriod},#{contractEndTime},#{remark},#{addTime},#{remindUser},#{contractEnterpries},#{adjunct})
+    </insert>
+    <update id="TdStaffUpdate" parameterType="com.entity.yyl.TdStaff">
+		update td_staff set persoId=#{persoId},staffContractNo=#{staffContractNo},conTractType=#{conTractType},makeContract=#{makeContract},
+		probationEffectiveDate=#{probationEffectiveDate},activePeriod=#{activePeriod},
+		contractEndTime=#{contractEndTime},remark=#{remark},addTime=#{addTime},remindUser=#{remindUser},contractEnterpries=#{contractEnterpries},adjunct=#{adjunct} where contractId = #{contractId}
+	</update>
+    <delete id="TdStaffDelete" parameterType="com.entity.yyl.TdStaff">
+		delete from td_staff where contractId = #{contractId}
+	</delete>
+</mapper>

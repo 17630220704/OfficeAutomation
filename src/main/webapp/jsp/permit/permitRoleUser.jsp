@@ -84,7 +84,7 @@
 </body>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit" data-toggle="modal" data-target="#myModal">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <%--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>--%>
 </script>
 <script type="text/html" id="checkboxTpl">
     <input type="checkbox" class="{{d.u_id}}" name="ulockingaa" value="{{d.u_locking}}" lay-skin="switch" lay-text="锁定|解锁" lay-filter="sexDemo" {{ d.u_locking == 1 ? 'checked' : '' }}>
@@ -171,10 +171,21 @@
             var uid = data.u_id;
             //console.log(obj)
             if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
-                });
+                if(uid==1){
+                    layer.msg("不可删除管理用户角色",{time:1000});
+                }else {
+                    layer.confirm('真的删除行么', function(index){
+                        $.post("/delRoleUser.do",{
+                            'uid':uid
+                        }).done(function (date) {
+                            layer.msg(date.result,{time:800},function () {
+                                obj.del();
+                                layer.close(index);
+                            });
+
+                        });
+                    });
+                }
             } else if(obj.event === 'edit'){
                 //获取并重写表格数据
                 $(".usname").val("");

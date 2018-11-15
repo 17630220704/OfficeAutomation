@@ -1,7 +1,6 @@
 package com.services.permit;
 
 
-import com.entity.permit.TbUser;
 import com.entity.permit.upRoleUser;
 
 import java.util.List;
@@ -34,4 +33,6 @@ public interface permitManageService {
     boolean updateRole(upRoleUser upru);
     //登陆锁定&&解锁
     String updatelocking(int uid, int ulocking);
+    //删除用户角色
+    Integer delRoleUser(int uid);
 }

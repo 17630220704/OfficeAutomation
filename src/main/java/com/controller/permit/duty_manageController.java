@@ -100,19 +100,6 @@ public class duty_manageController {
         map.put("result",scheduleType);
         return map;
     }
-    /*@RequestParam("scheduleId") Integer scheduleId
-             ,@RequestParam("scheduleName") String scheduleName
-             ,@RequestParam("scheduleType") String scheduleType
-             ,@RequestParam("scheduleState") String scheduleState
-             ,@RequestParam("dateStart") java.sql.Date dateStart
-             ,@RequestParam("dateEnd") Date dateEnd
-             ,@RequestParam("monday") String monday
-             ,@RequestParam("tuesday") String tuesday
-             ,@RequestParam("wednesday") String wednesday
-             ,@RequestParam("thursday") String thursday
-             ,@RequestParam("friday") String friday
-             ,@RequestParam("saturday") String saturday
-             ,@RequestParam("sunday") String sunday*/
     @ResponseBody
     @RequestMapping(value = "/updateschedule.do")
     public Map updateschedule(upschedule upschedule){
@@ -137,6 +124,44 @@ public class duty_manageController {
         Map map = new HashMap();
         String result = scheduleManageServicedao.saveschedule(tdSchedule);
         map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/deletescheduel.do")
+    public Map deletescheduel(int scheduleId){
+        Map map = new HashMap();
+        String result = scheduleManageServicedao.deletescheduel(scheduleId);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/updatescheduelState.do")
+    public Map updatescheduelState(int scheduleId,String scheduelState){
+        System.out.println("scheduleId:"+scheduleId);
+        System.out.println("scheduelState:"+scheduelState);
+        Map map = new HashMap();
+        Integer result = scheduleManageServicedao.updatescheduelState(scheduleId,scheduelState);
+        map.put("result",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/getpersoninfo_schedule.do")
+    public Map getpersoninfo_schedule(int scheduleId){
+        Map map = new HashMap();
+        List<Map<String,Object>> result = scheduleManageServicedao.getpersoninfo_schedule(scheduleId);
+        map.put("code",0);
+        map.put("msg","success");
+        map.put("data",result);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/uppersoninfo_schedule_save.do")
+    public Map uppersoninfo_schedule_save(int scheduleId){
+        Map map = new HashMap();
+        List<Map<String,Object>> result = scheduleManageServicedao.getpersoninfo_schedule(scheduleId);
+        map.put("code",0);
+        map.put("msg","success");
+        map.put("data",result);
         return map;
     }
 

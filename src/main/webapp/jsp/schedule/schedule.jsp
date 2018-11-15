@@ -14,6 +14,11 @@
 </head>
 <body>
 <div class="layui-row" style="min-height: 800px;">
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm saveschedule" lay-event="getCheckData">添加</button>
+        </div>
+    </script>
         <table class="layui-hide" id="test" lay-filter="test"></table>
         <script type="text/html" id="barDemo">
             <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -123,6 +128,13 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">排班人员</label>
+            <div class="layui-input-block">
+                <select name="city" xm-select="upshowPerson" xm-select-search="" xm-select-search-type="dl" class="showPersonName ckpersonname">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">周一时间：</label>
             <div class="layui-input-inline">
                 <input type="text" class="layui-input uprmonday"  value="00:00" name="uprmonday" >
@@ -226,12 +238,6 @@
                 </select>
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">是否启用</label>
-            <div class="layui-input-block">
-                <input class="savescheduleState" type="checkbox" name="switch" lay-skin="switch" lay-text="启用|停用" checked value="1">
-            </div>
-        </div>
     </form>
 </div>
 </body>
@@ -247,12 +253,14 @@
         var formSelects = layui.formSelects;
         /*重载多选下拉框数据*/
         layui.formSelects.data('showPerson', 'server', { url: '/listpersoninfo.do'});
+        layui.formSelects.data('upshowPerson', 'server', { url: '/listpersoninfo.do'});
     });
 </script>
 <script>
     $(function () {
         showscheduleType();
     });
+    /*班次类型追加*/
     function showscheduleType() {
         $.post("/scheduleType.do").done(function (date) {
             var  result = date.result;
@@ -265,9 +273,9 @@
             }
         })
     }
-
 </script>
 <script>
+    /*表格数据载入*/
     layui.use(['layer', 'form','laydate','table','jquery', 'formSelects'], function(){
         var table = layui.table;
         var layer = layui.layer
@@ -279,10 +287,9 @@
             id:'listschedule'
             ,elem: '#test'
             ,url:'/listschedule.do'
-            ,toolbar: 'default'
+            ,toolbar: '#toolbarDemo'
             ,cols: [[
-                {type: 'checkbox', fixed: 'left'}
-                ,{field:'scheduleId', title: '排班ID', sort: true}
+                {field:'scheduleId', title: '排班ID', sort: true}
                 ,{field:'scheduleName',title: '排班名'}
                 ,{field:'PersonName',title: '排班人员'}
                 ,{field:'Date_start',title: '排班开始时间'}
@@ -296,7 +303,7 @@
         table.on('tool(test)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.scheduleId + ' 的查看操作');
+                /*右侧查看操作*/
                 var monday=data.monday.split(',');
                 var tuesday=data.tuesday.split(',');
                 var wednesday=data.wednesday.split(',');
@@ -323,15 +330,30 @@
                     ,area:["900px","auto"]
                     ,content: $("#showschedule")
                 });
+                /*右侧删除操作*/
             } else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
+                layer.confirm('确认删除会删除与之关联的人员排班', function(index){
+                    $.post("/deletescheduel.do",{'scheduleId':data.scheduleId}).done(function (date) {
+                        layer.msg(date.result,{time:8000},function () {
+                            obj.del();
+                            layer.close(index);
+                        })
+                    })
                 });
+                /*右侧更新操作*/
             } else if(obj.event === 'edit'){
+                var scheduleid = data.scheduleId;
+                 var ckpersonname = $(".ckpersonname").val();
+                var array = [];
+                $.post("/getpersoninfo_schedule.do",{'scheduleId':scheduleid}).done(function (date) {
+                    for(i=0;i<date.data.length;i++){
+                        array[i]=(date.data[i].persoId);
+                    }
+                    formSelects.value('upshowPerson', array);
+                });
                 /*重新渲染*/
                 form.render('select');
-                /*初始化赋值*/
+                /*更新初始化赋值*/
                 var upscheduleName = data.scheduleName;
                 var monday=data.monday.split(',');
                 var tuesday=data.tuesday.split(',');
@@ -372,15 +394,17 @@
                         ,range: true
                         ,value:update
                     });
-
                 });
-                /*弹出层*/
+                /*获取原始备选项*/
+                var PersonName =layui.formSelects.value('upshowPerson', 'valStr');
+                /*弹出更新层*/
                 var openadd = layer.open({
                     type: 1
                     ,area:["900px","auto"]
                     ,btn: ['更新']
                     ,yes: function(layero, index){
                         /*获取数据*/
+                       var persoId = layui.formSelects.value('upshowPerson', 'valStr');
                        var upscheduleId=  $(".upscheduleId").val();
                        var upscheduleName =  $(".upscheduleName").val();
                        var upmonday = $(".uprmonday").val()+","+$(".uppmonday").val();
@@ -391,11 +415,13 @@
                        var upsaturday = $(".uprsaturday").val()+","+$(".uppsaturday").val();
                        var upsunday = $(".uprsunday").val()+","+$(".uppsunday").val();
                        var scheduleType = $(".scheduleType").val();
-                       /*分割时间范围*/
+                       /*拆分时间范围*/
                        var datetimese = $(".update").val().split(' - ');
                        var dateStart = datetimese[0];
                        var dateEnd =  datetimese[1];
                         $.post("/updateschedule.do",{
+                            'personName':PersonName,
+                            'persoId':persoId,
                             'scheduleId':upscheduleId,
                             'scheduleName':upscheduleName,
                             'scheduleType':scheduleType,
@@ -424,7 +450,8 @@
             var checkStatus = table.checkStatus(obj.config.id)
                 ,data = checkStatus.data; //获取选中的数据
             switch(obj.event){
-                case 'add':
+                /*顶部添加事件*/
+                case 'getCheckData':
                     form.render();
                     layui.use(['layer', 'form','laydate'], function(){
                         var layer = layui.layer
@@ -439,9 +466,10 @@
                             });
                         });
                     });
+                    /*弹出添加层*/
                     var saveschedule = layer.open({
                         type: 1
-                        ,area:["900px","auto"]
+                        ,area:["900px","600px"]
                         ,btn: ['添加']
                         ,yes: function(layero, index){
                             var persoId = layui.formSelects.value('showPerson', 'valStr');
@@ -451,7 +479,6 @@
                             var datetimese = $(".savedate").val().split(' - ');
                             var dateStart = datetimese[0];
                             var dateEnd =  datetimese[1];
-                            alert(scheduleState);
                             if(savescheduleType!=null&&savescheduleType!=''){
                                 $.post("/saveschedule.do",{
                                     'scheduleName':savescheduleName
@@ -463,7 +490,7 @@
                                 }).done(function (date) {
                                     layer.msg(date.result,{time:1000});
                                     layer.close(saveschedule);
-                                    table.reload("listschedule",{url:'/listschedule.do'})
+                                    table.reload("listschedule",{url:'/listschedule.do'});
                                 })
                             }else {
                                 layer.msg("所有项为必填项",{time:1000});
@@ -472,6 +499,7 @@
                         ,content: $("#saveschedule")
                     });
                     break;
+                    /*顶部更新事件*/
                 case 'update':
                     if(data.length === 0){
                         layer.msg('请选择一行');
@@ -481,6 +509,7 @@
                         layer.alert('编辑 [id]：'+ checkStatus.data[0].scheduleId);
                     }
                     break;
+                    /*顶部删除事件*/
                 case 'delete':
                     if(data.length === 0){
                         layer.msg('请选择一行');
@@ -490,24 +519,31 @@
                     break;
             }
         });
-        //监听锁定操作
+        //监听启用禁用操作
         form.on('switch(sexDemo)', function(obj){
             var chkval = this.value;
             var datalockingu_id = this.className;
-            alert(datalockingu_id);
-            alert(chkval);
-            table.reload('listschedule',{url:'/listschedule.do'});
-            /*if(chkval==1){
-                $.post("/updatelocking.do",{'uid':datalockingu_id,'ulocking':chkval}).done(function (date) {
-                    layer.msg(date.result,{time:800});
-                    table.reload('roletable',{url:'/listRoleUser.do'});
+            if(chkval==1){
+                $.post("/updatescheduelState.do",{
+                    'scheduleId':datalockingu_id,
+                    'scheduelState':0
+                }).done(function (date) {
+                    if (date.result==1){
+                        layer.msg("停用成功",{time:800});
+                    }
+                    table.reload("listschedule",{url:'/listschedule.do'})
                 });
             }else if (chkval ==0) {
-                $.post("/updatelocking.do",{'uid':datalockingu_id,'ulocking':chkval}).done(function (date) {
-                    layer.msg(date.result,{time:800});
-                    table.reload('roletable',{url:'/listRoleUser.do'});
+                $.post("/updatescheduelState.do",{
+                    'scheduleId':datalockingu_id,
+                    'scheduelState':1
+                }).done(function (date) {
+                    if (date.result==1){
+                        layer.msg("启用成功",{time:800});
+                    }
+                    table.reload("listschedule",{url:'/listschedule.do'})
                 });
-            }*/
+            }
         });
     });
 </script>

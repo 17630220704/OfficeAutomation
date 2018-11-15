@@ -25,6 +25,7 @@
             <id property="attachmentName" column="ATTACHMENT_NAME"></id>
 
         </association>
+
     </resultMap>
 
     <insert id="mailAdd" useGeneratedKeys="true" keyProperty="bodyId" parameterType="com.entity.lcy.Mailboxinfo2">
@@ -178,7 +179,7 @@ select m.BODY_ID,m.persoId,m.TO_ID2,m.toidname,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND
         where BODY_ID = #{bodyId}
     </update>
     <select id="Tbuser" resultType="Map">
-        select u_id,r_id,DeptId,DeptId,persoId,u_loginName,u_loginPassword,u_online,u_locking,u_deadline from tb_user where persoId = #{persoId}
+        select u_id,DeptId,persoId,u_loginName,u_loginPassword,u_online,u_locking,u_deadline from tb_user where persoId = #{persoId}
     </select>
     <update id="TbuserUP">
         update tb_user
@@ -188,7 +189,7 @@ select m.BODY_ID,m.persoId,m.TO_ID2,m.toidname,m.SUBJECT,m.SIZE,m.CONTENT,m.SEND
         where u_id =#{uId}
     </update>
     <select id="TbuserXq" resultType="Map">
-        select persoId,PosiId,contractId,PersonName,personBirth,personPicture,telephone,officePhone,Email,NowAddress,remark,NowState from tb_PersonInfo where persoId = #{persoId}
+        select persoId,PosiId,employedId,PersonName,personBirth,personPicture,telephone,officePhone,Email,NowAddress,remark,NowState from tb_PersonInfo where persoId = #{persoId}
     </select>
     <update id="Tbuserupp" parameterType="com.entity.lcy.TbPersoninfo">
         update tb_PersonInfo

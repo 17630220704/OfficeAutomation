@@ -36,7 +36,6 @@ public class EmailController {
         Map<String, Object> map = new HashMap<String, Object>();
         int a = mail.mailAdd(mailboxinfo2);
         System.out.println("插入后主键为：" + mailboxinfo2.getBodyId());
-        System.out.println(a);
         if (a > 0) {
             map.put("message", "发送成功");
         } else {
@@ -315,10 +314,9 @@ public class EmailController {
 
     @RequestMapping(value = "/Tbuser")
     @ResponseBody
-    public List<Map> Tbuser(HttpServletRequest session,HttpServletResponse response) {
+    public List<Map> Tbuser(HttpServletResponse response, int persoId) {
         response.setContentType("html/text;charset=utf-8");
         response.setCharacterEncoding("utf-8");
-        int persoId = (int) session.getAttribute("userid");
         List<Map> list = mail.Tbuser(persoId);
         System.out.println(list);
         return list;
@@ -368,7 +366,8 @@ public class EmailController {
                                        String keyWord
     ) {
         System.out.println(keyWord);
-        int persoId = (int) session.getAttribute("userid");
+        int persoId = (int) session.getSession().getAttribute("userid");
+        System.out.println(persoId);
         int EmailBoxid = 1;
         List<Mailboxinfo2> datas = mail.queryAllDataFromTable(page, limit, keyWord, persoId, EmailBoxid);
         int countx = mail.queryAllCount(keyWord, persoId, EmailBoxid);
@@ -384,11 +383,11 @@ public class EmailController {
     @ResponseBody
     @RequestMapping("/shipment")
     public Map<String, Object> shipment(HttpServletRequest session,
-            @RequestParam(required = false, defaultValue = "1") int page,
-            @RequestParam(required = false, defaultValue = "15") int limit,
-            String keyWord
+                                        @RequestParam(required = false, defaultValue = "1") int page,
+                                        @RequestParam(required = false, defaultValue = "15") int limit,
+                                        String keyWord
     ) {
-        int persoId = (int) session.getAttribute("userid");
+        int persoId = (int) session.getSession().getAttribute("userid");
         List<Mailboxinfo2> datas = mail.YfsQuery(page, limit, keyWord, persoId);
         int countx = mail.YfsQueryCount(keyWord, persoId);
         Map<String, Object> map = new HashMap<String, Object>();
@@ -402,11 +401,11 @@ public class EmailController {
     @ResponseBody
     @RequestMapping("/dustbin")
     public Map<String, Object> dustbin(HttpServletRequest session,
-            @RequestParam(required = false, defaultValue = "1") int page,
-            @RequestParam(required = false, defaultValue = "15") int limit,
-            String keyWord
+                                       @RequestParam(required = false, defaultValue = "1") int page,
+                                       @RequestParam(required = false, defaultValue = "15") int limit,
+                                       String keyWord
     ) {
-        int persoId = (int) session.getAttribute("userid");
+        int persoId = (int) session.getSession().getAttribute("userid");
         int EmailBoxid = 3;
         List<Mailboxinfo2> datas = mail.dustbin(page, limit, keyWord, persoId, EmailBoxid);
         int countx = mail.dustbinCount(keyWord, persoId, EmailBoxid);
@@ -422,11 +421,11 @@ public class EmailController {
     @ResponseBody
     @RequestMapping("/rough")
     public Map<String, Object> rough(HttpServletRequest session,
-            @RequestParam(required = false, defaultValue = "1") int page,
-            @RequestParam(required = false, defaultValue = "15") int limit,
-            String keyWord
+                                     @RequestParam(required = false, defaultValue = "1") int page,
+                                     @RequestParam(required = false, defaultValue = "15") int limit,
+                                     String keyWord
     ) {
-        int persoId = (int) session.getAttribute("userid");
+        int persoId = (int) session.getSession().getAttribute("userid");
         int EmailBoxid = 4;
         List<Mailboxinfo2> datas = mail.rough(page, limit, keyWord, persoId, EmailBoxid);
         int countx = mail.roughCount(keyWord, persoId, EmailBoxid);

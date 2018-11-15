@@ -16,6 +16,8 @@ public class upschedule {
     private String friday;
     private String saturday;
     private String sunday;
+    private String persoId;
+    private String personName;
 
     public Integer getScheduleId() {
         return scheduleId;
@@ -121,7 +123,23 @@ public class upschedule {
         this.sunday = sunday;
     }
 
-    public upschedule(Integer scheduleId, String scheduleName, String scheduleType, String scheduleState, Date dateStart, Date dateEnd, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {
+    public String getPersoId() {
+        return persoId;
+    }
+
+    public void setPersoId(String persoId) {
+        this.persoId = persoId;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public upschedule(Integer scheduleId, String scheduleName, String scheduleType, String scheduleState, Date dateStart, Date dateEnd, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday, String persoId, String personName) {
         this.scheduleId = scheduleId;
         this.scheduleName = scheduleName;
         this.scheduleType = scheduleType;
@@ -135,6 +153,8 @@ public class upschedule {
         this.friday = friday;
         this.saturday = saturday;
         this.sunday = sunday;
+        this.persoId = persoId;
+        this.personName = personName;
     }
 
     public upschedule() {
@@ -157,6 +177,8 @@ public class upschedule {
                 ", friday='" + friday + '\'' +
                 ", saturday='" + saturday + '\'' +
                 ", sunday='" + sunday + '\'' +
+                ", persoId='" + persoId + '\'' +
+                ", personName='" + personName + '\'' +
                 '}';
     }
 }

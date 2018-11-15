@@ -130,6 +130,14 @@ public class permit_manageController {
         map.put("result",result);
         return map;
     }
+    @ResponseBody
+    @RequestMapping(value = "/delRoleUser.do")
+    public Map delRoleUser(int uid){
+        Map map = new HashMap();
+        Integer result =  permitManageServicedao.delRoleUser(uid);
+        map.put("result",result);
+        return map;
+    }
 
     /*Get&&Set*/
     public permitManageService getPermitManageServicedao() {

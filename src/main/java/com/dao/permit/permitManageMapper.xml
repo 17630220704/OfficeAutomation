@@ -75,5 +75,8 @@
         </set>
         where u_id = #{uid}
     </update>
+    <delete id="delRoleUser" >
+        delete from tb_role_user where u_id = #{uid}
+    </delete>
 
 </mapper>

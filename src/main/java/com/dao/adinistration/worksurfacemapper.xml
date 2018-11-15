@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.adinistration.WorksurfaceDao">
+
+    <!--办公用品-->
+    <!--办公用品条件查询 so.sort_id=wo.sort_id-->
+    <select id="query_worksurface" resultType="map">
+			select wo.work_id,so.sort_style,wo.work_name,wo.work_unit,wo.work_supplier,wo.work_gline,wo.work_repertory,wo.setid,wo.work_sprice
+			from Worksurface wo,Sort so where 1=1
+                <if test="workName!=null and workName!=''">
+                    and wo.work_name like "%"#{workName}"%"
+                </if>
+         and so.sort_id=wo.sort_id group by wo.work_id asc
+    </select>
+
+    <!--<select id="query_worksurface"  resultType="map">
+			/*select * from Worksurface where work_name=#{workName}*/
+			select wo.work_id,so.sort_style,wo.work_name,wo.work_unit,wo.work_supplier,wo.work_gline,wo.work_repertory,wo.setid,wo.work_sprice
+			from Worksurface wo left join Sort so on so.sort_id=wo.sort_id where 1=1
+			<if test="workName!=null and workName!=''">
+               and wo.work_name like concat('%',#{workName},'%')
+            </if>
+		</select>-->
+    <!--办公用品查询-->
+		<!--<select id="query_worksurface" resultType="map">
+			select wo.work_id,so.sort_style,wo.work_name,wo.work_unit,wo.work_supplier,wo.work_gline,wo.work_repertory,wo.setid,wo.work_sprice
+			from Worksurface wo left join Sort so on so.sort_id=wo.sort_id
+		</select>-->
+    <!--办公用品增加-->
+		<insert id="save_worksurface" parameterType="com.entity.adinistration.Worksurface">
+            insert into
+            worksurface(sort_id,b_id,work_name,work_specification,work_style,work_unit,work_sprice,work_supplier,setid,work_dline,work_gline,work_repertory)
+            values(#{sort.sortId},#{bank.bId},#{workName},#{workSpecification},#{workStyle},#{workUnit},#{workSprice},#{workSupplier},#{setid},#{workGline},#{workDline},#{workRepertory})
+        </insert>
+    <!--办公用品修改 sort_id=#{sort.sortId},-->
+	    <update id="update_worksurface" parameterType="com.entity.adinistration.Worksurface">
+            update worksurface set
+            b_id=#{bank.bId},Use_UserId=#{useUserId},work_name=#{workName},work_specification=#{workSpecification},
+            work_style=#{workStyle},work_unit=#{workUnit},work_sprice=#{workSprice},work_supplier=#{workSupplier},
+            setid=#{setid},work_dline=#{workDline},work_gline=#{workGline},work_repertory=#{workRepertory},UserId=#{userId} where
+            work_id=#{workId}
+        </update>
+    <!--办公用品删除-->
+	    <delete id="delete_worksurface" parameterType="com.entity.adinistration.Worksurface">
+            delete from worksurface where work_id=#{workId}
+        </delete>
+    <!--分页-->
+    <select id="queryPage" resultType="map">
+        select wo.work_id,so.sort_style,wo.work_name,wo.work_unit,wo.work_supplier,wo.work_gline,wo.work_repertory,wo.setid,wo.work_sprice
+			from Worksurface wo left join Sort so on so.sort_id=wo.sort_id
+    </select>
+
+    <!--办公用品类别-->
+    <!--办公用品类别条件查询-->
+        <select id="query_sort" resultType="map">
+            select so.sort_id,ba.b_bankname,so.sort_style,ba.deptid,ba.useridone
+            from Sort so,Bank ba where 1=1
+            <if test="sortStyle!=null and sortStyle!=''">
+                and so.sort_style like "%"#{sortStyle}"%"
+            </if>
+            and so.b_id=ba.b_id group by so.sort_id asc
+        </select>
+    <!--办公用品类别删除-->
+        <delete id="delete_sort" parameterType="com.entity.adinistration.Sort">
+            delete from sort where sort_id=#{sortId}
+        </delete>
+    <!--办公用品类别增加-->
+        <insert id="save_sort" parameterType="com.entity.adinistration.Sort">
+            insert into sort(b_id,sort_id,sort_number,sort_style)
+            values(#{bank.bId},#{sortId},#{sortNumber},#{sortStyle})
+        </insert>
+    <!--办公用品类修改,deptid=#{bank.deptid},useridone=#{bank.useridone} b_id=#{bank.bId},-->
+        <update id="update_sort" parameterType="com.entity.adinistration.Sort">
+            update sort set sort_style=#{sortStyle},sort_number=#{sortNumber} where sort_id=#{sortId}
+        </update>
+
+
+
+    <!--办公用品库-->
+    <!--办公用品库查询(类型用)-->
+        <select id="query_bank"  resultType="map">
+            select b.b_id,b.b_bankname from bank b
+        </select>
+    <!--办公用品库查询-->
+    <select id="query_bank1"  resultType="map">
+            select b.b_id,pe.PersonName,b.deptid,b.useridone,b.b_bankname
+            from bank b,tb_personinfo pe where 1=1
+        <if test="bBankname!=null and bBankname!=''">
+            and b.b_bankname like "%"#{bBankname}"%"
+        </if>
+        and b.persoId=pe.persoId group by b.b_id asc
+
+            /*b.persoId=pe.persoId group by b.b_id asc*/
+        </select>
+    <!--办公用品库增加-->
+    <insert id="save_bank" parameterType="com.entity.adinistration.Bank">
+            insert into bank(persoId,b_bankname,deptid,useridone)
+            values(#{tbPersoninfo.persoId},#{bBankname},#{deptid},#{useridone})
+        </insert>
+    <!--办公用品库删除-->
+        <delete id="delete_bank" parameterType="com.entity.adinistration.Bank">
+            delete from Bank where b_id=#{bId}
+        </delete>
+    <!--办公用品库..修改 -->
+    <update id="update_bank" parameterType="com.entity.adinistration.Bank">
+            update bank set deptid=#{deptid},useridone=#{useridone},b_bankname=#{bBankname} where b_id=#{bId}
+        </update>
+    <!--职员查询(库用)-->
+    <select id="query_tbPersoninfo" resultType="map">
+        select tb.persoId,tb.PersonName from tb_personinfo tb
+    </select>
+
+
+    <!--申请用品-记录-->
+    <!--申请用品查询 /*group by ap.apply_id asc*/-->
+    <!--ap.b_id=wo.b_id=b.b_id=so.b_id-->
+    <select id="query_apply"  resultType="map">
+            select ap.apply_id,ap.apply_people,ap.apply_time,wo.work_name,so.sort_style,ap.apply_style,
+            ap.apply_price,ap.apply_number,ap.apply_comment,ap.apply_state,ap.userid,b.b_bankname
+            from Apply ap,Worksurface wo,Bank b,Sort so where ap.sort_id=so.sort_id and ap.b_id=b.b_id and ap.work_id=wo.work_id group by ap.apply_id asc
+    </select>
+    <!--待批申请 apply_state=#{applyState}-->
+    <select id="query_apply1"  resultType="map">
+            select ap.apply_id,ap.b_id,ap.sort_id,ap.apply_style,ap.apply_price,ap.apply_number,ap.apply_comment,
+            ap.userid,ap.sort_id,ap.b_id,ap.work_id,ap.apply_people,ap.apply_time,wo.work_name,b.b_bankname
+            from Apply ap,Worksurface wo,Bank b where ap.b_id=b.b_id and ap.work_id=wo.work_id and ap.apply_state=0
+    </select>
+    <!--申请用品增加-->
+        <insert id="save_apply" parameterType="com.entity.adinistration.Apply">
+            insert into Apply(b_id,sort_id,work_id,apply_style,apply_price,apply_number,apply_comment,apply_state,userid,apply_people,apply_time)
+            values(#{bank.bId},#{sort.sortId},#{worksurface.workId},#{applyStyle},#{applyPrice},#{applyNumber},#{applyComment},#{applyState},#{userid},#{applyPeople},#{applyTime})
+        </insert>
+    <!--申请用品删除-->
+        <delete id="delete_apply" parameterType="com.entity.adinistration.Apply">
+            delete from Apply where apply_id=#{applyId}
+        </delete>
+    <!--申请用品..修改  b_id=#{bank.bId},sort_id=#{sort.sortId},work_id=#{worksurface.workId},-->
+    <update id="update_apply" parameterType="com.entity.adinistration.Apply">
+          update apply set work_id=#{worksurface.workId},apply_style=#{applyStyle},apply_price=#{applyPrice},apply_number=#{applyNumber},
+          apply_comment=#{applyComment},apply_state=#{applyState},apply_people=#{applyPeople},userid=#{userid} where apply_id=#{applyId}
+        </update>
+    <!--库存修改-->
+    <update id="update_kucun" parameterType="com.entity.adinistration.Apply">
+            update worksurface
+            set work_repertory=work_repertory-(select apply_number from apply where apply_id=#{applyId})
+            where work_id=(select work_id from apply where apply_id=#{applyId})
+    </update>
+    <!--更新状态updateState-->
+    <update id="updateState" parameterType="com.entity.adinistration.Apply">
+        update apply set apply_state='1' where apply_id=#{applyId}
+    </update>
+    <!--更新状态updateStat-->
+    <update id="updateStat" parameterType="com.entity.adinistration.Apply">
+        update apply set apply_state='2' where apply_id=#{applyId}
+    </update>
+    <!--分页模糊查询-->
+       <!-- <select id="pageWorksurface" resultType="map">
+          select wo.work_id,so.sort_number,wo.work_name,wo.work_unit,wo.work_supplier,wo.work_gline,wo.work_repertory,wo.setid
+            from Worksurface wo,Sort so
+            where 1=1
+           <if test="name!=null and name!=''">
+             and workName like concat("%",#{name},"%")
+           </if>
+            and so.sort_id=wo.sort_id
+    </select>-->
+</mapper>
+
+
+<!--select wo.work_id,so.sort_number,wo.work_name,wo.work_unit,wo.work_supplier,wo.work_gline,wo.work_repertory,wo.setid
+			from Worksurface wo left join Sort so on so.sort_id=wo.sort_id-->

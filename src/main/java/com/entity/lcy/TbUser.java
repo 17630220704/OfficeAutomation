@@ -4,7 +4,6 @@ package com.entity.lcy;
 public class TbUser {
 
   private long uId;
-  private long rId;
   private long deptId;
   private long persoId;
   private String uLoginName;
@@ -20,15 +19,6 @@ public class TbUser {
 
   public void setUId(long uId) {
     this.uId = uId;
-  }
-
-
-  public long getRId() {
-    return rId;
-  }
-
-  public void setRId(long rId) {
-    this.rId = rId;
   }
 
 

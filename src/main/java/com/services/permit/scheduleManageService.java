@@ -1,8 +1,8 @@
 package com.services.permit;
 
-import com.entity.schedule.TbScheduleDate;
 import com.entity.schedule.TdSchedule;
 import com.entity.schedule.upschedule;
+import org.apache.ibatis.annotations.Param;
 
 import java.text.ParseException;
 import java.util.List;
@@ -27,4 +27,10 @@ public interface scheduleManageService {
     List<Map<String,Object>> listpersoninfo();
     //添加排班
     String saveschedule(TdSchedule tdSchedule);
+    //删除班次
+    String deletescheduel(int scheduleId);
+    //修改是否启用该排班
+    Integer updatescheduelState(int scheduleId, String scheduelState);
+    //根据id查询排班人员
+    List<Map<String,Object>> getpersoninfo_schedule(int scheduleId);
 }
