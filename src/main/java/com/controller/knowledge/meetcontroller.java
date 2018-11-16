@@ -82,7 +82,6 @@ public class meetcontroller {
     @ResponseBody
     public Map<String, Object> save(HttpServletRequest session, String mename, String mevalue, int menumber, String tidate, int coid, int tiid) {
         Map<String, Object> map = new HashMap<String, Object>();
-        session.getSession().setAttribute("userid",1);
         int b = (int) session.getSession().getAttribute("userid");
         meeting me = new meeting();
         me.setMename(mename);
@@ -155,7 +154,6 @@ public class meetcontroller {
     @ResponseBody
     public Map<String, Object> query1(HttpServletRequest session,@RequestParam(required = false, defaultValue = "8") int PageSize , @RequestParam(required = false, defaultValue = "1") int startPage) {
         Map<String, Object> map = new HashMap<String, Object>();
-        session.getSession().setAttribute("userid",1);
         int b = (int) session.getSession().getAttribute("userid");
         PageHelper.startPage(startPage, PageSize);
         List<meeting> list = ser.query1(b);
@@ -208,9 +206,7 @@ public class meetcontroller {
     @ResponseBody
     public  Map<String, Object> query4(int meid,int coid) {
         Map<String, Object> map = new HashMap<String, Object>();
-        System.out.println(meid +"sss"+coid);
         List<meeting> list= ser.query4(meid);
-        System.out.println(list.get(0).getMeid());
         time ti = new time();
         ti.setTidate(list.get(0).getMedate());
         conferenceroom co = new conferenceroom();

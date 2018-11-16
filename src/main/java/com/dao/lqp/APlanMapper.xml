@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.APlan">
+    <select id="findplanall" resultType="map">
+		SELECT plan.*,hire.* FROM tb_recruitmentplan plan,tb_hirefile hire  group by plan.PlanID asc
+	</select>
+	<select id="findplanSX" resultType="map">
+		SELECT plan.*,hire.* FROM tb_recruitmentplan plan,tb_hirefile hire  where
+		hire.PlanID=plan.PlanID  and plan.approvalStatus=1 group by plan.PlanID asc
+	</select>
+	<select id="findplanSX1" resultType="map">
+		SELECT plan.*,hire.* FROM tb_recruitmentplan plan,tb_hirefile hire  where
+		hire.PlanID=plan.PlanID  and plan.approvalStatus=0 group by plan.PlanID asc
+	</select>
+   <select id="findplanbyname" resultType="map">
+		/*select hire.empId,hire.empName,hire.specialty from tb_hirefile as hire where hire.remark =0*/
+		SELECT plan.planName,plan.PlanID FROM tb_recruitmentplan plan
+	</select>
+	<select id="findplanbynameEnd" resultType="map">
+		/*select hire.empId,hire.empName,hire.specialty from tb_hirefile as hire where hire.remark =0*/
+		SELECT plan.planName,plan.PlanID FROM tb_recruitmentplan plan where plan.approvalStatus=1
+	</select>
+	<select id="findplanbypeople" resultType="map">
+			SELECT hire.*,plan.* FROM tb_hirefile as hire ,tb_recruitmentplan as plan where hire.PlanID=plan.PlanID and plan.approvalStatus=1 and hire.remark=1
+	</select>
+	<select id="findhirepeople" resultType="com.entity.lqp.TbHirefile">
+		select hire.empId,hire.empName from tb_hirefile as hire where hire.remark =0
+	</select>
+	<select id="findhirepeople1" resultType="com.entity.lqp.TbHirefile">
+		select hire.* from tb_hirefile as hire where hire.PlanID=#{people}
+	</select>
+	<select id="findpeople" resultType="map">
+		SELECT * FROM tb_personinfo WHERE  persoId in (select persoId FROM tb_user WHERE DeptId=#{people})
+	</select>
+    <select id="findplanthem" resultType="map" parameterType="com.entity.lqp.TbRecruitmentplan">
+		select plan.* from tb_recruitmentplan as plan  where  plan.approvalStatus=0
+
+            <if test="planName!=null and planName!=''">
+                and  plan.planName like  "%"#{planName}"%"
+            </if>
+			<if test="approvalStatus!= null and approvalStatus!=''">
+				and  plan.approvalStatus=#{approvalStatus}
+			</if>
+            <!--<if test="approvalStatus!=null and approvalStatus!='' or approvalStatus==0">
+                and  plan.approvalStatus  == #{approvalStatus}
+            </if>-->
+
+	</select>
+    <insert id="insertplan" parameterType="com.entity.lqp.TbRecruitmentplan">
+		insert into tb_recruitmentplan(planName,dictionaryID,startTime,endTime,budget,PlanInstructions,PlanNote,NoteRemind,approvalStatus)
+		                          values(#{planName},#{dictionaryId},#{startTime},#{endTime},#{budget},#{planInstructions},#{planNote},#{noteRemind},#{approvalStatus})
+	</insert>
+	<insert id="insertplanAdd" parameterType="com.entity.lqp.TbRecruitmentplan">
+		insert into tb_recruitmentplan(planName,dictionaryID,startTime,endTime,budget,PlanInstructions,PlanNote,NoteRemind,approvalStatus)
+		                          values(#{planName},#{dictionaryId},#{startTime},#{endTime},#{budget},#{planInstructions},#{planNote},#{noteRemind},#{approvalStatus})
+	</insert>
+
+    <delete id="deleteplan" parameterType="com.entity.lqp.TbRecruitmentplan">
+		delete from tb_recruitmentplan where PlanID = #{planId}
+	</delete>
+
+    <update id="updatethem" parameterType="com.entity.lqp.TbRecruitmentplan">
+		update tb_recruitmentplan set approvalStatus=#{approvalStatus}
+		where PlanID = #{planId}
+	</update>
+	<update id="updateplan" parameterType="com.entity.lqp.TbRecruitmentplan">
+		update tb_recruitmentplan set planName=#{planName},dictionaryID=#{dictionaryId},startTime=#{startTime},
+endTime=#{endTime},budget=#{budget},PlanInstructions=#{planInstructions},PlanNote=#{planNote},NoteRemind=#{noteRemind},approvalStatus=#{approvalStatus}
+		where PlanID = #{planId}
+	</update>
+	<update id="updateplanAdd" parameterType="com.entity.lqp.TbRecruitmentplan">
+		update tb_recruitmentplan set planName=#{planName},dictionaryID=#{dictionaryId},startTime=#{startTime},
+endTime=#{endTime},budget=#{budget},PlanInstructions=#{planInstructions},approvalStatus=#{approvalStatus}
+		where PlanID = #{planId}
+	</update>
+	<update id="updatepeople" parameterType="com.entity.lqp.TbRecruitmentplan">
+		update tb_recruitmentplan set PlanNote=#{planNote}
+		where PlanID = #{planId}
+	</update>
+	<update id="updatepeople1" useGeneratedKeys="true" keyProperty="planId"  parameterType="com.entity.lqp.TbRecruitmentplan">
+		update tb_recruitmentplan set NoteRemind=#{noteRemind}
+		where PlanID = #{planId}
+	</update>
+	<update id="updatehire"  parameterType="com.entity.lqp.TbRecruitmentplan" >
+
+		update tb_hirefile set remark=1 where empID in (select empID FROM(SELECT hire.empID FROM tb_recruitmentplan plan,tb_hirefile hire  where
+		hire.PlanID=plan.PlanID and plan.PlanID=#{planId})tb_hirefile)
+	</update>
+
+</mapper>

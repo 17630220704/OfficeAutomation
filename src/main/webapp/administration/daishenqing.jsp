@@ -77,7 +77,7 @@
                     b+="<td>" +
                         "<input type='button' class='update' value='批准' id='btn'> " +
                         "<input type='button' class='noup' value='不批准' id='no'>"+
-                        "<a href='daishenqing.jsp'><input type='button' value='返回'></a>"+
+                        /*"<a href='daishenqing.jsp'><input type='button' value='返回'></a>"+*/
                         "</td></tr>";
                 }
                 $("#list").html(b);
@@ -117,7 +117,7 @@
     //修改状态(2)未通过审核
     $(function () {
         var a="";
-        $("#list").on("click",".nop",function () {
+        $("#list").on("click",".noup",function () {
             a=$(this);
             var upd=a.parent().parent().children().eq(0).html();
             $.ajax({

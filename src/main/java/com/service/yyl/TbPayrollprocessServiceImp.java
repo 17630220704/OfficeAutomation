@@ -36,13 +36,11 @@ public class TbPayrollprocessServiceImp implements TbPayrollprocessService{
     public void TbPayrollprocessAdd(TbPayrollprocess tpl) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
-        session.setAttribute("username","小明");
-        session.setAttribute("userid","2");
-        session.getAttribute("username");
-        session.getAttribute("userid");
-        String a = (String)session.getAttribute("userid");
+        String a = session.getAttribute("userid").toString();
         tpl.setOperator(a);
+        System.out.println(tpl);
         tpldao.TbPayrollprocessAdd(tpl);//薪资流程
+        System.out.println("完成");
         /*创建工资条*/
         List<Map> tp = tpdao.TbPersoninfoSelect();
         for (int i = 0; i < tp.size(); i++) {

@@ -23,19 +23,7 @@
     <script type="text/javascript"  src="jquery-3.1.1.min.js"></script>
 </head>
 
-<%--$(".selector1").change(function(){
 
-     // 先清空第二个
-
-      $(".selector2").empty();
-
-     // 实际的应用中，这里的option一般都是用循环生成多个了
-
-      var option = $("<option>").val(1).text("pxx");
-
-          $(".selector2").append(option);
-
-    });--%>
 
 <body>
     <center>
@@ -101,8 +89,6 @@
                 <td>
                     <input type="number" min="0" name="applyNumber" id="apply_number" class="form-control" style="width: 250px"/>
                     <div id="diva"></div>
-                    <%--<input id="input" >--%>
-                   <%-- <p id="p"></p>--%>
                 </td>
             </tr>
             <tr>
@@ -143,20 +129,6 @@
             ,form = layui.form;
     });
 </script>
-
-<%--<script>
-    //存取数字一的容器
-    var num="";
-    //给所有数字添加点击事件
-    $(".number input").click(function(){
-        //获取当前点击的value值
-        var value = $(this).val();
-        //因为 value和num是字符串，加号在这里是连接字符串，然后存进变量num里面
-        num = num+value;
-        //把变量num在input里面输出
-        $("input[type='text']").val(num);
-    })
-</script>--%>
 <script>
 /*申请提交*/
     $(function() {

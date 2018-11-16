@@ -117,9 +117,6 @@
                 stree+="</li>";
                 $(".showthree").append(stree);
             }
-        }).fail(function (xhr,status) {
-            alert(xhr.status);
-            alert(status)
         });
     })
 </script>
@@ -140,9 +137,6 @@
                     strees+="</li>";
                     $(".showthrees"+trees[i].m_level).append(strees);
                 }
-            }).fail(function (xhr,status) {
-                alert(xhr.status);
-                alert(status)
             });
         });
     });

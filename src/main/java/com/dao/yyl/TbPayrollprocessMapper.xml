@@ -7,7 +7,7 @@
     </select>
     <insert id="TbPayrollprocessAdd" parameterType="com.entity.yyl.TbPayrollprocess">
 		insert into tb_payrollprocess(startdate,abortdate,year,month,remark,state,operator,seet)
-		values(#{startdate},#{abortdate},#{year},#{month},#{remark},#{state},#{operator},replace(#{seet},' ',''))
+		values(#{startdate},#{abortdate},#{year},#{month},#{remark},#{state},#{operator},#{seet})
 	</insert>
     <update id="TbPayrollprocessUpdate" parameterType="com.entity.yyl.TbPayrollprocess">
 		update tb_payrollprocess

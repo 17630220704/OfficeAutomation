@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.ANeed">
+
+    <select id="findneedall" resultType="map">
+		SELECT need.*,dept.* FROM tb_recruitmentneed as need,tb_deparment as dept  where
+		need.deptId=dept.deptId
+		<!--<if test="jods!=null and jods!=''">
+			and  need.jods  like  "%"#{jods}"%"
+		</if>-->
+		<if test="small!=null and small!='' and big!=null  and big!='' ">
+			and  need.needDate between #{small} and  #{big}    /*时间字段 between 起始时间 结束时间and */
+
+		</if>
+
+
+		group by need.needID asc
+	</select>
+	<select id="findneedShenpi" resultType="map">
+		SELECT need.*,dept.* FROM tb_recruitmentneed as need LEFT JOIN tb_deparment as dept
+ON need.DeptId=dept.DeptId
+		WHERE need.DeptId in
+(SELECT DeptId FROM tb_user WHERE persoId in
+(SELECT persoId FROM tb_personinfo WHERE PersonName=#{shenpi}))
+
+	<if test="remind!=null and remind!=''">
+		and  need.remind like "%"#{remind}"%"
+	</if>
+	<if test="remark!=null and remark!=''">
+		and  need.remark like "%"#{remark}"%"
+	</if>
+		order by need.needDate desc
+
+	</select>
+    <select id="findneedbyname" resultType="map">
+		select dept.DeptId,dept.DeptName from tb_deparment as dept
+	</select>
+    <insert id="insertneed" parameterType="com.entity.lqp.TbRecruitmentneed">
+		insert into tb_recruitmentneed(jods,needDate,needNumber,DeptId,needRequirements,remind,remark) values(#{jods},#{needDate},#{needNumber},#{deptId},#{needRequirements},#{remind},#{remark})
+	</insert>
+
+    <delete id="deleteneed" parameterType="com.entity.lqp.TbRecruitmentneed">
+		delete from tb_recruitmentneed where needID = #{needId}
+	</delete>
+
+    <update id="updateneed" parameterType="com.entity.lqp.TbRecruitmentneed">
+		update tb_recruitmentneed set jods=#{jods},needDate=#{needDate},needNumber=#{needNumber},DeptId=#{deptId} ,needRequirements=#{needRequirements}, remind=#{remind} ,remark=#{remark}
+		where needID = #{needId}
+	</update>
+	<update id="updateneedshenpi" parameterType="com.entity.lqp.TbRecruitmentneed">
+		update tb_recruitmentneed set  remind=#{remind} ,remark=#{remark}
+		where needID = #{needId}
+	</update>
+</mapper>

@@ -198,7 +198,7 @@
                 if(data.message=="修改成功"){
                     alert(data.message);
                     $("#kulist").html("");
-                    window.parent.location.reload();
+                    location.reload();
 
                 }
             }
@@ -242,7 +242,7 @@
                 success:function(data){
                     alert(data.message);
                     $("#table").css("display","none");
-                    window.parent.location.reload();
+                    location.reload();
                 }
             });
         });

@@ -35,7 +35,7 @@ public class permit_manageController {
     public Map getModulTrees(Integer rid){
         Map map = new HashMap();
         List<Map<String,Object>> getmodulTrees = permitManageServicedao.getModulTrees(rid);
-        map.put("getmodulTrees",getmodulTrees);
+        System.out.println(getmodulTrees);
         return map;
     }
     @ResponseBody

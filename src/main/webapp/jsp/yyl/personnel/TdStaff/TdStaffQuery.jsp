@@ -293,7 +293,7 @@
                     var e = "&nbsp;";
                         if(d>c){
                             var e = "<b style='color: red;'>已到期</b>";
-                            var xu = "<button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>";
+                            var xu = "";//"<button class='btn btn-primary xiugai' value='"+i+"' data-toggle='modal' data-target='#myModa3'>修改</buuton>";
                             var san = "<button onclick='tdConfigDelete(this)'class='btn btn-primary' type='button' value='"+data[i].contractId+"'>删除</button>";
                         }else{
                             var xu = "";

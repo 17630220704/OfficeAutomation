@@ -152,10 +152,6 @@
                         <td class="td2" colspan="4"><input type="text" class="form-control xg9" name="tranReason" placeholder="请输入名称"></td>
                     </tr>
                     <tr>
-                        <td class="td1">附件：</td>
-                        <td class="td2" colspan="4"><input type="text" class="form-control xg12"name="attachmentName"></td>
-                    </tr>
-                    <tr>
                         <td class="td1">备注：</td>
                         <td class="td2" colspan="4"><input type="text" class="form-control xg13"name="remark"></td>
                     </tr>
@@ -219,16 +215,12 @@
                         <tr>
                             <td class="td1">修改时间：</td>
                             <td class="td2" colspan="2"><input type="text" class="form-control date" name="updateTime"></td>
-                            <td class="td1">经办人：</td>
-                            <td class="td2" colspan="2"><input type="text" class="form-control" name="responsiblePerson" value=""></td>
+                            <td class="td1"></td>
+                            <td class="td2" colspan="2"></td>
                         </tr>
                         <tr>
                             <td class="td1">调动原因：</td>
                             <td class="td2" colspan="5"><input type="text" class="form-control" name="tranReason" placeholder="请输入名称"></td>
-                        </tr>
-                        <tr>
-                            <td class="td1">附件：</td>
-                            <td class="td2" colspan="5"><input type="text" class="form-control"name="attachmentName"></td>
                         </tr>
                         <tr>
                             <td class="td1">备注：</td>

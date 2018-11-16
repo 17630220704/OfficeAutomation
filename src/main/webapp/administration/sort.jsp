@@ -132,7 +132,7 @@
    </div>
     <div class="container pull-left">
         <div class="navbar-header" >
-            <a class="navbar-brand">库名称查询：</a>
+            <a class="navbar-brand">类别名称查询：</a>
         </div>
         <div>
             <form class="navbar-form navbar-left" role="search" method="post">
@@ -238,7 +238,7 @@
                 success:function(data){
                     alert(data.message);
                     $("#table1").css("display","none");
-                    window.parent.location.reload();
+                    location.reload();
                 }
             });
         });
@@ -255,7 +255,7 @@
                 if(data.message=="修改成功"){
                     alert(data.message);
                     $("#list").html("");
-                    window.parent.location.reload();
+                    location.reload();
                 }
             }
         })

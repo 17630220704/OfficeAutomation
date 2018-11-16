@@ -23,6 +23,7 @@ public class TbPayrollprocessController {
     }
     @RequestMapping(value="tpl_add.do")
     public void TbPayrollprocessAdd(TbPayrollprocess tpl){
+        System.out.println(tpl);
         tpldao.TbPayrollprocessAdd(tpl);
     }
     @RequestMapping(value="tpl_update.do")

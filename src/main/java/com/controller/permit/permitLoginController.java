@@ -50,6 +50,7 @@ public class permitLoginController {
         Map<String,Object> map = new HashMap<String,Object>();
         List<Map> list= permitLoginServicedao.getTree(userid);
         map.put("getTree",list);
+        System.out.println(map);
         return map;
     }
 
@@ -61,6 +62,7 @@ public class permitLoginController {
         List<Map> list= permitLoginServicedao.getTrees(m_id,userid);
         map.put("getTrees",list);
         }
+        System.out.println(map);
         return map;
     }
 

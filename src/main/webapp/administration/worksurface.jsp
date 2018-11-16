@@ -261,7 +261,7 @@
             success:function(data){
                 if(data.message=="修改成功"){
                     alert(data.message);
-                    window.parent.location.reload();
+                    location.reload();
                     $("#list").html("")
                 }
             }
@@ -329,7 +329,7 @@ $(function() {
             success:function(data){
                 alert(data.message);
                 $("#table").css("display","none");
-               window.parent.location.reload();
+               location.reload();
             }
         });
     });
@@ -352,7 +352,7 @@ $(function(){
                 if(data.message=="删除成功"){
                     alert(data.message);
                     a.parent().parent().remove();
-                    window.parent.location.reload();
+                    location.reload();
                 }else{
                     alert(data.message);
                     getqueryworksurface();

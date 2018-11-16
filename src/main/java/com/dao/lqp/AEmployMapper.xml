@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.AEmploy">
+    <select id="findemployall" resultType="map" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		SELECT employ.*,plan.*,hire.*,dept.* FROM tb_recruitmentemployed employ,tb_RecruitmentPlan plan,tb_HireFile hire,tb_deparment dept  where
+		/*employ.planId=plan.planId and plan.PlanID=hire.PlanID and employ.deptId=dept.deptId */
+employ.empID=hire.empID and hire.PlanID =plan.PlanID and employ.deptId=dept.deptId
+		group by employ.employedId asc
+
+</select>
+    <select id="findemployallshaixuan" resultType="map" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		SELECT employ.*,plan.*,hire.*,hire.empName,dept.* FROM tb_recruitmentemployed employ,tb_RecruitmentPlan plan,tb_HireFile hire,tb_deparment dept  where
+		employ.empID=hire.empID and hire.PlanID =plan.PlanID and employ.deptId=dept.deptId
+      and  employ.Shaixuan=3  and hire.remark=2
+      group by employ.employedId asc
+</select>
+   <select id="findemploybyname" resultType="map">
+		select dept.DeptId,dept.DeptName from tb_deparment as dept
+	</select>
+    <select id="findemploybynamep" resultType="map">
+		SELECT hire.*,plan.* FROM tb_hirefile as hire ,tb_recruitmentplan as plan where hire.PlanID=plan.PlanID and plan.approvalStatus=1 and hire.remark=1
+	</select>
+	<select id="findShaixuan" resultType="map">
+		SELECT employ.*,plan.*,hire.*,dept.* FROM tb_recruitmentemployed employ,tb_RecruitmentPlan plan,tb_HireFile hire,tb_deparment dept  where
+        employ.empID=hire.empID and hire.PlanID =plan.PlanID and employ.deptId=dept.deptId
+
+			<if test="shaixuan!=null and shaixuan!=''">
+				and  employ.Shaixuan like  "%"#{shaixuan}"%"
+			</if>
+			<if test="headid!=null and headid!=''">
+				and  employ.headid like  "%"#{headid}"%"
+			</if>
+			group by employ.employedId asc
+
+	</select>
+    <select id="findShaixuan2" resultType="map" >
+        SELECT employ.*,plan.*,hire.*,dept.* FROM tb_recruitmentemployed employ,tb_RecruitmentPlan plan,tb_HireFile hire,tb_deparment dept  where
+        employ.empID=hire.empID and hire.PlanID =plan.PlanID and employ.deptId=dept.deptId
+
+
+        <if test="shaixuan!=null and shaixuan!=''">
+            and  employ.Shaixuan like  "%"#{shaixuan}"%"
+        </if>
+
+        group by employ.employedId asc
+
+    </select>
+    <insert id="insertemploy" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		insert into tb_recruitmentemployed(empId,DeptId,headid,HireDate,workEndTime,officialSalary,remark)
+		 values(#{empID},#{deptId},#{headid},#{hireDate},#{workEndTime},#{officialSalary},#{remark})
+	</insert>
+    <insert id="insertemployAdd" useGeneratedKeys="true" keyProperty="employedId" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		insert into tb_recruitmentemployed(empID,DeptId,Shaixuan,headid,HireDate,remark)
+		 values(#{empId},#{deptId},#{shaixuan},#{headid},#{hireDate},#{remark})
+	</insert>
+
+    <delete id="deleteemploy" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		delete from tb_recruitmentemployed where EmployedID = #{employedId}
+	</delete>
+
+    <update id="updateemploy" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		update tb_recruitmentemployed set empID=#{empId},DeptId=#{deptId},headid=#{headid},HireDate=#{hireDate},workEndTime=#{workEndTime},officialSalary=#{officialSalary},remark=#{remark}
+		where EmployedID = #{employedId}
+	</update>
+	<update id="updateShaixuan" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		update tb_recruitmentemployed set Shaixuan=#{shaixuan}
+		where EmployedID = #{employedId}
+	</update>
+    <update id="updateShaixuanluyong" parameterType="com.entity.lqp.TbRecruitmentemployed">
+		update tb_recruitmentemployed set headid=#{headid},HireDate=#{hireDate},workEndTime=#{workEndTime},officialSalary=#{officialSalary},remark=#{remark}
+		where EmployedID = #{employedId}
+	</update>
+    <update id="updatehire"  parameterType="com.entity.lqp.TbRecruitmentemployed" >
+			update tb_hirefile set remark=2 where empID in
+(select empID FROM(SELECT hire.empID FROM tb_recruitmentemployed employ,tb_hirefile hire  where
+		employ.empID=hire.empID and employ.EmployedID=#{employedId})tb_hirefile)
+	</update>
+</mapper>

@@ -13,7 +13,7 @@
         select tm.m_id as mid,(case when rmid.mid is not null then true else  false  end ) as checked,tm.m_level as mlevel,tm.m_Name as mname,tm.m_url as murl
         from tb_module tm left join
         (select tm.m_id as mid from tb_module tm left join tb_permit_role t on tm.m_id = t.m_id
-        left join tb_role t2 on t.r_id = t2.r_id where t.r_id=#{rid})as rmid on tm.m_id=rmid.mid group by tm.m_id asc;
+        left join tb_role t2 on t.r_id = t2.r_id where t.r_id=#{rid})as rmid on tm.m_id=rmid.mid group by tm.m_id desc ;
     </select>
     <select id="deletePermit" resultType="Integer" parameterType="int">
         delete from tb_permit_role where r_id=#{rid};

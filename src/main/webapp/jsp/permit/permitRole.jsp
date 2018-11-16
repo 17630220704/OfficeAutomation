@@ -128,6 +128,7 @@
         }).extend({
             authtree: 'authtree',
         });
+        alert(rid);
         $.ajax({
             type: "Post",
             url: "/getModulTrees.do",

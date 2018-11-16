@@ -27,10 +27,11 @@ public class permitManageServiceImp implements permitManageService {
     @Override
     public List<Map<String,Object>> getModulTrees(Integer rid) {
         treefactory tfy = new treefactory();
-        List<Map<String,Object>> getModulTrees = new ArrayList<Map<String,Object>>();
+        List<Map<String,Object>> getModulTreess = new ArrayList<Map<String,Object>>();
         List<Map<String,Object>> list = permitManagedao.getModulTrees(rid);
-        getModulTrees = tfy.deptList(list);
-        return getModulTrees;
+        getModulTreess = tfy.deptList(list);
+        System.out.println(getModulTreess);
+        return getModulTreess;
     }
 
     @Override

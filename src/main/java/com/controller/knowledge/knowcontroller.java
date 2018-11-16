@@ -71,7 +71,6 @@ public class knowcontroller {
     @ResponseBody
     public Map<String, Object> query1(HttpServletRequest session,@RequestParam(required = false, defaultValue = "8") int PageSize , @RequestParam(required = false, defaultValue = "1") int startPage){
         Map<String, Object> map= new HashMap<String, Object>();
-        session.getSession().setAttribute("userid",1);
         int b = (int) session.getSession().getAttribute("userid");
         PageHelper.startPage(startPage, PageSize);
         List<meeting> list =ser.query1(b);
@@ -115,7 +114,6 @@ public class knowcontroller {
     public Map<String, Object> grhy(HttpServletRequest session,@RequestParam(required = false, defaultValue = "5") int PageSize , @RequestParam(required = false, defaultValue = "1") int startPage){
         PageHelper.startPage(startPage, PageSize);
         Map<String, Object> map= new HashMap<String, Object>();
-        session.getSession().setAttribute("userid",1);
         int b = (int) session.getSession().getAttribute("userid");
         List<meeting> list =ser.grhy(b);
         PageInfo<meeting> pi = new PageInfo<>(list);
@@ -128,7 +126,6 @@ public class knowcontroller {
     public Map<String, Object> query9( HttpServletRequest session,String date,String date1,@RequestParam(required = false, defaultValue = "8") int PageSize ,@RequestParam(required = false, defaultValue = "1") int startPage) {
         Map<String, Object> map = new HashMap<String, Object>();
         PageHelper.startPage(startPage, PageSize);
-        session.getSession().setAttribute("userid",1);
         int b = (int) session.getSession().getAttribute("userid");
         meeting me = new meeting();
         me.setMedate(date);

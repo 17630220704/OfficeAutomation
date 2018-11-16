@@ -334,7 +334,7 @@
             } else if(obj.event === 'del'){
                 layer.confirm('确认删除会删除与之关联的人员排班', function(index){
                     $.post("/deletescheduel.do",{'scheduleId':data.scheduleId}).done(function (date) {
-                        layer.msg(date.result,{time:8000},function () {
+                        layer.msg(date.result,{time:500},function () {
                             obj.del();
                             layer.close(index);
                         })

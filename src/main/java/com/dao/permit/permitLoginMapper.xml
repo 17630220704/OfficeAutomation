@@ -12,8 +12,10 @@
 	</select>
 	<select id="ListTree" resultType="map">
 		/*根据用户id获取一级菜单*/
-		select tm.*,tpo.* from tb_module tm,tb_permit_role tpr,tb_role tr,tb_personinfo tpo,tb_user tu
-		where tm.m_level=0 and tpr.m_id=tm.m_id and tr.r_id=tpr.r_id and tr.r_id=#{userid} and tpo.persoId=tu.persoId and tu.u_id=tr.r_id
+		select tm.* from
+		tb_module tm left join tb_permit_role tpr on tm.m_id = tpr.m_id left join tb_role tr on tr.r_id=tpr.r_id
+		left join tb_role_user user2 on tr.r_id = user2.r_id left join tb_user user3 on user2.u_id = user3.u_id
+		where tm.m_level=0 and user3.u_id=#{userid}
 		group by tm.m_id asc;
 	</select>
 	<select id="ListTrees" resultType="map">

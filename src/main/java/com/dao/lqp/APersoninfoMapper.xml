@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.lqp.APersoninfo">
+    <select id="findinfoall" resultType="map">
+		SELECT info.*,positi.* FROM tb_personinfo info,tb_position positi
+	where info.posiId=positi.posiId    group by info.persoId desc
+	</select>
+   <select id="findinfobyname" resultType="map">
+		select positi.posiId,positi.posiName from tb_position as positi
+	</select>
+	<select id="findinfobydept" resultType="map">
+		select dept.deptId,dept.deptName from tb_deparment as dept
+	</select>
+	<select id="findinfobyrole" resultType="map">
+		select role.r_id,role.r_Name from tb_role as role
+	</select>
+	<select id="findShaixuan" resultType="map">
+		select info.* from tb_personinfo as info
+        <where>
+        <if test="shaixuan!=null and shaixuan!=''">
+            and  info.Shaixuan like  "%"#{shaixuan}"%"
+        </if>
+            <if test="personName!=null and personName!=''">
+                and  info.PersonName like  "%"#{personName}"%"
+            </if>
+            <if test="nowState!=null and nowState!=''">
+                and  info.NowState like  "%"#{nowState}"%"
+            </if>
+        </where>
+	</select>
+    <insert id="insertinfo" useGeneratedKeys="true" keyProperty="persoId" parameterType="com.entity.lqp.TbRecruitmentplan">
+		insert into tb_personinfo(PosiId,EmployedID,PersonName,personBirth,personPicture, telephone,officePhone,Email,NowAddress,remark,NowState)
+		         values(#{posiId},#{employedId},#{personName},#{personBirth},#{personPicture}, #{telephone},#{officePhone},#{email},#{nowAddress},#{remark},#{nowState})
+	</insert>
+	<insert id="insertinfoAdd"  useGeneratedKeys="true" keyProperty="persoId" parameterType="com.entity.lqp.TbRecruitmentplan">
+		insert into tb_personinfo(PosiId,PersonName,personBirth,personPicture, telephone,officePhone,Email,NowAddress,remark,NowState)
+		         values(#{posiId},#{personName},#{personBirth},#{personPicture}, #{telephone},#{officePhone},#{email},#{nowAddress},#{remark},#{nowState})
+	</insert>
+<insert id="insertuser" useGeneratedKeys="true" keyProperty="uId" parameterType="com.entity.lqp.TbUser">
+	insert into tb_user(DeptId,persoId,u_loginName,u_loginPassword)
+	values(#{deptId},#{persoId},#{uLoginName},#{uLoginPassword})
+
+</insert>
+	<insert id="insertRoleUser" parameterType="com.entity.lqp.TbRoleUser">
+	insert into tb_role_user(r_id,u_id)
+	values(#{rId},#{uId})
+
+</insert>
+    <delete id="deleteinfo" parameterType="com.entity.lqp.TbRecruitmentplan">
+		delete from tb_personinfo where persoId = #{persoId}
+	</delete>
+
+    <update id="updateinfo" parameterType="com.entity.lqp.TbRecruitmentplan">
+		update tb_personinfo set PosiId=#{posiId},PersonName=#{personName},
+		personBirth=#{personBirth},personPicture=#{personPicture},telephone=#{telephone},
+		officePhone=#{officePhone},Email=#{email},NowAddress=#{nowAddress},remark=#{remark},
+		NowState=#{nowState}
+		where persoId = #{persoId}
+	</update>
+	<update id="updateShaixuan" parameterType="com.entity.lqp.TbRecruitmentplan">
+		update tb_personinfo set Shaixuan=#{shaixuan}
+		where persoId = #{persoId}
+	</update>
+
+
+	<update id="updatehire"  parameterType="com.entity.lqp.TbPersoninfo" >
+				update tb_hirefile set remark=3 where empID in
+(select empID FROM(SELECT hire.empID FROM tb_recruitmentemployed employ,tb_hirefile hire,tb_personinfo info  where
+		employ.empID=hire.empID AND info.EmployedID=employ.EmployedID and info.persoId=#{persoId})tb_hirefile)
+	</update>
+</mapper>
